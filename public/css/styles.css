@@ -1,0 +1,113 @@
+/* Custom integrated styles */
+section {
+    background: url("../img/background.png") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.form-container.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form-box {
+    max-width: 100%;
+    width: 100%;
+    max-width: 420px; /* Limita el ancho máximo del formulario */
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo negro con opacidad */
+    border-radius: 12px; /* Bordes redondeados para un look más suave */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra suave para darle profundidad */
+    backdrop-filter: blur(10px); /* Añade un desenfoque de fondo para mayor profesionalismo */
+}
+
+.form-box h2 {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.inputbox {
+    margin-bottom: 1.5rem;
+}
+
+.inputbox label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #e2e8f0;
+}
+
+.inputbox input {
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    border: 2px solid #4A5568;
+    border-radius: 4px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.inputbox input:focus {
+    border-color: #63B3ED;
+    background-color: rgba(99, 179, 237, 0.1); /* Fondo suave al hacer foco */
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    background-color: #63B3ED;
+    color: white;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    width: auto; /* Ancho automático */
+    margin-top: 1rem;
+    display: inline-block; /* Permite centrar el botón */
+    text-align: center;
+}
+
+button:hover {
+    background-color: #4299e1;
+}
+
+.register {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.register a {
+    color: #63B3ED;
+    text-decoration: none;
+}
+
+.register a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    background-color: #f56565;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
