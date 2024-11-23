@@ -1,7 +1,5 @@
-
 <body class="bg-gray-900 text-white">
     <section class="w-full flex flex-col md:flex-row items-center justify-around px-4">
-        <!-- Información del formulario -->
         <div class="info-box text-center md:w-1/2 px-6">
             <h2 class="text-4xl font-bold mb-6">Welcome</h2>
             <p class="text-lg mb-4">
@@ -12,12 +10,11 @@
             </button>
         </div>
 
-        <!-- Formulario de Login -->
         <div class="form-container" id="form-container">
             <div class="form-box">
                 <h2>Login</h2>
 
-                <!-- Mensaje de error si existe -->
+                <!-- Display error message if it exists -->
                 <?php if (!empty($error)): ?>
                     <div class="error text-center mb-4"><?= esc($error) ?></div>
                 <?php endif; ?>
@@ -33,9 +30,11 @@
                         <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     </div>
 
+                    <!-- Submit button -->
                     <button type="submit">Login</button>
                 </form>
 
+                <!-- Register link -->
                 <div class="register">
                     <p>Don't have an account? <a href="/signup">Register here</a></p>
                 </div>
@@ -44,11 +43,12 @@
     </section>
 
     <script>
+        // Function to show the login form when the button is clicked
         function showLoginForm() {
             const formContainer = document.getElementById("form-container");
             formContainer.classList.add("show");
         }
     </script>
 </body>
-</html>
+
 
