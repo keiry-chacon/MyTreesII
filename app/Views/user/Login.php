@@ -19,7 +19,7 @@
                     <div class="error text-center mb-4"><?= esc($error) ?></div>
                 <?php endif; ?>
 
-                <form method="post" action="<?= base_url('login') ?>" class="flex flex-col">
+                <form method="post" action="/user/login" class="flex flex-col">
                     <div class="inputbox">
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -30,11 +30,9 @@
                         <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     </div>
 
-                    <!-- Submit button -->
                     <button type="submit">Login</button>
                 </form>
 
-                <!-- Register link -->
                 <div class="register">
                     <p>Don't have an account? <a href="/signup">Register here</a></p>
                 </div>

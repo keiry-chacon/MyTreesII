@@ -6,30 +6,32 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    protected $table = 'users';
-    protected $primaryKey = 'Id_User';
-    protected $allowedFields = ['username', 'password'];
+    protected $table = 'users';  
+    protected $primaryKey = 'Id_User';  
+    protected $allowedFields = ['username', 'password'];  
 
     /**
-     * Method to authenticate a user by username and password
+     * Method to authenticate a user by username and password.
      *
-     * @param string $username The username of the user to authenticate
+     * @param string $username The username to authenticate
      * @param string $password The password to verify
-     * @return mixed The user object if authenticated, null if not
+     * @return mixed User data if authenticated, null otherwise
      */
     public function authenticate($username, $password)
     {
+        // Search for the user by username
         $user = $this->where('Username', $username)->first();
         
-        log_message('debug', 'Usuario encontrado: ' . json_encode($user));
+        log_message('debug', 'User found: ' . json_encode($user));
         
-        // If user exists and the password is correct, return the user data
-        if ($user && password_verify($password, $user['password'])) {
+        // If the user exists and the password is correct, return the user data
+        if ($user && password_verify($password, $user['Password'])) {
             return $user;
         }
         
         return null;
     }
 }
+
 
 
