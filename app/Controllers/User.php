@@ -46,19 +46,35 @@ class User extends BaseController
                 'username'   => $user['Username'],
                 'role_id'    => $user['Role_Id'],
                 'isLoggedIn' => true,
-            ]);
+                'profile_pic'    => $user['Profile_Pic'],
 
-            // Redirect to a dashboard or home page, not the login page
-            return redirect()->to('/login')->with('success', 'Login exitoso');
+            ]);
+           
+
+
+            switch ($user['Role_Id']) {
+                case '1':
+                    return redirect()->to('/admin/dashboard');
+                case '2':
+                    return redirect()->to('/friend/dashboard');
+                case '3':
+                    return redirect()->to('/operator/dashboard');
+                default:
+                    return redirect()->to('/'); 
+            }
         } else {
             // Incorrect login attempt
             return redirect()->to('/login')->with('error', 'Datos incorrectos');
         }
     }
-}
+    public function logout()
+    {
+        // Destruir todas las variables de sesión
+        session()->destroy();
 
-
-
+        // Redirigir a la página de login (o la página que desees)
+        return redirect()->to('/login');
+    }
     /**
      * Display the signup page
      */
@@ -71,6 +87,9 @@ class User extends BaseController
             . view('user/signup', $data);
     }
 }
+
+
+
 
    
 
