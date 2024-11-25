@@ -3,16 +3,32 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\CountryModel;
+use App\Models\ProvinceModel;
+use App\Models\DistrictModel;
 
 class User extends BaseController
 {
     private $db;
     private $userModel;
+    private $countryModel;
+    private $provinceModel;
+    private $districtModel;
 
     public function __construct()
     {
         // Connect to the database
         $this->db = \Config\Database::connect();
+
+        // Load the CountryModel
+        $this->countryModel = model(CountryModel::class);
+
+        // Load the ProvinceModel
+        $this->provinceModel = model(ProvinceModel::class);
+
+        // Load the DistrictModel
+        $this->districtModel = model(DistrictModel::class);
+
         // Load the UserModel
         $this->userModel = model(UserModel::class);
     }
@@ -21,6 +37,8 @@ class User extends BaseController
     {
         return view('shared/header') . view('user/login');
     }
+
+
 
     /**
      * Handle the user login process
@@ -46,12 +64,10 @@ class User extends BaseController
                 'username'   => $user['Username'],
                 'role_id'    => $user['Role_Id'],
                 'isLoggedIn' => true,
-                'profile_pic'    => $user['Profile_Pic'],
+                'profile_pic'=> $user['Profile_Pic'],
 
             ]);
            
-
-
             switch ($user['Role_Id']) {
                 case '1':
                     return redirect()->to('/admin/dashboard');
@@ -67,25 +83,88 @@ class User extends BaseController
             return redirect()->to('/login')->with('error', 'Datos incorrectos');
         }
     }
+
+
+    
     public function logout()
     {
-        // Destruir todas las variables de sesión
+        // Destroy all session variables
         session()->destroy();
 
-        // Redirigir a la página de login (o la página que desees)
+        // Redirects to the login page
         return redirect()->to('/login');
     }
+
+
+
+    public function indexSignUp()
+    {
+        $country = $this->countryModel->findAll();
+        $province = $this->provinceModel->findAll();
+        $district = $this->districtModel->findAll();
+
+        $data['country'] = $country;
+        $data['province'] = $province;        
+        $data['district'] = $district;
+        return view('shared/header', $data) . view('user/signup', $data);
+    }
+
+
+
     /**
      * Display the signup page
      */
     public function signup()
     {
-        // Pass any error messages to the view
-        $data['error'] = session('error');
-        
-        return view('shared/header', $data)
-            . view('user/signup', $data);
+        // Data received from the form
+        $data = [
+            'First_Name'  => $this->request->getPost('first_name'),
+            'Last_Name1'  => $this->request->getPost('last_name1'),
+            'Last_Name2'  => $this->request->getPost('last_name2'),
+            'Username'    => $this->request->getPost('username'),
+            'Password'    => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
+            'Email'       => $this->request->getPost('email'),
+            'Phone'       => $this->request->getPost('phone'),
+            'Gender'      => $this->request->getPost('gender'),
+            'District_Id' => $this->request->getPost('district'),
+        ];
+    
+        // Handling the profile picture
+        $file = $this->request->getFile('profilePic'); // Get the file
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            // Generate a unique name to avoid collisions
+            $newName = $file->getRandomName();
+    
+            // Move the file to the uploads folder
+            $file->move(WRITEPATH . 'uploads_profile', $newName);
+    
+            // Save the file name in the record
+            $data['Profile_Pic'] = $newName;
+        } else {
+            // If no file is uploaded, use the default image
+            $data['Profile_Pic'] = 'default_profile.png';
+        }
+    
+        $userModel = new UserModel();
+    
+        // Validation and saving
+        if (!$userModel->save($data)) {
+            // Get validation errors from the model
+            $errors = $userModel->errors();
+    
+            // Redirect back to the form with errors
+            return redirect()->back()->withInput()->with('error', $errors);
+        }
+    
+        // If everything is correct, redirect to the login page with a success message
+        return redirect()->to('/login')->with('success', 'Your account was successfully created!');
     }
+    
+
+
+    
+
+
 }
 
 

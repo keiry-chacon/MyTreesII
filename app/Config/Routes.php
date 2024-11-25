@@ -6,10 +6,19 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+
+//Principal Login
 $routes->get('/login', 'User::index');
 $routes->post('/user/login', 'User::login');
+
+// Logout
 $routes->post('/logout', 'User::logout');
-$routes->get('/signup', 'User::signup');
+
+//SignUp
+$routes->get('/signup', 'User::indexSignUp');
+$routes->post('/user/signup', 'User::signup');
+
+
 $routes->get('/unauthorized', 'Error::unauthorized');
 $routes->post('/redirectDashboard', 'Error::redirectDashboard');
 
