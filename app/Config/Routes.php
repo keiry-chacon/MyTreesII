@@ -8,11 +8,11 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 //Principal Login
-$routes->get('/login', 'User::index');
+$routes->get('/login', 'User::indexLogin');
 $routes->post('/user/login', 'User::login');
 
 // Logout
-$routes->post('/logout', 'User::logout');
+$routes->post('/user/logout', 'User::logout');
 
 //SignUp
 $routes->get('/signup', 'User::indexSignUp');
@@ -21,6 +21,16 @@ $routes->post('/user/signup', 'User::signup');
 
 $routes->get('/unauthorized', 'Error::unauthorized');
 $routes->post('/redirectDashboard', 'Error::redirectDashboard');
+
+//Mytrees
+$routes->get('/mytrees', 'Friend::mytrees');
+
+//Friend
+$routes->get('/friend/dashboard', 'Friend::index');
+
+//User
+$routes->get('/profile', 'Friend::profile');
+$routes->post('/user/profile', 'Friend::Profile');
 
 
 $routes->group('admin', ['filter' => 'auth:1'], function ($routes) {

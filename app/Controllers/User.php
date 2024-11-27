@@ -33,7 +33,7 @@ class User extends BaseController
         $this->userModel = model(UserModel::class);
     }
 
-    public function index()
+    public function indexLogin()
     {
         return view('shared/header') . view('user/login');
     }
@@ -95,8 +95,9 @@ class User extends BaseController
         return redirect()->to('/login');
     }
 
-
-
+    /**
+     * Display the signup page
+     */
     public function indexSignUp()
     {
         $country = $this->countryModel->findAll();
@@ -109,11 +110,6 @@ class User extends BaseController
         return view('shared/header', $data) . view('user/signup', $data);
     }
 
-
-
-    /**
-     * Display the signup page
-     */
     public function signup()
     {
         // Data received from the form
@@ -160,6 +156,30 @@ class User extends BaseController
         return redirect()->to('/login')->with('success', 'Your account was successfully created!');
     }
     
+    /**
+     * Display the profile page
+     */
+    public function viewProfile()
+{
+    // Get the user ID from the session
+    $userId = session()->get('username');
+
+    if (!$userId) {
+        // Redirect to the login page if the user is not logged in
+        return redirect()->to('/login');
+    }
+
+    // Fetch user data from the database
+    $user = $this->userModel->where('Username', $userId)->first();
+
+    if (!$user) {
+        return redirect()->to('/login')->with('error', 'User not found');
+    }
+
+    // Pass the user data to the view
+    return view('shared/header') . view('user/profile', ['user' => $user]);
+}
+
 
 
     

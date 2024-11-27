@@ -1,37 +1,32 @@
-<body class="font-sans bg-gray-100">
-    <header>
-        <nav class="fixed top-0 left-0 h-full w-64 bg-gray-300 shadow-lg flex flex-col p-4 z-50">
-            <a href="#" id="profile-link" class="flex flex-col items-center mb-8 p-4 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
-                <img src="" alt="Profile Image" class="w-20 h-20 rounded-full border-4 border-white mb-3 object-cover">
-                <div class="text-center font-semibold text-gray-700"><?php echo htmlspecialchars($_SESSION['username']); ?></div>
-            </a>
-            <div id="profile-submenu" class="hidden flex-col p-4 space-y-2">
-                <a href="../inc/profile.php?username=<?php echo urlencode($_SESSION['username']); ?>" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2">
-                    <i class="fas fa-user"></i>
-                    <span>Profile</span>
-                </a>
-                <a href="/logout" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Log Out</span>
-                </a>
-            </div>
-            <ul class="space-y-4">
-                <li>
-                    <a href="../friend/friend.php" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
-                        <i class="fas fa-home mr-3"></i> Home
-                    </a>
-                </li>
-                <li>
-                    <a href="../friend/friends_trees.php" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
-                        <i class="fas fa-tree mr-3"></i> My Trees
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="ml-64 p-8">
-        <h2>Welcome to Your Friend Page</h2>
+<div class="content ml-64"> 
+    <div class="hero-section bg-cover bg-center text-white text-center py-24" style="background-image: url('<?= base_url('img/background_friend.png'); ?>');">
+        <div class="hero-content">
+            <h1 class="text-4xl mb-2">Welcome to Our Tree Garden</h1>
+            <p class="text-lg mb-4">Discover a variety of trees available for you. Make your choice and add life to your space!</p>
+            <a href="#available-trees" class="bg-green-200 text-green-800 py-2 px-4 rounded-lg transition duration-300 hover:bg-green-300">View Available Trees</a>
+        </div>
     </div>
-</body>
-</html>
+
+    <div id="available-trees" class="product-container text-center mt-12">
+        <div class="tree-cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
+            <?php foreach ($trees as $tree): ?>
+                <a href="<?= base_url('friend/tree_detail/' . $tree['Id_Tree']); ?>" class="card bg-white rounded-lg border-2 border-gray-300 shadow-2xl p-4 transition-transform transform hover:scale-105 hover:shadow-2xl">
+                    <img src="<?= $uploads_folder . $tree['Photo_Path'] . '?' . time(); ?>" alt="Tree Image" class="w-full h-48 object-contain rounded-lg mb-4">
+                    <div class="card-content">
+                        <h3 class="text-xl font-semibold mb-2"><?= esc($tree['Commercial_Name']); ?></h3>
+                        <p>Location: <?= esc($tree['Location']); ?></p>
+                        <p>Price: ₡<?= number_format($tree['Price'], 0, ',', '.'); ?></p>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+<script>
+    setTimeout(function() {
+        const successMessage = document.querySelector('.success-message');
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+    }, 4000);
+</script>
