@@ -9,6 +9,7 @@ class TreeModel extends Model
     protected $table = 'trees'; 
     protected $primaryKey = 'Id_Tree';
     protected $allowedFields = ['Specie_Id', 'Location', 'Size', 'StatusT', 'Price', 'Photo_Path']; 
+    
     public function getAvailableTrees()
     {
         return $this->select('trees.*, species.Commercial_Name, species.Scientific_Name') 

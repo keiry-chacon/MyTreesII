@@ -18,31 +18,31 @@ class User extends BaseController
     public function __construct()
     {
         // Connect to the database
-        $this->db = \Config\Database::connect();
+        $this->db               = \Config\Database::connect();
 
-        // Load the CountryModel
-        $this->countryModel = model(CountryModel::class);
-
-        // Load the ProvinceModel
-        $this->provinceModel = model(ProvinceModel::class);
-
-        // Load the DistrictModel
-        $this->districtModel = model(DistrictModel::class);
-
-        // Load the UserModel
-        $this->userModel = model(UserModel::class);
+        // Load the Models
+        $this->countryModel     = model(CountryModel::class);
+        $this->provinceModel    = model(ProvinceModel::class);
+        $this->districtModel    = model(DistrictModel::class);
+        $this->userModel        = model(UserModel::class);
     }
 
+
+
+
+
+    /**
+     * Displays the Friend page
+    */  
     public function indexLogin()
     {
         return view('shared/header') . view('user/login');
     }
 
 
-
     /**
      * Handle the user login process
-     */
+    */
     public function login()
     {
         $username = trim($this->request->getPost('username'));
@@ -70,7 +70,7 @@ class User extends BaseController
            
             switch ($user['Role_Id']) {
                 case '1':
-                    return redirect()->to('/admin/dashboard');
+                    return redirect()->to('/adminhome');
                 case '2':
                     return redirect()->to('/friend/dashboard');
                 case '3':
@@ -85,7 +85,9 @@ class User extends BaseController
     }
 
 
-    
+    /**
+     * Handle the user LogOut process
+    */
     public function logout()
     {
         // Destroy all session variables
@@ -95,8 +97,12 @@ class User extends BaseController
         return redirect()->to('/login');
     }
 
+
+
+
+
     /**
-     * Display the signup page
+     * Displays the SignUp page
      */
     public function indexSignUp()
     {
@@ -110,6 +116,13 @@ class User extends BaseController
         return view('shared/header', $data) . view('user/signup', $data);
     }
 
+
+
+
+
+    /**
+     * Add a new user to the database
+    */
     public function signup()
     {
         // Data received from the form
@@ -156,29 +169,33 @@ class User extends BaseController
         return redirect()->to('/login')->with('success', 'Your account was successfully created!');
     }
     
+
+
+
+
     /**
-     * Display the profile page
+     * Displays the profile page
      */
     public function viewProfile()
-{
-    // Get the user ID from the session
-    $userId = session()->get('username');
+    {
+        // Get the user ID from the session
+        $userId = session()->get('username');
 
-    if (!$userId) {
-        // Redirect to the login page if the user is not logged in
-        return redirect()->to('/login');
+        if (!$userId) {
+            // Redirect to the login page if the user is not logged in
+            return redirect()->to('/login');
+        }
+
+        // Fetch user data from the database
+        $user = $this->userModel->where('Username', $userId)->first();
+
+        if (!$user) {
+            return redirect()->to('/login')->with('error', 'User not found');
+        }
+
+        // Pass the user data to the view
+        return view('shared/header') . view('user/profile', ['user' => $user]);
     }
-
-    // Fetch user data from the database
-    $user = $this->userModel->where('Username', $userId)->first();
-
-    if (!$user) {
-        return redirect()->to('/login')->with('error', 'User not found');
-    }
-
-    // Pass the user data to the view
-    return view('shared/header') . view('user/profile', ['user' => $user]);
-}
 
 
 

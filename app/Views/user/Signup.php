@@ -73,10 +73,10 @@
                 <div>
                     <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
                     <select id="gender" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" name="gender" required>
-                        <option value="" <?= old('gender') === '' ? 'selected' : '' ?>>Select Gender</option>
-                        <option value="M" <?= old('gender') === 'M' ? 'selected' : '' ?>>Male</option>
-                        <option value="F" <?= old('gender') === 'F' ? 'selected' : '' ?>>Female</option>
-                        <option value="O" <?= old('gender') === 'O' ? 'selected' : '' ?>>Other</option>
+                        <option value=""    <?= old('gender') === '' ? 'selected' : '' ?>>Select Gender</option>
+                        <option value="M"   <?= old('gender') === 'M' ? 'selected' : '' ?>>Male</option>
+                        <option value="F"   <?= old('gender') === 'F' ? 'selected' : '' ?>>Female</option>
+                        <option value="O"   <?= old('gender') === 'O' ? 'selected' : '' ?>>Other</option>
                     </select>
                     <div class="text-red-500 text-sm"><?= session('error')['gender'] ?? '' ?></div>
                 </div>
