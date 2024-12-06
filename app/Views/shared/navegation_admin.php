@@ -26,8 +26,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
-                        <i class="fas fa-tree mr-3"></i> Manage Trees
+                    <a href="/adduser" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
+                        <i class="fas fa-home mr-3"></i> Add User
                     </a>
                 </li>
                 <li>
@@ -36,7 +36,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
+                    <a href="/managetrees" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
+                        <i class="fas fa-tree mr-3"></i> Manage Trees
+                    </a>
+                </li>
+                <li>
+                    <a href="/managefriends" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
                         <i class="fas fa-tree mr-3"></i> Manage Friends
                     </a>
                 </li>

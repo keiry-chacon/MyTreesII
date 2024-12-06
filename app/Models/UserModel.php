@@ -21,7 +21,8 @@ class UserModel extends Model
         'Phone',
         'Gender',
         'Profile_Pic',
-        'District_Id'
+        'District_Id',
+        'Role_Id'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -86,6 +87,16 @@ class UserModel extends Model
         
         return null;
     }
+
+
+    
+    public function getAvailableUsers()
+    {
+        return $this->where('Role_Id', 2)
+                    ->findAll();
+    }
+
+
 }
 
 

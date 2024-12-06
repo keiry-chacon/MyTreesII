@@ -4,6 +4,10 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Models\SpeciesModel;
+use App\Models\TreeModel;
+use App\Models\CountryModel;
+use App\Models\ProvinceModel;
+use App\Models\DistrictModel;
 
 
 class Admin extends BaseController
@@ -11,6 +15,10 @@ class Admin extends BaseController
     private $db;
     private $userModel;
     private $speciesModel;
+    private $treeModel;
+    private $countryModel;
+    private $provinceModel;
+    private $districtModel;
 
     public function __construct()
     {
@@ -20,6 +28,10 @@ class Admin extends BaseController
         // Load the Models
         $this->userModel        = model(UserModel::class);
         $this->speciesModel     = model(SpeciesModel::class);
+        $this->treeModel        = model(TreeModel::class);
+        $this->countryModel     = model(CountryModel::class);
+        $this->provinceModel    = model(ProvinceModel::class);
+        $this->districtModel    = model(DistrictModel::class);
     }
 
 
@@ -236,7 +248,7 @@ class Admin extends BaseController
 
 
     /**
-     * Add a new species to the database
+     * Delete a species to the database
     */
     public function deletespecies()
     {
@@ -255,11 +267,324 @@ class Admin extends BaseController
         }
     
         // If everything is correct, redirect to the login page with a success message
-        return redirect()->to('/managespecies')->with('success', 'Species Added Succesfully');
+        return redirect()->to('/managespecies')->with('success', 'Tree Deleted Succesfully');
     }
 
 
 
 
+
+    /**
+     * Displays the list of registered trees
+    */
+    public function indexManageTrees()
+    {
+        $trees = $this->treeModel->getAvailableTrees();
+
+        $data['trees'] = $trees;
+        return view('shared/header', $data) . view('admin/manageTrees', $data);
+    }
+
+
+
+
+
+    /**
+     * Displays the interface of the add tree section
+    */
+    public function indexAddTree()
+    {
+        $species = $this->speciesModel->getSpeciesByStatus(1);
+
+        $data['species'] = $species;
+        return view('shared/header', $data) . view('admin/addtree', $data);
+    }
+
+
+    /**
+     * Add a new tree to the database
+    */
+    public function addtree()
+    {
+        // Data received from the form
+        $data = [
+            'Specie_Id'     => $this->request->getPost('specie_id'),
+            'Location'      => $this->request->getPost('location'),
+            'Size'          => $this->request->getPost('size'),
+            'StatusT'       => $this->request->getPost('status'),
+            'Price'         => $this->request->getPost('price'),
+        ];
+    
+        // Handling the tree picture
+        $file = $this->request->getFile('treePic'); // Get the file
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            // Generate a unique name to avoid collisions
+            $newName = $file->getRandomName();
+    
+            // Move the file to the uploads folder
+            $file->move(WRITEPATH . 'uploads_tree', $newName);
+    
+            // Save the file name in the record
+            $data['Photo_Path'] = $newName;
+        } else {
+            // If no file is uploaded, use the default image
+            $data['Photo_Path'] = 'default_tree.png';
+        }
+    
+        $treeModel = new TreeModel();
+    
+        // Validation and saving
+        if (!$treeModel->save($data)) {
+            // Get validation errors from the model
+            $errors = $treeModel->errors();
+    
+            // Redirect back to the form with errors
+            return redirect()->back()->withInput()->with('error', $errors);
+        }
+    
+        // If everything is correct, redirect to the login page with a success message
+        return redirect()->to('/managetrees')->with('success', 'Tree Added Succesfuly');
+    }
+
+
+
+
+
+
+
+    /**
+     * Displays the interface of the update tree section
+     */
+    public function indexUpdateTree()
+    {
+        // Get the tree ID from the URL (GET parameter)
+        $idTree = $this->request->getGet('id_tree');
+        
+        // Validate that the ID is valid
+        if (!$idTree || !is_numeric($idTree)) {
+            return redirect()->to('/managetrees')->with('error', 'Invalid Tree ID');
+        }
+
+        // Create the tree model
+        $treeModel = new TreeModel();
+
+        // Search for the tree by ID
+        $tree = $treeModel->find($idTree);
+
+        // Check if the tree exists
+        if (!$tree) {
+            return redirect()->to('/managetrees')->with('error', 'Tree not found');
+        }
+
+        // Fetch species data to display in the dropdown
+        $species = $this->speciesModel->getSpeciesByStatus(1);
+
+        // Prepare the data to be passed to the view
+        $data = [
+            'species' => $species,
+            'tree' => $tree,
+            'error_msg' => session()->get('error')  // Get any error message, if exists
+        ];
+
+        // Return the full view with header and the update tree form
+        return view('shared/header', $data) . view('admin/updateTree', $data);
+    }
+
+
+
+
+
+    /**
+     * Update an existing tree in the database
+     */
+    public function updateTree()
+    {
+        // Get the form data
+        $idTree       = $this->request->getPost('id_tree'); // Tree ID from the POST data
+        $specieId     = $this->request->getPost('specie_id');
+        $location     = $this->request->getPost('location');
+        $size         = $this->request->getPost('size');
+        $status       = $this->request->getPost('status');
+        $price        = $this->request->getPost('price');
+
+        // Validate that the tree ID is valid
+        if (!$idTree || !is_numeric($idTree)) {
+            log_message('error', 'Invalid or missing tree ID.');
+            return redirect()->to('/managetrees')->with('error', 'Invalid tree ID');
+        }
+
+        // Load the tree model
+        $treeModel = new TreeModel();
+
+        // Prepare the data for the update
+        $data = [];
+        if (!empty($specieId)) {
+            $data['Specie_Id'] = $specieId;
+        }
+        if (!empty($location)) {
+            $data['Location'] = $location;
+        }
+        if (!empty($size)) {
+            $data['Size'] = $size;
+        }
+        if (!empty($status)) {
+            $data['StatusT'] = $status;
+        }
+        if (!empty($price)) {
+            $data['Price'] = $price;
+        }
+
+        // Check if there are any fields to update
+        if (empty($data)) {
+            return redirect()->back()->with('error', 'No fields to update.');
+        }
+
+        // Handling the tree picture
+        $file = $this->request->getFile('treePic'); // Get the file if it exists
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            // Generate a unique name for the image to avoid collision
+            $newName = $file->getRandomName();
+            
+            // Move the file to the uploads folder
+            $file->move(WRITEPATH . 'uploads_tree', $newName);
+            
+            // Save the new file name in the record
+            $data['Photo_Path'] = $newName;
+        }
+
+        // Check if tree exists in the database
+        $tree = $treeModel->find($idTree);
+        if (!$tree) {
+            return redirect()->to('/managetrees')->with('error', 'Tree not found');
+        }
+
+        // Try to update the tree
+        if (!$treeModel->update($idTree, $data)) {
+            // Get errors from the model
+            $errors = $treeModel->errors();
+            log_message('error', 'Errors trying to update tree: ' . implode(', ', $errors));
+            
+            // Redirect with errors if the update fails
+            return redirect()->back()->withInput()->with('error', implode(', ', $errors));
+        }
+
+        // If everything is correct, redirect to the trees management page with a success message
+        return redirect()->to('/managetrees')->with('success', 'Tree updated successfully');
+    }
+
+
+
+
+
+
+
+
+    /**
+     * Add a new species to the database
+    */
+    public function deletetree()
+    {
+        // Id_Tree received from the form
+        $idTree    = $this->request->getPost('id_tree');
+    
+        $treeModel = new TreeModel();
+    
+        // Validation and saving
+        if (!$treeModel->update($idTree, ['StatusT' => 0])) {
+            // Get validation errors from the model
+            $errors = $treeModel->errors();
+    
+            // Redirect back to the form with errors
+            return redirect()->back()->withInput()->with('error', $errors);
+        }
+    
+        // If everything is correct, redirect to the login page with a success message
+        return redirect()->to('/managetrees')->with('success', 'Tree Deleted Succesfully');
+    }
+
+
+
+
+
+    /**
+     * Displays the list of registered trees
+    */
+    public function indexManageFriends()
+    {
+        $user = $this->userModel->getAvailableUsers();
+
+        $data['users'] = $user;
+        return view('shared/header', $data) . view('admin/manageFriends', $data);
+    }
+
+
+
+
+
+    /**
+     * Displays the interface of the add species section
+    */
+    public function indexAddUser()
+    {
+        $country    = $this->countryModel->findAll();
+        $province   = $this->provinceModel->findAll();
+        $district   = $this->districtModel->findAll();
+
+        $data['country']    = $country;
+        $data['province']   = $province;        
+        $data['district']   = $district;
+        return view('shared/header', $data) . view('admin/addUser', $data);    
+    }
+
+
+    /**
+     * Add a new user to the database
+    */
+    public function adduser()
+    {
+        // Data received from the form
+        $data = [
+            'First_Name'  => $this->request->getPost('first_name'),
+            'Last_Name1'  => $this->request->getPost('last_name1'),
+            'Last_Name2'  => $this->request->getPost('last_name2'),
+            'Username'    => $this->request->getPost('username'),
+            'Password'    => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
+            'Email'       => $this->request->getPost('email'),
+            'Phone'       => $this->request->getPost('phone'),
+            'Gender'      => $this->request->getPost('gender'),
+            'District_Id' => $this->request->getPost('district'),
+            'Role_Id'     => $this->request->getPost('role'),
+        ];
+    
+        // Handling the profile picture
+        $file = $this->request->getFile('profilePic'); // Get the file
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            // Generate a unique name to avoid collisions
+            $newName = $file->getRandomName();
+    
+            // Move the file to the uploads folder
+            $file->move(WRITEPATH . 'uploads_profile', $newName);
+    
+            // Save the file name in the record
+            $data['Profile_Pic'] = $newName;
+        } else {
+            // If no file is uploaded, use the default image
+            $data['Profile_Pic'] = 'default_profile.png';
+        }
+    
+        $userModel = new UserModel();
+    
+        // Validation and saving
+        if (!$userModel->save($data)) {
+            // Get validation errors from the model
+            $errors = $userModel->errors();
+    
+            // Redirect back to the form with errors
+            return redirect()->back()->withInput()->with('error', $errors);
+        }
+    
+        // If everything is correct, redirect to the login page with a success message
+        return redirect()->to('/adminhome')->with('success', 'The account was successfully created!');
+    }
 
 }

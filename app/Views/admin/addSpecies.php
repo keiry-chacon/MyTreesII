@@ -20,7 +20,7 @@
             <?php endif; ?>
 
             <!-- Form -->
-            <form method="post" action="/admin/addspecies" class="space-y-4">
+            <form method="POST" action="/admin/addspecies" class="space-y-4">
                 <?= csrf_field() ?>
 
                 <!-- Commercial Name -->

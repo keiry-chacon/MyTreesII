@@ -6,6 +6,7 @@ use App\Models\UserModel;
 use App\Models\CountryModel;
 use App\Models\ProvinceModel;
 use App\Models\DistrictModel;
+use CodeIgniter\Router\Router;
 
 class User extends BaseController
 {
@@ -125,6 +126,7 @@ class User extends BaseController
     */
     public function signup()
     {
+        $Role_Id = 2;
         // Data received from the form
         $data = [
             'First_Name'  => $this->request->getPost('first_name'),
@@ -136,6 +138,7 @@ class User extends BaseController
             'Phone'       => $this->request->getPost('phone'),
             'Gender'      => $this->request->getPost('gender'),
             'District_Id' => $this->request->getPost('district'),
+            'Role_Id'     => $Role_Id,
         ];
     
         // Handling the profile picture

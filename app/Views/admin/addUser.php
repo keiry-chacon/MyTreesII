@@ -4,7 +4,7 @@
         <div class="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
             <!-- Header -->
             <div class="text-center mb-6">
-                <h1 class="text-2xl font-bold text-gray-800">Create an Account</h1>
+                <h1 class="text-2xl font-bold text-gray-800">Create a New User</h1>
                 <p class="text-gray-600 text-sm">Join us to access all the features</p>
             </div>
 
@@ -20,7 +20,7 @@
             <?php endif; ?>
 
             <!-- Form -->
-            <form method="POST" action="/user/signup" enctype="multipart/form-data" class="space-y-4">
+            <form method="POST" action="/admin/adduser" enctype="multipart/form-data" class="space-y-4">
                 <?= csrf_field() ?>
 
                 <!-- Profile Picture -->
@@ -128,17 +128,22 @@
                     <div class="text-red-500 text-sm"><?= session('error')['password'] ?? '' ?></div>
                 </div>
 
+                <!-- Role -->
+                <div>
+                    <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+                    <select id="role" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" name="role" required>
+                        <option value=""    <?= old('role') === '' ? 'selected' : '' ?>>Select User Role</option>
+                        <option value="1"   <?= old('role') === '1' ? 'selected' : '' ?>>Administrator</option>
+                        <option value="3"   <?= old('role') === '3' ? 'selected' : '' ?>>Operator</option>
+                    </select>
+                    <div class="text-red-500 text-sm"><?= session('error')['role'] ?? '' ?></div>
+                </div>
+
                 <!-- Submit Button -->
                 <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
-                    Sign Up
+                    Add
                 </button>
             </form>
-
-            <!-- Login Link -->
-            <p class="mt-6 text-center text-gray-600 text-sm">
-                Already have an account? 
-                <a href="/login" class="text-blue-500 hover:underline">Log In</a>
-            </p>
         </div>
     </div>
 </body>
