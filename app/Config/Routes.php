@@ -93,10 +93,11 @@ $routes->get('/friend/dashboard', 'Friend::index');
 //Mytrees
 $routes->get('/mytrees', 'Tree::mytrees');
 $routes->get('/friend/tree_detail/(:segment)', 'Tree::treeDetail/$1');
-$route['tree_details/(:num)'] = 'Tree/details/$1';
-
+$routes->get('/friend/tree_detail_friend/(:segment)', 'Tree::treeDetailFriend/$1');
 
 //User
+$routes->post('purchase/processPurchase', 'Purchase::processPurchase');
+$routes->get('purchase/success', 'Purchase::success');
 
 
 

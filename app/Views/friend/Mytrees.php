@@ -11,7 +11,7 @@
         <?php if (empty($trees)): ?>
             <div class="text-center mt-20">
                 <p class="text-gray-500 text-lg">No trees found in your collection.</p>
-                <a href="friend.php" class="mt-4 inline-block bg-green-500 text-white py-2 px-6 rounded-lg transition duration-300 hover:bg-green-600">
+                <a href="/friend/dashboard" class="mt-4 inline-block bg-green-500 text-white py-2 px-6 rounded-lg transition duration-300 hover:bg-green-600">
                     Buy Trees
                 </a>
             </div>
@@ -22,7 +22,7 @@
                         <?php foreach ($trees as $index => $tree): 
                             $photoTree = $uploads_folder . $tree['Photo_Path'] . '?' . time(); ?>
                             <div class="carousel-item <?php echo ($index === 0) ? 'active' : ''; ?> w-full flex-shrink-0">
-<a href="#" class="block bg-white rounded-lg transition-transform transform hover:scale-105" onclick="showTreeDetails(<?php echo $tree['Tree_Id']; ?>); return false;">
+                                <a href="<?= site_url('/friend/tree_detail_friend/' . $tree['Tree_Id']); ?>" class="block bg-white rounded-lg transition-transform transform hover:scale-105" onclick="showTreeDetails(<?php echo $tree['Tree_Id']; ?>); return false;">
                                     <img src="<?php echo $photoTree; ?>" alt="Tree Image" class="w-full h-48 object-contain rounded-lg">
                                     <div class="mt-3">
                                         <h3 class="text-xl text-gray-800"><?php echo $tree['Commercial_Name']; ?></h3>
@@ -44,21 +44,8 @@
 <link rel="stylesheet" href="../css/friend_trees.css">
 
 <script>
-    function showTreeDetails(idTree) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?php echo base_url("tree_details"); ?>' + idTree, true);
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const detailContainer = document.createElement('div');
-            detailContainer.classList.add('tree-detail-container', 'fixed', 'top-0', 'left-0', 'w-full', 'h-full', 'flex', 'justify-center', 'items-center', 'bg-white', 'bg-opacity-90', 'z-50');
-            detailContainer.innerHTML = xhr.responseText + '<button onclick="closeDetail();" class="absolute top-4 right-4 bg-red-500 text-white p-2 rounded">Close</button>';
-            document.body.appendChild(detailContainer);
-        } else {
-            console.error('Error loading tree details.');
-        }
-    };
-    xhr.send();
-}
+  
+
 
 
     function closeDetail() {
@@ -93,3 +80,5 @@
     showSlides();
     setInterval(showSlides, 5000);
 </script>
+
+

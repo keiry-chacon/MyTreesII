@@ -60,14 +60,10 @@ class Tree extends BaseController
     }
     public function treeDetail($id)
     {
-        // Instanciar el modelo de árboles
         $treeModel = new TreeModel();
         
-        // Obtener los detalles del árbol por su ID
         $tree = $treeModel->getTreeById($id);
-        $purchaseModel = new PurchaseModel(); // Instanciar el modelo de productos
-        $purchaseModel = $purchaseModel->getPurchaseByUserId($id);
-        // Verificar si el árbol existe
+
         if (!$tree) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Árbol no encontrado');
         }
@@ -82,27 +78,44 @@ class Tree extends BaseController
         ]) . 
         view('friend/tree_detail', [
             'tree' => $tree,
+            'uploads_folder'    => base_url('uploads_tree/')
+        ]);
+    }
+    public function detail($id) {
+        $tree = $this->treeModel->getTreeById($id);
+
+        if ($tree) {
+            echo $this->view('tree_detail_friend', ['tree' => $tree], true);
+        } else {
+            echo "Error: Tree not found.";
+        }
+    
+    }
+    public function treeDetailFriend($id)
+    {
+        $treeModel = new TreeModel();
+        
+        $tree = $treeModel->getTreeById($id);
+        $purchaseModel = new PurchaseModel(); // Instanciar el modelo de productos
+        $purchaseModel = $purchaseModel->getPurchaseByUserId($id);
+        if (!$tree) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Árbol no encontrado');
+        }
+
+        $user       = $this->userModel->where('Username', session()->get('username'))->first(); 
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+        return view('shared/header') . 
+        view('shared/navegation_friend', [
+            'profilePic'        => $profilePic,
+            'uploads_profile'   => base_url('uploads_profile/')
+        ]) . 
+        view('friend/tree_detail_friend', [
+            'tree' => $tree,
             'products'       => $purchaseModel,
             'uploads_folder'    => base_url('uploads_tree/')
         ]);
     }
-        public function detail($id)
-        {
-            // Cargar el modelo para obtener la información del árbol
-            $this->load->model('TreeModel');
-            $tree = $this->TreeModel->getTreeById($id);
-    
-            // Validar si existe
-            if (!$tree) {
-                show_404();
-                return;
-            }
-    
-            // Cargar la vista con los detalles
-            $data['tree'] = $tree;
-            $this->load->view('tree_detail_friend', $data);
-        }
-        
-    }
+}
 
 

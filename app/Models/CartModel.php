@@ -6,11 +6,11 @@ use CodeIgniter\Model;
 
 class CartModel extends Model
 {
-    protected $table = 'purchase'; 
-    protected $primaryKey = 'Id_Purchase';
+    protected $table = 'cart'; 
+    protected $primaryKey = 'Id_Cart';
     protected $allowedFields = ['Tree_Id', 'User_Id', 'Shipping_Location', 'Payment_Method', 'Purchase_Date', 'StatusP']; 
 
-    public function getFriendsTrees($user_id)
+    public function getCartByUserId($user_id)
     {
         return $this->select('purchase.*, species.Commercial_Name, species.Scientific_Name, trees.Photo_Path, trees.Location')
                     ->join('trees', 'trees.Id_Tree = purchase.Tree_Id') 

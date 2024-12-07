@@ -1,78 +1,88 @@
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
-<button onclick="goToDashboard()" class="absolute top-4 left-80 text-2xl text-blue-500 bg-transparent border-none cursor-pointer">
-    <i class="fas fa-arrow-left"></i>
-</button>
+    <button onclick="goToDashboard()" class="absolute top-4 left-80 text-2xl text-blue-500 bg-transparent border-none cursor-pointer">
+        <i class="fas fa-arrow-left"></i>
+    </button>
 
-<div class="flex justify-center items-center py-12 px-8">
-    <div class="bg-white max-w-6xl rounded-xl shadow-lg p-10 relative ml-60 transform transition-transform duration-500 hover:shadow-2xl">
-        
-        <div class="flex flex-col md:flex-row items-center gap-6">
-            <div class="md:w-1/2 p-4">
-                <img class="w-full h-96 object-contain rounded-lg shadow-md transition-shadow duration-300 hover:shadow-xl" src="<?= $uploads_folder . $tree['Photo_Path']; ?>" alt="<?= esc($tree['Commercial_Name']); ?>">
-            </div>
-
-            <div class="md:w-1/2 p-4 space-y-6">
-                
-                <div class="text-3xl font-bold text-gray-800 hover:text-blue-500 transition-colors duration-300">
-                    <?= esc($tree['Commercial_Name']); ?>
+    <div class="flex justify-center items-center py-12 px-8">
+        <div class="bg-white max-w-6xl rounded-xl shadow-lg p-10 relative ml-60 transform transition-transform duration-500 hover:shadow-2xl">
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="md:w-1/2 p-4">
+                    <!-- Mostrar imagen del árbol -->
+                    <img class="w-full h-96 object-contain rounded-lg shadow-md transition-shadow duration-300 hover:shadow-xl" 
+                         src="<?= $uploads_folder . $tree['Photo_Path']; ?>" alt="<?= esc($tree['Commercial_Name']); ?>">
                 </div>
 
-                <div class="text-xl italic text-gray-500">
-                    <?= esc($tree['Scientific_Name']); ?>
-                </div>
-
-                <div class="text-md text-gray-600">
-                    <i class="fas fa-map-marker-alt mr-1 text-red-400"></i> 
-                    Location: <?= esc($tree['Location']); ?>
-                </div>
-
-                <div class="text-4xl font-semibold text-gray-800 mt-4">
-                    ₡<?= number_format($tree['Price'], 2, ',', '.'); ?>
-                </div>
-
-                <div class="mt-4">
-                    <label class="block text-gray-600 font-semibold">Size:</label>
-                    <div class="flex space-x-2 mt-1">
-                        <button class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full shadow hover:bg-gray-300 focus:outline-none transform transition-transform duration-300 hover:scale-105"><?= esc($tree['Size']); ?> cm</button>
+                <div class="md:w-1/2 p-4 space-y-6">
+                    <!-- Nombre comercial del árbol -->
+                    <div class="text-3xl font-bold text-gray-800 hover:text-blue-500 transition-colors duration-300">
+                        <?= esc($tree['Commercial_Name']); ?>
                     </div>
-                </div>
 
-                <div class="flex space-x-6 mt-6">
-                    <form method="POST" action="<?= site_url('treecontroller/addToCart'); ?>">
-                        <input type="hidden" name="tree_id" value="<?= esc($tree['Id_Tree']); ?>">
-                        <button type="submit" class="flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 focus:outline-none transition-colors duration-300" name="add_to_cart">
-                            <i class="fas fa-shopping-cart mr-2"></i> Add To Cart
+                    <!-- Nombre científico del árbol -->
+                    <div class="text-xl italic text-gray-500">
+                        <?= esc($tree['Scientific_Name']); ?>
+                    </div>
+
+                    <!-- Ubicación del árbol -->
+                    <div class="text-md text-gray-600">
+                        <i class="fas fa-map-marker-alt mr-1 text-red-400"></i> 
+                        Location: <?= esc($tree['Location']); ?>
+                    </div>
+
+                    <!-- Precio del árbol -->
+                    <div class="text-4xl font-semibold text-gray-800 mt-4">
+                        ₡<?= number_format($tree['Price'], 2, ',', '.'); ?>
+                    </div>
+
+                    <!-- Tamaño del árbol -->
+                    <div class="mt-4">
+                        <label class="block text-gray-600 font-semibold">Size:</label>
+                        <div class="flex space-x-2 mt-1">
+                            <button class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full shadow hover:bg-gray-300 focus:outline-none transform transition-transform duration-300 hover:scale-105"><?= esc($tree['Size']); ?> cm</button>
+                        </div>
+                    </div>
+
+                    <!-- Botones de acción (Añadir al carrito / Comprar ahora) -->
+                    <div class="flex space-x-6 mt-6">
+                        <form method="POST" action="<?= site_url('treecontroller/addToCart'); ?>">
+                            <input type="hidden" name="tree_id" value="<?= esc($tree['Id_Tree']); ?>">
+                            <button type="submit" class="flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 focus:outline-none transition-colors duration-300" name="add_to_cart">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add To Cart
+                            </button>
+                        </form>
+                        <button onclick="showPurchaseForm(<?= esc($tree['Id_Tree']); ?>)" class="flex items-center px-6 py-3 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 focus:outline-none transition-colors duration-300">
+                            <i class="fas fa-money-bill-wave mr-2"></i> Buy Now
                         </button>
-                    </form>
-                    <button onclick="showPurchaseForm(<?= esc($tree['Id_Tree']); ?>)" class="flex items-center px-6 py-3 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 focus:outline-none transition-colors duration-300">
-                        <i class="fas fa-money-bill-wave mr-2"></i> Buy Now
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal para el formulario de compra -->
+    <div id="purchaseModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex justify-center items-center">
+        <div class="bg-white p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto relative rounded-lg">
+            <button onclick="closePurchaseForm()" class="absolute top-4 right-4 text-2xl text-red-500 bg-transparent border-none cursor-pointer">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Purchase Form</h1>
+
+            <div id="cartItems" class="space-y-6">
+    <!-- Los productos se agregarán aquí dinámicamente -->
+        <div class="flex items-center space-x-4">
+            <img src="<?= $uploads_folder . $tree['Photo_Path']; ?>" alt="<?= esc($tree['Commercial_Name']); ?>" class="w-20 h-20 object-cover rounded-md">
+            <div>
+                <h3 class="text-lg font-semibold"><?= esc($tree['Commercial_Name']); ?></h3>
+                <p class="text-sm text-gray-600"><?= esc($tree['Scientific_Name']); ?></p>
+                <p class="text-sm text-gray-800">Price: ₡<?= number_format($tree['Price'], 2, ',', '.'); ?></p>
+            </div>
+        </div>
 </div>
 
-<!-- Modal for Purchase Form -->
-<div id="purchaseModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex justify-center items-center">
-    <div class="bg-white p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto relative rounded-lg">
-        <!-- Botón de cierre -->
-        <button onclick="closePurchaseForm()" class="absolute top-4 right-4 text-2xl text-red-500 bg-transparent border-none cursor-pointer">
-            <i class="fas fa-times"></i>
-        </button>
-
-        <!-- Título -->
-        <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Purchase Form</h1>
-
-        <!-- Contenido del formulario -->
-        <div>
-            <!-- Resumen de la compra -->
-            <div id="cartItems" class="space-y-6">
-                <!-- Los productos se agregarán aquí dinámicamente -->
-            </div>
 
             <!-- Formulario de compra -->
-            <form action="../actions/friend/process_purchase.php" method="POST">
+            <form action="<?= site_url('purchase/processPurchase'); ?>" method="POST">
                 <input type="hidden" name="tree_id" id="tree_id" value="<?= $tree['Id_Tree']; ?>">
 
                 <div class="mb-4">
@@ -92,26 +102,23 @@
             </form>
         </div>
     </div>
-</div>
 </body>
+
 
 <script>
     // Obtener los productos desde PHP
-    const cartItems = <?php echo json_encode($products); ?>;
 
-    // Función para mostrar los productos en el modal
     function loadCartItems() {
-        const cartItemsContainer = document.getElementById('cartItems');
-        
+        const cartItemsContainer = document.getElementById('cartItems'); // Asegúrate de tener este contenedor en el HTML
         cartItems.forEach(item => {
             const productHTML = `
                 <div class="flex items-center space-x-4">
-                    <img src="${'<?= $uploads_folder ?>' + item.image}" alt="${item.common_name}" class="w-20 h-20 object-cover rounded-md">
+                    <img src="<?= $uploads_folder . $tree['Photo_Path'] ?>" alt="${item.Commercial_Name}" class="w-20 h-20 object-cover rounded-md">
                     <div>
-                        <h3 class="text-lg font-semibold">${item.common_name}</h3>
-                        <p class="text-sm text-gray-600">${item.scientific_name}</p>
-                        <p class="text-sm text-gray-800">Price: $${item.price.toFixed(2)}</p>
-                        <p class="text-sm text-gray-600">Quantity: ${item.quantity}</p>
+                        <h3 class="text-lg font-semibold">${item.Commercial_Name}</h3>
+                        <p class="text-sm text-gray-600">${item.Scientific}</p>
+                        <p class="text-sm text-gray-800">Price: $${item.Price.toFixed(2)}</p>
+                        <p class="text-sm text-gray-600">Quantity: ${item.Quantity}</p>
                     </div>
                 </div>
             `;
@@ -119,7 +126,6 @@
         });
     }
 
-    window.onload = loadCartItems;
     function goToDashboard() {
         window.location.href = "/friend/dashboard"; // Reemplaza con la URL de tu dashboard
     }

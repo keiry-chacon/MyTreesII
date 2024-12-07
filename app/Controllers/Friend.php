@@ -25,10 +25,6 @@ class Friend extends BaseController
 
     }
 
-
-
-
-
     /**
      * Displays the friend page
     */    
@@ -91,49 +87,5 @@ class Friend extends BaseController
             'user' => $user
         ]);
     }
-
-
-
-
-
-    /**
-     * Displays the mytrees page
-    */    
-    public function mytrees()
-    {
-        $purchaseMessage = session()->get('purchase_message');
-        if ($purchaseMessage) {
-            session()->remove('purchase_message');
-        }
-
-        // Retrieve user details
-        $user       = $this->userModel->where('Username', session()->get('username'))->first(); 
-        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
-
-        // Get the trees for the user
-        $trees = $this->purchaseModel->getFriendsTrees( $user['Id_User']);
-
-        return view('shared/header', [
-            'uploads_profile'   => base_url('uploads_profile/')
-        ]) . 
-        view('shared/navegation_friend', [
-            'profilePic'        => $profilePic,
-            'uploads_profile'   => base_url('uploads_profile/')
-        ]) . 
-        view('friend/mytrees', [
-            'trees' => $trees,
-            'purchase_message'  => $purchaseMessage,
-            'uploads_folder'    => base_url('uploads_tree/')
-        ]);
-    }
-
-
-
-
-
-
-
-
-
 }
 

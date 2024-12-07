@@ -63,6 +63,7 @@ class User extends BaseController
             // Store session data
             session()->set([
                 'username'   => $user['Username'],
+                'user_id'   => $user['Id_User'],
                 'role_id'    => $user['Role_Id'],
                 'isLoggedIn' => true,
                 'profile_pic'=> $user['Profile_Pic'],

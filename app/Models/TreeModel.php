@@ -60,4 +60,16 @@ class TreeModel extends Model
             ->where('trees.Id_Tree', $id)  // Filtra por el ID del árbol
             ->first();  // Obtiene solo el primer resultado (ya que el ID es único)
     }
+    public function getTreeDetails($treeId) {
+        // Realizar la consulta para obtener los detalles del árbol
+        $query = $this->db->get_where('trees', array('Tree_Id' => $treeId));
+
+        // Si la consulta tiene resultados, devolverlos
+        if ($query->num_rows() > 0) {
+            return $query->row_array(); // Retorna como array
+        }
+
+        // Si no se encuentra el árbol, devolver null
+        return null;
+    }
 }

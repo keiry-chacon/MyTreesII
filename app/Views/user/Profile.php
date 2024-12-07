@@ -5,13 +5,11 @@
     <form action="<?= site_url('user/updateProfile') ?>" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
-        <!-- Imagen de perfil -->
         <div>
         <img src="<?= $uploads_profile . $profile . '?' . time() ?>" alt="Profile Image" class="w-20 h-20 rounded-full border-4 border-white mb-3 object-cover">
         <input type="file" name="profileImage" accept="image/*">
         </div>
 
-        <!-- Datos del usuario -->
         <div>
             <label>Nombre de usuario</label>
             <input type="text" name="username" value="<?= esc($userData['Username']) ?>" required>
