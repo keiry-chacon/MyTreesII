@@ -5,13 +5,12 @@
                 <img src="<?= $uploads_profile . $profilePic . '?' . time() ?>" alt="Profile Image" class="w-20 h-20 rounded-full border-4 border-white mb-3 object-cover">
                 <div class="text-center font-semibold text-gray-700"><?php echo htmlspecialchars($_SESSION['username']); ?></div>
             </a>
-            <div id="profile-submenu" class="hidden flex-col p-4 space-y-2"> 
-                <form action="/user/profile" method="post">
-                    <button type="submit" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2 w-full">
-                        <i class="fas fa-user"></i>
-                        <span>Profile</span>
-                    </button>
-                </form>
+            <div id="profile-submenu" class="hidden flex-col p-4 space-y-2">
+                <li>
+                    <a href="/profile" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
+                        <i class="fas fa-user"></i> Profile
+                    </a>
+                </li>
                 <form action="/user/logout" method="post">
                     <button type="submit" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2 w-full">
                         <i class="fas fa-sign-out-alt"></i>
@@ -36,7 +35,6 @@
 </body>
 <script>
         document.getElementById('profile-link').addEventListener('click', function(event) {
-            event.preventDefault();  
             const submenu = document.getElementById('profile-submenu');
             submenu.classList.toggle('hidden'); 
         });

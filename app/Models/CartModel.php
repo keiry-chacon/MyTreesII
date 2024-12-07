@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PurchaseModel extends Model
+class CartModel extends Model
 {
     protected $table = 'purchase'; 
     protected $primaryKey = 'Id_Purchase';
@@ -20,11 +20,4 @@ class PurchaseModel extends Model
                     ->findAll();
     }
 
-
-    public function getPurchaseByUserId($userId)
-    {
-        return $this->where('User_Id', $userId) // Filtrar por el ID del usuario
-                    ->orderBy('Purchase_Date', 'DESC') // Ordenar por fecha de compra (más reciente primero)
-                    ->findAll(); // Obtener todas las compras del usuario
-    }
 }

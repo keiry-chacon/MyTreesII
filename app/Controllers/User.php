@@ -179,25 +179,109 @@ class User extends BaseController
     /**
      * Displays the profile page
      */
-    public function viewProfile()
+
+     public function profile()
+     {
+         // Verificar si el nombre de usuario existe en la sesión
+         if (!isset($_SESSION['username'])) {
+             return redirect()->back()->with('error', 'Usuario no especificado.');
+         }
+     
+         // Obtener los datos del usuario de la base de datos
+         $userData = $this->userModel->where('Username', $_SESSION['username'])->first();
+     
+         // Verificar si el usuario existe
+         if (!$userData) {
+             throw new \CodeIgniter\Exceptions\PageNotFoundException('Usuario no encontrado.');
+         }
+     
+         // Verificar si el perfil tiene imagen, si no asignar una imagen por defecto
+         $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
+     
+         // Determinar la vista de navegación según el rol
+         $navigationView = 'shared/navegation_friend';  // Valor por defecto
+         if (isset($userData['Role_Id'])) {
+             switch ($userData['Role_Id']) {
+                 case 'admin':
+                     $navigationView = 'shared/navegation_admin';  // Si el rol es 'admin', carga 'navegation_admin'
+                     break;
+                 case 'operator':
+                     $navigationView = 'shared/navegation_operator';  // Si el rol es 'operator', carga 'navegation_operator'
+                     break;
+                 case 'friend':
+                 default:
+                     $navigationView = 'shared/navegation_friend';  // Si el rol es 'friend' o cualquier otro valor, carga 'navegation_friend'
+                     break;
+             }
+         }
+     
+         // Pasar los datos a la vista
+         return view('shared/header', [
+             'uploads_profile' => base_url('uploads_profile/')
+         ]) . 
+         view($navigationView, [  // Cargar la vista de navegación según el rol
+             'profilePic' => $profileImage,
+             'uploads_profile' => base_url('uploads_profile/')
+         ]) . 
+         view('user/Profile', [
+             'userData' => $userData,
+             'uploads_profile' => base_url('uploads_profile/'),
+             'profileImage' => $profileImage, // Corregir nombre de variable
+         ]);
+     }
+     
+    
+
+    public function updateProfile()
     {
-        // Get the user ID from the session
-        $userId = session()->get('username');
-
+        $userId = session()->get('Id_User');
         if (!$userId) {
-            // Redirect to the login page if the user is not logged in
-            return redirect()->to('/login');
+            return redirect()->route('login')->with('error', 'Debe iniciar sesión.');
         }
 
-        // Fetch user data from the database
-        $user = $this->userModel->where('Username', $userId)->first();
+        $uploads_folder = WRITEPATH . 'uploads_user/';
 
-        if (!$user) {
-            return redirect()->to('/login')->with('error', 'User not found');
+        if ($this->request->getMethod() === 'post') {
+            $updateSuccess = false;
+
+            // Manejo de la imagen de perfil
+            $file = $this->request->getFile('profileImage');
+            if ($file && $file->isValid()) {
+                $fileName = $userId . '.' . $file->getExtension();
+                $file->move($uploads_folder, $fileName);
+
+                // Actualizar el campo Profile_Pic en la base de datos
+                $this->userModel->update($userId, ['Profile_Pic' => $fileName]);
+                session()->set('ProfileImage', $fileName);
+                $updateSuccess = true;
+            }
+
+            // Actualizar otros datos del usuario
+            $newData = [
+                'Username' => $this->request->getPost('username'),
+                'First_Name' => $this->request->getPost('first_name'),
+                'Last_Name1' => $this->request->getPost('last_name1'),
+                'Last_Name2' => $this->request->getPost('last_name2'),
+                'Email' => $this->request->getPost('email'),
+                'Phone' => $this->request->getPost('phone'),
+                'Gender' => $this->request->getPost('gender'),
+            ];
+
+            if ($this->request->getPost('password')) {
+                $newData['Password'] = password_hash($this->request->getPost('password'), PASSWORD_BCRYPT);
+            }
+
+            if ($this->userModel->update($userId, $newData)) {
+                session()->set('Username', $newData['Username']);
+                $updateSuccess = true;
+            }
+
+            if ($updateSuccess) {
+                return redirect()->route('user/profile/' . $newData['Username'])->with('success', 'Perfil actualizado con éxito.');
+            } else {
+                return redirect()->back()->with('error', 'Hubo un problema al actualizar el perfil.');
+            }
         }
-
-        // Pass the user data to the view
-        return view('shared/header') . view('user/profile', ['user' => $user]);
     }
 
 

@@ -10,8 +10,8 @@
     <div id="available-trees" class="product-container text-center mt-12">
         <div class="tree-cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
             <?php foreach ($trees as $tree): ?>
-                <a href="<?= base_url('friend/tree_detail/' . $tree['Id_Tree']); ?>" class="card bg-white rounded-lg border-2 border-gray-300 shadow-2xl p-4 transition-transform transform hover:scale-105 hover:shadow-2xl">
-                    <img src="<?= $uploads_folder . $tree['Photo_Path'] . '?' . time(); ?>" alt="Tree Image" class="w-full h-48 object-contain rounded-lg mb-4">
+                <a href="<?= site_url('/friend/tree_detail/' . $tree['Id_Tree']); ?>" class="card bg-white rounded-lg border-2 border-gray-300 shadow-2xl p-4 transition-transform transform hover:scale-105 hover:shadow-2xl">
+                <img src="<?= $uploads_folder . $tree['Photo_Path'] . '?' . time(); ?>" alt="Tree Image" class="w-full h-48 object-contain rounded-lg mb-4">
                     <div class="card-content">
                         <h3 class="text-xl font-semibold mb-2"><?= esc($tree['Commercial_Name']); ?></h3>
                         <p>Location: <?= esc($tree['Location']); ?></p>

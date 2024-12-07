@@ -23,6 +23,14 @@ $routes->get('/unauthorized', 'Error::unauthorized');
 $routes->post('/redirectDashboard', 'Error::redirectDashboard');
 
 
+    // Ruta para mostrar el perfil del usuario
+    $routes->get('/profile', 'User::profile');
+
+    // Ruta para editar el perfil del usuario
+    $routes->post('update', 'User::updateProfile', ['as' => 'user.updateProfile']); 
+
+
+
 
 
 
@@ -63,9 +71,6 @@ $routes->post('/admin/updatetree', 'Admin::updateTree');
 //Delete Tree
 $routes->post('/admin/deletetree', 'Admin::deleteTree');
 
-//Admin Profile
-$routes->get('/profile', 'Admin::profile');
-$routes->post('/user/profile', 'Admin::Profile');
 
 
 
@@ -86,12 +91,13 @@ $routes->post('/admin/adduser', 'Admin::addUser');
 $routes->get('/friend/dashboard', 'Friend::index');
 
 //Mytrees
-$routes->get('/mytrees', 'Friend::mytrees');
+$routes->get('/mytrees', 'Tree::mytrees');
+$routes->get('/friend/tree_detail/(:segment)', 'Tree::treeDetail/$1');
+$route['tree_details/(:num)'] = 'Tree/details/$1';
 
 
 //User
-$routes->get('/profile', 'Friend::profile');
-$routes->post('/user/profile', 'Friend::Profile');
+
 
 
 

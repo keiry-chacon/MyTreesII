@@ -53,4 +53,11 @@ class TreeModel extends Model
                 ->where('trees.StatusT', 1) 
                 ->findAll();
     }
+    public function getTreeById($id)
+    {
+        return $this->select('trees.*, species.Commercial_Name, species.Scientific_Name')
+            ->join('species', 'species.Id_Specie = trees.Specie_Id')  // Ajusta el nombre de las columnas según tu esquema
+            ->where('trees.Id_Tree', $id)  // Filtra por el ID del árbol
+            ->first();  // Obtiene solo el primer resultado (ya que el ID es único)
+    }
 }
