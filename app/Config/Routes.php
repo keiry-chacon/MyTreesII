@@ -64,7 +64,7 @@ $routes->get('/managetrees', 'Admin::indexManageTrees');
 $routes->get('/addtree', 'Admin::indexAddTree');
 $routes->post('/admin/addtree', 'Admin::addTree');
 
-//Edit Tree
+//Update Tree
 $routes->get('/updatetree', 'Admin::indexUpdateTree');
 $routes->post('/admin/updatetree', 'Admin::updateTree');
 
@@ -74,9 +74,17 @@ $routes->post('/admin/deletetree', 'Admin::deleteTree');
 
 
 
-//Manage Friends
+//Manage Friends Trees
+//View friends list
 $routes->get('/managefriends', 'Admin::indexManageFriends');
 
+//View the list of friends trees
+$routes->get('/friendtrees', 'Admin::indexFriendTrees');
+$routes->post('/admin/friendtrees', 'Admin::friendtrees');
+
+//Update Friend Tree
+$routes->get('/updatefriendtree', 'Admin::indexUpdateFriendTree');
+$routes->post('/admin/updatefriendtree', 'Admin::updateFriendTree');
 
 
 //Add User
@@ -98,6 +106,22 @@ $routes->get('/friend/tree_detail_friend/(:segment)', 'Tree::treeDetailFriend/$1
 //User
 $routes->post('purchase/processPurchase', 'Purchase::processPurchase');
 $routes->get('purchase/success', 'Purchase::success');
+
+
+
+
+// ================================================================
+//                              Operator
+$routes->get('/operatorhome', 'User::indexOperatorHome');
+
+
+
+
+// ================================================================
+//                       Administartor/Operator
+//Register Update
+$routes->get('/registerupdate', 'User::indexRegisterUpdate');
+$routes->post('/operator/registerupdate', 'User::registerUpdate');
 
 
 

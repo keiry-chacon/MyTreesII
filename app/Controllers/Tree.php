@@ -22,7 +22,7 @@ class Tree extends BaseController
         $this->treeModel        = model(TreeModel::class); 
         $this->userModel        = model(UserModel::class);
         $this->purchaseModel    = model(PurchaseModel::class);
-        $this->session = \Config\Services::session();
+        $this->session          = \Config\Services::session();
 
 
     }

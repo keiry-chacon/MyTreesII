@@ -67,7 +67,7 @@
 
                             <!-- Edit link to the trees update page -->
                             <td class="px-6 py-4 text-center">
-                                <a href="/updatetree?id_user=<?= urlencode($user['Id_User']) ?>" 
+                                <a href="/friendtrees?id_user=<?= urlencode($user['Id_User']) ?>" 
                                 class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 flex items-center justify-center space-x-2" 
                                 title="View Trees">
                                     <i class="fas fa-tree"></i>

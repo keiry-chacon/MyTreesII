@@ -53,6 +53,36 @@ class TreeModel extends Model
                 ->where('trees.StatusT', 1) 
                 ->findAll();
     }
+
+
+    public function getFriendsTrees($friendId)
+    {
+        return $this->db->table('trees as trees_main') // Asignar alias aquí
+            ->select(
+                'purchase.Id_Purchase, 
+                 purchase.Payment_Method, 
+                 purchase.Shipping_Location, 
+                 purchase.Purchase_Date, 
+                 trees_main.Id_Tree, 
+                 trees_main.Specie_Id, 
+                 species.Commercial_Name,  
+                 species.Scientific_Name,  
+                 trees_main.Location, 
+                 purchase.StatusP, 
+                 trees_main.Price, 
+                 trees_main.Photo_Path'
+            )
+            ->join('purchase', 'trees_main.Id_Tree = purchase.Tree_Id') // Alias usado
+            ->join('species', 'species.Id_Specie = trees_main.Specie_Id') // Alias usado
+            ->where('purchase.User_Id', $friendId)
+            ->where('purchase.StatusP', 1)
+            ->get()
+            ->getResultArray();
+    }
+    
+    
+
+
     public function getTreeById($id)
     {
         return $this->select('trees.*, species.Commercial_Name, species.Scientific_Name')
@@ -60,6 +90,8 @@ class TreeModel extends Model
             ->where('trees.Id_Tree', $id)  // Filtra por el ID del árbol
             ->first();  // Obtiene solo el primer resultado (ya que el ID es único)
     }
+
+
     public function getTreeDetails($treeId) {
         // Realizar la consulta para obtener los detalles del árbol
         $query = $this->db->get_where('trees', array('Tree_Id' => $treeId));

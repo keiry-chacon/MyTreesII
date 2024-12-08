@@ -6,6 +6,9 @@ use App\Models\UserModel;
 use App\Models\CountryModel;
 use App\Models\ProvinceModel;
 use App\Models\DistrictModel;
+use App\Models\TreeUpdateModel;
+use App\Models\TreeModel;
+
 use CodeIgniter\Router\Router;
 
 class User extends BaseController
@@ -15,6 +18,8 @@ class User extends BaseController
     private $countryModel;
     private $provinceModel;
     private $districtModel;
+    private $treeupdateModel;
+    private $treeModel;
 
     public function __construct()
     {
@@ -26,6 +31,8 @@ class User extends BaseController
         $this->provinceModel    = model(ProvinceModel::class);
         $this->districtModel    = model(DistrictModel::class);
         $this->userModel        = model(UserModel::class);
+        $this->treeupdateModel  = model(TreeUpdateModel::class);
+        $this->treeModel        = model(TreeModel::class);
     }
 
 
@@ -76,7 +83,7 @@ class User extends BaseController
                 case '2':
                     return redirect()->to('/friend/dashboard');
                 case '3':
-                    return redirect()->to('/operator/dashboard');
+                    return redirect()->to('/operatorhome');
                 default:
                     return redirect()->to('/'); 
             }
@@ -176,6 +183,172 @@ class User extends BaseController
 
 
 
+    /**
+     * Displays the RegisterUpdate page
+     */
+    public function indexRegisterUpdate()
+    {
+        // Get the tree ID from the URL (GET parameter)
+        $idTree = $this->request->getGet('id_tree');
+
+        // Validate that the ID is valid
+        if (!$idTree || !is_numeric($idTree)) {
+            return redirect()->to('/managetrees')->with('error', 'Invalid Tree ID');
+        }
+
+        // Create the tree model
+        $treeModel = new TreeModel();
+
+        // Search for the tree by ID
+        $tree = $treeModel->find($idTree);
+
+        // Check if the tree exists
+        if (!$tree) {
+            return redirect()->to('/managetrees')->with('error', 'Tree not found');
+        }
+
+        // Prepare the data to be passed to the view
+        $data = [
+            'tree' => $tree,
+            'error_msg' => session()->get('error')
+        ];        
+
+        // Return the full view with header and the update tree form
+        return view('shared/header', $data) . view('operator/registerUpdate', $data);
+    }
+
+
+    /**
+     * Update a tree with a register
+     */
+    public function registerUpdate()  //Esta función está en ADmin con UpdateTree
+    {
+        // Get the form data
+        $idTree       = $this->request->getPost('id_tree'); // Tree ID from the POST data
+        $size         = $this->request->getPost('size');
+
+        // Validate that the tree ID is valid
+        if (!$idTree || !is_numeric($idTree)) {
+            log_message('error', 'Invalid or missing tree ID.');
+            return redirect()->to('/managefriends')->with('error', 'Invalid tree ID');
+        }
+
+        // Load the tree model
+        $treeModel          = new TreeModel();
+
+
+        // Prepare the data for the update
+        $data = [];
+        if (!empty($size)) {
+            $data['Size'] = $size;
+        }
+
+        // Check if there are any fields to update
+        if (empty($data)) {
+            return redirect()->back()->with('error', 'No fields to update.');
+        }
+
+        // Handling the tree picture
+        $file = $this->request->getFile('treePic'); // Get the file if it exists
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            // Generate a unique name for the image to avoid collision
+            $newName = $file->getRandomName();
+            
+            // Move the file to the uploads folder
+            $file->move(WRITEPATH . 'uploads_tree', $newName);
+            
+            // Save the new file name in the record
+            $data['Photo_Path'] = $newName;
+        }
+
+        // Check if tree exists in the database
+        $tree = $treeModel->find($idTree);
+        if (!$tree) {
+            return redirect()->to('/managefriends')->with('error', 'Tree not found');
+        }
+
+        // Try to update the tree
+        if (!$treeModel->update($idTree, $data)) {
+            // Get errors from the model
+            $errors = $treeModel->errors();
+            log_message('error', 'Errors trying to update tree: ' . implode(', ', $errors));
+            
+            // Redirect with errors if the update fails
+            return redirect()->back()->withInput()->with('error', implode(', ', $errors));
+        }
+
+        $result = $this->registerUpdateTree($idTree, $size, $newName ?? null);
+
+        if ($result !== true) {
+            // Si hubo un error en la función de inserción, redirigir con error
+            return redirect()->back()->withInput()->with('error', $result);
+        }
+        
+        // If everything is correct, redirect to the trees management page with a success message
+        return redirect()->to('/managefriends')->with('success', 'Tree updated successfully');
+    }
+
+
+    /**
+     * register a tree with a register
+     */
+    public function registerUpdateTree($idTree, $size, $photoPath = null)
+    {
+        $treeupdateModel = new TreeUpdateModel();
+
+        // Crear los datos para insertar
+        $data = [
+            'Id_Tree' => $idTree, // Asegúrate de que este campo exista en tu tabla
+            'Size' => $size
+        ];
+
+        // Si hay una foto, agregarla a los datos
+        if (!empty($photoPath)) {
+            $data['Photo_Path'] = $photoPath;
+        }
+
+        // Intentar insertar el nuevo registro
+        if (!$treeupdateModel->insert($data)) {
+            // Si falla, obtener los errores del modelo
+            $errors = $treeupdateModel->errors();
+            log_message('error', 'Errors trying to insert tree in TreeUpdateModel: ' . implode(', ', $errors));
+            return implode(', ', $errors);
+        }
+
+        // Si todo es correcto, devolver true
+        return true;
+    }
+
+    
+
+
+
+
+
+
+    /**
+     * Displays the Operator page
+    */  
+    public function indexOperatorHome()
+    {
+        $username   = session()->get('username');
+        $user       = $this->userModel->where('Username', $username)->first();
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+        return view('shared/header', [
+            'uploads_profile'   => base_url('uploads_profile/')
+        ]) . 
+        view('shared/navegation_operator', [
+            'profilePic'        => $profilePic,
+            'uploads_profile'   => base_url('uploads_profile/')
+        ]) . 
+        view('operator/operatorHome', [
+        ]);
+    }
+
+
+
+
 
     /**
      * Displays the profile page
@@ -193,7 +366,7 @@ class User extends BaseController
      
          // Verificar si el usuario existe
          if (!$userData) {
-             throw new \CodeIgniter\Exceptions\PageNotFoundException('Usuario no encontrado.');
+             throw new \CodeIgniter\Exceptions\PageNotFoundException('User not founded.');
          }
      
          // Verificar si el perfil tiene imagen, si no asignar una imagen por defecto

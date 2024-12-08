@@ -1,0 +1,314 @@
+CRITICAL - 2024-12-08 00:04:40 --> ErrorException: Undefined array key "Profile_Pic"
+[Method: POST, Route: user/login]
+in APPPATH\Controllers\User.php on line 69.
+ 1 APPPATH\Controllers\User.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Profile_Pic"', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 69)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->login()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:22:49 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerupdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerupdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerupdate', [], true)
+ 3 APPPATH\Controllers\User.php(198): view('user/registerupdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:23:06 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerUpdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerUpdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerUpdate', [], true)
+ 3 APPPATH\Controllers\User.php(198): view('user/registerUpdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:24:51 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerUpdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerUpdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerUpdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerUpdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:25:23 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerupdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerupdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerupdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerupdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:31:01 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerupdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerupdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerupdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerupdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:32:28 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerupdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerupdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerupdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerupdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:33:08 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerupdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerupdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerupdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerupdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:34:28 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerUpdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerUpdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerUpdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerUpdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:42:49 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerUpdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerUpdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerUpdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerUpdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:43:37 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerUpdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerUpdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerUpdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerUpdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:45:26 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerUpdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerUpdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerUpdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerUpdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:45:30 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerUpdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerUpdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerUpdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerUpdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:46:18 --> ErrorException: Undefined variable $tree
+[Method: GET, Route: registerupdate]
+in APPPATH\Views\operator\registerUpdate.php on line 20.
+ 1 APPPATH\Views\operator\registerUpdate.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $tree', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\operator\\registerUpdate.php', 20)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\operator\\registerUpdate.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('operator/registerUpdate', [], true)
+ 5 APPPATH\Controllers\User.php(194): view('operator/registerUpdate', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:46:32 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerUpdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerUpdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerUpdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerUpdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:46:41 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/registerupdate.php"
+[Method: GET, Route: registerupdate]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/registerupdate.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/registerupdate', [], true)
+ 3 APPPATH\Controllers\User.php(194): view('user/registerupdate', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:47:21 --> ErrorException: Undefined variable $tree
+[Method: GET, Route: registerupdate]
+in APPPATH\Views\operator\registerUpdate.php on line 20.
+ 1 APPPATH\Views\operator\registerUpdate.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $tree', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\operator\\registerUpdate.php', 20)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\operator\\registerUpdate.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('operator/registerupdate', [], true)
+ 5 APPPATH\Controllers\User.php(194): view('operator/registerupdate', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:47:28 --> ErrorException: Undefined variable $tree
+[Method: GET, Route: registerupdate]
+in APPPATH\Views\operator\registerUpdate.php on line 20.
+ 1 APPPATH\Views\operator\registerUpdate.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $tree', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\operator\\registerUpdate.php', 20)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\operator\\registerUpdate.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('operator/registerUpdate', [], true)
+ 5 APPPATH\Controllers\User.php(194): view('operator/registerUpdate', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:52:58 --> ErrorException: Undefined variable $tree
+[Method: GET, Route: registerupdate]
+in APPPATH\Views\operator\registerUpdate.php on line 20.
+ 1 APPPATH\Views\operator\registerUpdate.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $tree', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\operator\\registerUpdate.php', 20)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\operator\\registerUpdate.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('operator/registerUpdate', [], true)
+ 5 APPPATH\Controllers\User.php(194): view('operator/registerUpdate', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 02:56:05 --> ErrorException: Undefined variable $tree
+[Method: GET, Route: registerupdate]
+in APPPATH\Views\operator\registerUpdate.php on line 20.
+ 1 APPPATH\Views\operator\registerUpdate.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $tree', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\operator\\registerUpdate.php', 20)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\operator\\registerUpdate.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('operator/registerUpdate', [], true)
+ 5 APPPATH\Controllers\User.php(217): view('operator/registerUpdate', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexRegisterUpdate()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-12-08 03:13:07 --> mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`mytrees`.`tree_update`, CONSTRAINT `fk_update` FOREIGN KEY (`Tree_Id`) REFERENCES `trees` (`Id_Tree`)) in C:\xampp\ISW-613-MyTrees2\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\xampp\ISW-613-MyTrees2\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `tr...', 0)
+#1 C:\xampp\ISW-613-MyTrees2\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tr...')
+#2 C:\xampp\ISW-613-MyTrees2\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tr...')
+#3 C:\xampp\ISW-613-MyTrees2\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tr...', Array, false)
+#4 C:\xampp\ISW-613-MyTrees2\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\ISW-613-MyTrees2\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\ISW-613-MyTrees2\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\ISW-613-MyTrees2\app\Controllers\User.php(311): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\ISW-613-MyTrees2\app\Controllers\User.php(280): App\Controllers\User->registerUpdateTree('18', '800', NULL)
+#9 C:\xampp\ISW-613-MyTrees2\system\CodeIgniter.php(933): App\Controllers\User->registerUpdate()
+#10 C:\xampp\ISW-613-MyTrees2\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#11 C:\xampp\ISW-613-MyTrees2\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\ISW-613-MyTrees2\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\ISW-613-MyTrees2\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\ISW-613-MyTrees2\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+CRITICAL - 2024-12-08 03:13:07 --> CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`mytrees`.`tree_update`, CONSTRAINT `fk_update` FOREIGN KEY (`Tree_Id`) REFERENCES `trees` (`Id_Tree`))
+[Method: POST, Route: operator/registerupdate]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tree_update` (`Size`) VALUES (:Size:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\User.php(311): CodeIgniter\Model->insert([...])
+ 6 APPPATH\Controllers\User.php(280): App\Controllers\User->registerUpdateTree('18', '800', null)
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->registerUpdate()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 03:13:07 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`mytrees`.`tree_update`, CONSTRAINT `fk_update` FOREIGN KEY (`Tree_Id`) REFERENCES `trees` (`Id_Tree`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tree_update` (`Size`) VALUES (\'800\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tree_update` (`Size`) VALUES (\'800\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tree_update` (`Size`) VALUES (:Size:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\User.php(311): CodeIgniter\Model->insert([...])
+ 8 APPPATH\Controllers\User.php(280): App\Controllers\User->registerUpdateTree('18', '800', null)
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->registerUpdate()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-08 03:13:07 --> [Caused by] mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`mytrees`.`tree_update`, CONSTRAINT `fk_update` FOREIGN KEY (`Tree_Id`) REFERENCES `trees` (`Id_Tree`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `tree_update` (`Size`) VALUES (\'800\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tree_update` (`Size`) VALUES (\'800\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tree_update` (`Size`) VALUES (\'800\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tree_update` (`Size`) VALUES (:Size:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\User.php(311): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\User.php(280): App\Controllers\User->registerUpdateTree('18', '800', null)
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->registerUpdate()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

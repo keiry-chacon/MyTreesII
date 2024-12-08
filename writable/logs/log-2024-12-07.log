@@ -1,0 +1,200 @@
+CRITICAL - 2024-12-07 19:24:57 --> ErrorException: Cannot redeclare App\Controllers\Admin::indexManageTrees()
+[Method: GET, Route: adminhome]
+in APPPATH\Controllers\Admin.php on line 532.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-12-07 19:25:01 --> ErrorException: Cannot redeclare App\Controllers\Admin::indexManageTrees()
+[Method: GET, Route: managetrees]
+in APPPATH\Controllers\Admin.php on line 532.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-12-07 20:07:49 --> mysqli_sql_exception: Not unique table/alias: 'trees' in C:\xampp\ISW-613-MyTrees2\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\xampp\ISW-613-MyTrees2\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `purchas...', 0)
+#1 C:\xampp\ISW-613-MyTrees2\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `purchas...')
+#2 C:\xampp\ISW-613-MyTrees2\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `purchas...')
+#3 C:\xampp\ISW-613-MyTrees2\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `purchas...', Array, false)
+#4 C:\xampp\ISW-613-MyTrees2\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\ISW-613-MyTrees2\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\ISW-613-MyTrees2\app\Models\TreeModel.php(78): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\ISW-613-MyTrees2\app\Controllers\Admin.php(534): App\Models\TreeModel->getFriendsTrees('2')
+#8 C:\xampp\ISW-613-MyTrees2\system\CodeIgniter.php(933): App\Controllers\Admin->indexFriendTrees()
+#9 C:\xampp\ISW-613-MyTrees2\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#10 C:\xampp\ISW-613-MyTrees2\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\ISW-613-MyTrees2\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\ISW-613-MyTrees2\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\ISW-613-MyTrees2\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-12-07 20:07:49 --> CodeIgniter\Database\Exceptions\DatabaseException: Not unique table/alias: 'trees'
+[Method: GET, Route: friendtrees]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `purchase`.`Id_Purchase`, `purchase`.`Payment_Method`, `purchase`.`Shipping_Location`, `purchase`.`Purchase_Date`, `trees`.`Id_Tree`, `trees`.`Specie_Id`, `species`.`Commercial_Name`, `species`.`Scientific_Name`, `trees`.`Location`, `purchase`.`StatusP`, `trees`.`Price`, `trees`.`Photo_Path`
+FROM `trees`
+JOIN `trees` ON `trees`.`Id_Tree` = `purchase`.`Tree_Id`
+JOIN `species` ON `species`.`Id_Specie` = `trees`.`Specie_Id`
+WHERE `purchase`.`User_Id` = :purchase.User_Id:
+AND `purchase`.`StatusP` = :purchase.StatusP:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\TreeModel.php(78): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Admin.php(534): App\Models\TreeModel->getFriendsTrees('2')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->indexFriendTrees()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-07 20:07:49 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Not unique table/alias: 'trees'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `purchase`.`Id_Purchase`, `purchase`.`Payment_Method`, `purchase`.`Shipping_Location`, `purchase`.`Purchase_Date`, `trees`.`Id_Tree`, `trees`.`Specie_Id`, `species`.`Commercial_Name`, `species`.`Scientific_Name`, `trees`.`Location`, `purchase`.`StatusP`, `trees`.`Price`, `trees`.`Photo_Path`
+FROM `trees`
+JOIN `trees` ON `trees`.`Id_Tree` = `purchase`.`Tree_Id`
+JOIN `species` ON `species`.`Id_Specie` = `trees`.`Specie_Id`
+WHERE `purchase`.`User_Id` = \'2\'
+AND `purchase`.`StatusP` = 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `purchase`.`Id_Purchase`, `purchase`.`Payment_Method`, `purchase`.`Shipping_Location`, `purchase`.`Purchase_Date`, `trees`.`Id_Tree`, `trees`.`Specie_Id`, `species`.`Commercial_Name`, `species`.`Scientific_Name`, `trees`.`Location`, `purchase`.`StatusP`, `trees`.`Price`, `trees`.`Photo_Path`
+FROM `trees`
+JOIN `trees` ON `trees`.`Id_Tree` = `purchase`.`Tree_Id`
+JOIN `species` ON `species`.`Id_Specie` = `trees`.`Specie_Id`
+WHERE `purchase`.`User_Id` = \'2\'
+AND `purchase`.`StatusP` = 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `purchase`.`Id_Purchase`, `purchase`.`Payment_Method`, `purchase`.`Shipping_Location`, `purchase`.`Purchase_Date`, `trees`.`Id_Tree`, `trees`.`Specie_Id`, `species`.`Commercial_Name`, `species`.`Scientific_Name`, `trees`.`Location`, `purchase`.`StatusP`, `trees`.`Price`, `trees`.`Photo_Path`
+FROM `trees`
+JOIN `trees` ON `trees`.`Id_Tree` = `purchase`.`Tree_Id`
+JOIN `species` ON `species`.`Id_Specie` = `trees`.`Specie_Id`
+WHERE `purchase`.`User_Id` = :purchase.User_Id:
+AND `purchase`.`StatusP` = :purchase.StatusP:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\TreeModel.php(78): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Admin.php(534): App\Models\TreeModel->getFriendsTrees('2')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->indexFriendTrees()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-07 20:07:49 --> [Caused by] mysqli_sql_exception: Not unique table/alias: 'trees'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `purchase`.`Id_Purchase`, `purchase`.`Payment_Method`, `purchase`.`Shipping_Location`, `purchase`.`Purchase_Date`, `trees`.`Id_Tree`, `trees`.`Specie_Id`, `species`.`Commercial_Name`, `species`.`Scientific_Name`, `trees`.`Location`, `purchase`.`StatusP`, `trees`.`Price`, `trees`.`Photo_Path`
+FROM `trees`
+JOIN `trees` ON `trees`.`Id_Tree` = `purchase`.`Tree_Id`
+JOIN `species` ON `species`.`Id_Specie` = `trees`.`Specie_Id`
+WHERE `purchase`.`User_Id` = \'2\'
+AND `purchase`.`StatusP` = 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `purchase`.`Id_Purchase`, `purchase`.`Payment_Method`, `purchase`.`Shipping_Location`, `purchase`.`Purchase_Date`, `trees`.`Id_Tree`, `trees`.`Specie_Id`, `species`.`Commercial_Name`, `species`.`Scientific_Name`, `trees`.`Location`, `purchase`.`StatusP`, `trees`.`Price`, `trees`.`Photo_Path`
+FROM `trees`
+JOIN `trees` ON `trees`.`Id_Tree` = `purchase`.`Tree_Id`
+JOIN `species` ON `species`.`Id_Specie` = `trees`.`Specie_Id`
+WHERE `purchase`.`User_Id` = \'2\'
+AND `purchase`.`StatusP` = 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `purchase`.`Id_Purchase`, `purchase`.`Payment_Method`, `purchase`.`Shipping_Location`, `purchase`.`Purchase_Date`, `trees`.`Id_Tree`, `trees`.`Specie_Id`, `species`.`Commercial_Name`, `species`.`Scientific_Name`, `trees`.`Location`, `purchase`.`StatusP`, `trees`.`Price`, `trees`.`Photo_Path`
+FROM `trees`
+JOIN `trees` ON `trees`.`Id_Tree` = `purchase`.`Tree_Id`
+JOIN `species` ON `species`.`Id_Specie` = `trees`.`Specie_Id`
+WHERE `purchase`.`User_Id` = \'2\'
+AND `purchase`.`StatusP` = 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `purchase`.`Id_Purchase`, `purchase`.`Payment_Method`, `purchase`.`Shipping_Location`, `purchase`.`Purchase_Date`, `trees`.`Id_Tree`, `trees`.`Specie_Id`, `species`.`Commercial_Name`, `species`.`Scientific_Name`, `trees`.`Location`, `purchase`.`StatusP`, `trees`.`Price`, `trees`.`Photo_Path`
+FROM `trees`
+JOIN `trees` ON `trees`.`Id_Tree` = `purchase`.`Tree_Id`
+JOIN `species` ON `species`.`Id_Specie` = `trees`.`Specie_Id`
+WHERE `purchase`.`User_Id` = :purchase.User_Id:
+AND `purchase`.`StatusP` = :purchase.StatusP:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\TreeModel.php(78): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin.php(534): App\Models\TreeModel->getFriendsTrees('2')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->indexFriendTrees()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-07 20:21:57 --> TypeError: CodeIgniter\Database\BaseBuilder::from(): Argument #2 ($overwrite) must be of type bool, string given, called in C:\xampp\ISW-613-MyTrees2\system\Model.php on line 930
+[Method: GET, Route: friendtrees]
+in SYSTEMPATH\Database\BaseBuilder.php on line 580.
+ 1 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->from('trees', 'trees_main')
+ 2 APPPATH\Models\TreeModel.php(74): CodeIgniter\Model->__call('from', [...])
+ 3 APPPATH\Controllers\Admin.php(534): App\Models\TreeModel->getFriendsTrees('3')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->indexFriendTrees()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-07 20:22:04 --> TypeError: CodeIgniter\Database\BaseBuilder::from(): Argument #2 ($overwrite) must be of type bool, string given, called in C:\xampp\ISW-613-MyTrees2\system\Model.php on line 930
+[Method: GET, Route: friendtrees]
+in SYSTEMPATH\Database\BaseBuilder.php on line 580.
+ 1 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->from('trees', 'trees_main')
+ 2 APPPATH\Models\TreeModel.php(74): CodeIgniter\Model->__call('from', [...])
+ 3 APPPATH\Controllers\Admin.php(534): App\Models\TreeModel->getFriendsTrees('2')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->indexFriendTrees()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-07 20:23:29 --> ErrorException: Undefined variable $error_msg
+[Method: GET, Route: friendtrees]
+in APPPATH\Views\admin\friendTrees.php on line 14.
+ 1 APPPATH\Views\admin\friendTrees.php(14): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $error_msg', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\friendTrees.php', 14)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\friendTrees.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/friendtrees', [], true)
+ 5 APPPATH\Controllers\Admin.php(537): view('admin/friendtrees', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->indexFriendTrees()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-07 20:43:55 --> ErrorException: Undefined variable $uploads_folder_t
+[Method: GET, Route: friendtrees]
+in APPPATH\Views\admin\friendTrees.php on line 33.
+ 1 APPPATH\Views\admin\friendTrees.php(33): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $uploads_folder_t', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\friendTrees.php', 33)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\friendTrees.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/friendtrees', [], true)
+ 5 APPPATH\Controllers\Admin.php(537): view('admin/friendtrees', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->indexFriendTrees()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-07 20:47:23 --> ErrorException: Undefined variable $uploads_folder_t
+[Method: GET, Route: friendtrees]
+in APPPATH\Views\admin\friendTrees.php on line 37.
+ 1 APPPATH\Views\admin\friendTrees.php(37): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $uploads_folder_t', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\friendTrees.php', 37)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\friendTrees.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/friendtrees', [], true)
+ 5 APPPATH\Controllers\Admin.php(537): view('admin/friendtrees', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->indexFriendTrees()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-07 23:13:29 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/operatorhome.php"
+[Method: GET, Route: operatorhome]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/operatorhome.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/operatorhome', [], true)
+ 3 APPPATH\Controllers\User.php(189): view('user/operatorhome')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexOperatorHome()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-07 23:16:17 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/operatorHome.php"
+[Method: GET, Route: operatorhome]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/operatorHome.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/operatorHome', [], true)
+ 3 APPPATH\Controllers\User.php(189): view('user/operatorHome')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexOperatorHome()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

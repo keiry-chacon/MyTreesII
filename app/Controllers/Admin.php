@@ -507,7 +507,7 @@ class Admin extends BaseController
 
 
     /**
-     * Displays the list of registered trees
+     * Displays the list of registered friends
     */
     public function indexManageFriends()
     {
@@ -515,6 +515,128 @@ class Admin extends BaseController
 
         $data['users'] = $user;
         return view('shared/header', $data) . view('admin/manageFriends', $data);
+    }
+
+
+
+
+
+
+
+
+     /**
+     * Displays the list of friend trees
+    */
+    public function indexFriendTrees()
+    {
+        $idUser = $this->request->getGet('id_user');
+
+        $trees = $this->treeModel->getFriendsTrees($idUser);
+
+        $data['trees'] = $trees;
+        return view('shared/header', $data) . view('admin/friendtrees', $data);
+    }
+
+
+
+
+
+       /**
+     * Displays the interface of the update tree section
+     */
+    public function indexUpdateFriendTree()
+    {
+        // Get the tree ID from the URL (GET parameter)
+        $idTree = $this->request->getGet('id_tree');
+        
+        // Validate that the ID is valid
+        if (!$idTree || !is_numeric($idTree)) {
+            return redirect()->to('/managefriends')->with('error', 'Invalid Tree ID');
+        }
+
+        // Create the tree model
+        $treeModel = new TreeModel();
+
+        // Search for the tree by ID
+        $tree = $treeModel->find($idTree);
+
+        // Check if the tree exists
+        if (!$tree) {
+            return redirect()->to('/managefriends')->with('error', 'Tree not found');
+        }
+
+        // Fetch species data to display in the dropdown
+        $species = $this->speciesModel->getSpeciesByStatus(1);
+
+        // Prepare the data to be passed to the view
+        $data = [
+            'species' => $species,
+            'tree' => $tree,
+            'error_msg' => session()->get('error')  // Get any error message, if exists
+        ];
+
+        // Return the full view with header and the update tree form
+        return view('shared/header', $data) . view('admin/updatefriendtree', $data);
+    }
+
+
+    /**
+     * Update an existing tree in the database
+     */
+    public function updateFriendTree() //PENSAR EN BORRAR ESTA
+    {
+        // Get the form data
+        $idTree       = $this->request->getPost('id_tree'); // Tree ID from the POST data
+        $size         = $this->request->getPost('size');
+        $status       = $this->request->getPost('status');
+
+        // Validate that the tree ID is valid
+        if (!$idTree || !is_numeric($idTree)) {
+            log_message('error', 'Invalid or missing tree ID.');
+            return redirect()->to('/managetrees')->with('error', 'Invalid tree ID');
+        }
+
+        // Load the tree model
+        $treeModel = new TreeModel();
+
+        // Prepare the data for the update
+        $data = [];
+        if (!empty($specieId)) {
+            $data['Specie_Id'] = $specieId;
+        }
+        if (!empty($location)) {
+            $data['Location'] = $location;
+        }
+        if (!empty($size)) {
+            $data['Size'] = $size;
+        }
+        if (!empty($status)) {
+            $data['StatusT'] = $status;
+        }
+
+        // Check if there are any fields to update
+        if (empty($data)) {
+            return redirect()->back()->with('error', 'No fields to update.');
+        }
+
+        // Check if tree exists in the database
+        $tree = $treeModel->find($idTree);
+        if (!$tree) {
+            return redirect()->to('/managetrees')->with('error', 'Tree not found');
+        }
+
+        // Try to update the tree
+        if (!$treeModel->update($idTree, $data)) {
+            // Get errors from the model
+            $errors = $treeModel->errors();
+            log_message('error', 'Errors trying to update tree: ' . implode(', ', $errors));
+            
+            // Redirect with errors if the update fails
+            return redirect()->back()->withInput()->with('error', implode(', ', $errors));
+        }
+
+        // If everything is correct, redirect to the trees management page with a success message
+        return redirect()->to('/managetrees')->with('success', 'Tree updated successfully');
     }
 
 
