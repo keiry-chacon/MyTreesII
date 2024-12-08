@@ -14,11 +14,11 @@ public function redirectDashboard()
     
     switch ($role) {
         case 1:
-            return redirect()->to('/admin/dashboard');
+            return redirect()->to('/adminHome');
         case 2:
             return redirect()->to('/friend/dashboard');
         case 3:
-            return redirect()->to('/operator/dashboard');
+            return redirect()->to('/operatorHome');
         default:
             return redirect()->to('/');  
     }

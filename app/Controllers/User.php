@@ -7,6 +7,7 @@ use App\Models\CountryModel;
 use App\Models\ProvinceModel;
 use App\Models\DistrictModel;
 use App\Models\TreeUpdateModel;
+use App\Models\CartModel;
 use App\Models\TreeModel;
 
 use CodeIgniter\Router\Router;
@@ -20,6 +21,7 @@ class User extends BaseController
     private $districtModel;
     private $treeupdateModel;
     private $treeModel;
+    private $cartModel; // Agregar CartModel
 
     public function __construct()
     {
@@ -33,6 +35,8 @@ class User extends BaseController
         $this->userModel        = model(UserModel::class);
         $this->treeupdateModel  = model(TreeUpdateModel::class);
         $this->treeModel        = model(TreeModel::class);
+        $this->cartModel        = model(CartModel::class); // Inicializar CartModel
+
     }
 
 
@@ -179,8 +183,6 @@ class User extends BaseController
         // If everything is correct, redirect to the login page with a success message
         return redirect()->to('/login')->with('success', 'Your account was successfully created!');
     }
-    
-
 
 
     /**
@@ -458,12 +460,53 @@ class User extends BaseController
         }
     }
 
+/**
+     * Displays the friend page
+    */    
+    public function indexFriend()
+    {
+        $purchaseMessage = session()->get('purchase_message');
+        if ($purchaseMessage) {
+            session()->remove('purchase_message');
+        }
 
+        $user       = $this->userModel->where('Username', $_SESSION['username'])->first(); 
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+        $trees = $this->treeModel->getAvailableTrees(); 
+        $session = session();
+        $userId = $session->get('user_id');
+        $cartCount = $this->cartModel->where('User_Id', $userId)->where('Status', 'active')->countAllResults();
+
+// Consulta para obtener los elementos activos en el carrito
+         $carts = $this->cartModel->getCartDetails($userId);
+
+
+
+
+        return view('shared/header', [
+            'uploads_profile'   => base_url('uploads_profile/')
+        ]) . 
+        view('shared/navegation_friend', [
+            'profilePic'        => $profilePic,
+            'uploads_profile'   => base_url('uploads_profile/'),
+            'cartCount' => $cartCount,
+            'carts' => $carts,
+            'uploads_folder'    => base_url('uploads_tree/')
+
+        ]) . 
+        view('friend/dashboard', [
+            'trees'             => $trees,
+            'purchase_message'  => $purchaseMessage,
+            'uploads_folder'    => base_url('uploads_tree/')
+        ]);
+    }
 
     
 
 
 }
+
 
 
 

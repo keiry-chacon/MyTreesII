@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\TreeModel; 
 use App\Models\PurchaseModel; 
+use App\Models\CartModel;
 
 class Friend extends BaseController
 {
@@ -12,9 +13,11 @@ class Friend extends BaseController
     private $treeModel;
     private $userModel;
     private $purchaseModel;
+    protected $cartModel;
 
     public function __construct()
     {
+        
         // Connect to the database
         $this->db               = \Config\Database::connect();
 
@@ -22,6 +25,7 @@ class Friend extends BaseController
         $this->treeModel        = model(TreeModel::class); 
         $this->userModel        = model(UserModel::class);
         $this->purchaseModel    = model(PurchaseModel::class);
+        $this->cartModel = new CartModel();
 
     }
 
@@ -39,13 +43,26 @@ class Friend extends BaseController
         $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
 
         $trees = $this->treeModel->getAvailableTrees(); 
+        $session = session();
+        $userId = $session->get('user_id');
+        $cartCount = $this->cartModel->where('User_Id', $userId)->where('Status', 'active')->countAllResults();
+
+// Consulta para obtener los elementos activos en el carrito
+         $carts = $this->cartModel->getCartDetails($userId);
+
+
+
 
         return view('shared/header', [
             'uploads_profile'   => base_url('uploads_profile/')
         ]) . 
         view('shared/navegation_friend', [
             'profilePic'        => $profilePic,
-            'uploads_profile'   => base_url('uploads_profile/')
+            'uploads_profile'   => base_url('uploads_profile/'),
+            'cartCount' => $cartCount,
+            'carts' => $carts,
+            'uploads_folder'    => base_url('uploads_tree/')
+
         ]) . 
         view('friend/dashboard', [
             'trees'             => $trees,

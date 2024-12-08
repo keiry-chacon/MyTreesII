@@ -38,7 +38,6 @@ $routes->post('/redirectDashboard', 'Error::redirectDashboard');
 //                              Admin
 
 // Home
-$routes->get('/adminhome', 'Admin::indexHome');
 
 
 //Manage Species
@@ -96,7 +95,7 @@ $routes->post('/admin/adduser', 'Admin::addUser');
 
 // ================================================================
 //                              Friend
-$routes->get('/friend/dashboard', 'Friend::index');
+$routes->get('/friend/dashboard', 'User::indexFriend');
 
 //Mytrees
 $routes->get('/mytrees', 'Tree::mytrees');
@@ -106,6 +105,13 @@ $routes->get('/friend/tree_detail_friend/(:segment)', 'Tree::treeDetailFriend/$1
 //User
 $routes->post('purchase/processPurchase', 'Purchase::processPurchase');
 $routes->get('purchase/success', 'Purchase::success');
+$routes->post('/addToCart', 'Cart::addToCart');
+$routes->post('/showCart', 'Cart::showCart');
+// routes.php (en la carpeta de rutas de tu aplicación)
+$routes->post('/cartRemove', 'Cart::removeItem');
+$routes->post('/cart/buyAll', 'Purchase::buyAllItems');
+
+
 
 
 
@@ -123,12 +129,14 @@ $routes->get('/operatorhome', 'User::indexOperatorHome');
 $routes->get('/registerupdate', 'User::indexRegisterUpdate');
 $routes->post('/operator/registerupdate', 'User::registerUpdate');
 
+$routes->get('/adminhome', 'Admin::indexHome');
 
 
 
 $routes->group('admin', ['filter' => 'auth:1'], function ($routes) {
-    $routes->get('dashboard', 'Admin::index');
+    $routes->get('dashboard', 'Admin::indexHome');
 });
+
 
 $routes->group('friend', ['filter' => 'auth:2'], function ($routes) {
     $routes->get('dashboard', 'Friend::index');

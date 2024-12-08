@@ -1,3 +1,13 @@
+<?php if (session()->has('message')): ?>
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <?= session('message') ?>
+    </div>
+<?php endif; ?>
+<?php if (session()->has('error')): ?>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <?= session('error') ?>
+    </div>
+<?php endif; ?>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
     <button onclick="goToDashboard()" class="absolute top-4 left-80 text-2xl text-blue-500 bg-transparent border-none cursor-pointer">
         <i class="fas fa-arrow-left"></i>
@@ -44,8 +54,9 @@
 
                     <!-- Botones de acción (Añadir al carrito / Comprar ahora) -->
                     <div class="flex space-x-6 mt-6">
-                        <form method="POST" action="<?= site_url('treecontroller/addToCart'); ?>">
+                        <form method="POST" action="<?= site_url('/addToCart'); ?>">
                             <input type="hidden" name="tree_id" value="<?= esc($tree['Id_Tree']); ?>">
+                            <input type="hidden" name="price" value="<?= esc($tree['Price']); ?>">
                             <button type="submit" class="flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 focus:outline-none transition-colors duration-300" name="add_to_cart">
                                 <i class="fas fa-shopping-cart mr-2"></i> Add To Cart
                             </button>
@@ -79,8 +90,6 @@
             </div>
         </div>
 </div>
-
-
             <!-- Formulario de compra -->
             <form action="<?= site_url('purchase/processPurchase'); ?>" method="POST">
                 <input type="hidden" name="tree_id" id="tree_id" value="<?= $tree['Id_Tree']; ?>">

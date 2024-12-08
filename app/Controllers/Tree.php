@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\TreeModel; 
 use App\Models\PurchaseModel; 
+use App\Models\CartModel; 
 
 class Tree extends BaseController
 {
@@ -12,6 +13,7 @@ class Tree extends BaseController
     private $treeModel;
     private $userModel;
     private $purchaseModel;
+    protected $cartModel;
 
     public function __construct()
     {
@@ -23,6 +25,7 @@ class Tree extends BaseController
         $this->userModel        = model(UserModel::class);
         $this->purchaseModel    = model(PurchaseModel::class);
         $this->session          = \Config\Services::session();
+        $this->cartModel = new CartModel();
 
 
     }
@@ -45,13 +48,17 @@ class Tree extends BaseController
         // Get the trees for the user
         $trees = $this->purchaseModel->getFriendsTrees( $user['Id_User']);
 
-        return view('shared/header', [
-            'uploads_profile'   => base_url('uploads_profile/')
-        ]) . 
+        $cartCount = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();
+        $carts = $this->cartModel->getCartDetails($user['Id_User']);
+        return view('shared/header') . 
         view('shared/navegation_friend', [
             'profilePic'        => $profilePic,
-            'uploads_profile'   => base_url('uploads_profile/')
-        ]) . 
+            'uploads_profile'   => base_url('uploads_profile/'),
+            'cartCount' => $cartCount,
+            'carts' => $carts,
+            'uploads_folder'    => base_url('uploads_tree/')
+
+        ]) .  
         view('friend/mytrees', [
             'trees' => $trees,
             'purchase_message'  => $purchaseMessage,
@@ -71,10 +78,16 @@ class Tree extends BaseController
         $user       = $this->userModel->where('Username', session()->get('username'))->first(); 
         $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
 
+        $cartCount = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();
+        $carts = $this->cartModel->getCartDetails($user['Id_User']);
         return view('shared/header') . 
         view('shared/navegation_friend', [
             'profilePic'        => $profilePic,
-            'uploads_profile'   => base_url('uploads_profile/')
+            'uploads_profile'   => base_url('uploads_profile/'),
+            'cartCount' => $cartCount,
+            'carts' => $carts,
+            'uploads_folder'    => base_url('uploads_tree/')
+
         ]) . 
         view('friend/tree_detail', [
             'tree' => $tree,
@@ -105,10 +118,16 @@ class Tree extends BaseController
         $user       = $this->userModel->where('Username', session()->get('username'))->first(); 
         $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
 
+        $cartCount = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();
+        $carts = $this->cartModel->getCartDetails($user['Id_User']);
         return view('shared/header') . 
         view('shared/navegation_friend', [
             'profilePic'        => $profilePic,
-            'uploads_profile'   => base_url('uploads_profile/')
+            'uploads_profile'   => base_url('uploads_profile/'),
+            'cartCount' => $cartCount,
+            'carts' => $carts,
+            'uploads_folder'    => base_url('uploads_tree/')
+
         ]) . 
         view('friend/tree_detail_friend', [
             'tree' => $tree,
@@ -116,6 +135,8 @@ class Tree extends BaseController
             'uploads_folder'    => base_url('uploads_tree/')
         ]);
     }
+    
+
 }
 
 

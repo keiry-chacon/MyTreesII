@@ -14,7 +14,7 @@ class PurchaseModel extends Model
     {
         return $this->select('purchase.*, species.Commercial_Name, species.Scientific_Name, trees.Photo_Path, trees.Location')
                     ->join('trees', 'trees.Id_Tree = purchase.Tree_Id') 
-                    ->join('species', 'species.Id_Specie = trees.Specie_Id')  // Assuming the relationship is through Species_Id
+                    ->join('species', 'species.Id_Specie = trees.Specie_Id') 
                     ->where('purchase.User_Id', $user_id)
                     ->where('purchase.StatusP', 1) 
                     ->findAll();
@@ -27,4 +27,10 @@ class PurchaseModel extends Model
                     ->orderBy('Purchase_Date', 'DESC') // Ordenar por fecha de compra (más reciente primero)
                     ->findAll(); // Obtener todas las compras del usuario
     }
+
+    public function insertPurchase($data)
+{
+    return $this->db->table('purchase')->insert($data);
+}
+
 }
