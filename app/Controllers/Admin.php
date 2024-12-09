@@ -664,14 +664,20 @@ class Admin extends BaseController
     */
     public function indexAddUser()
     {
+        $username = session()->get('username');
+
         $country    = $this->countryModel->findAll();
         $province   = $this->provinceModel->findAll();
         $district   = $this->districtModel->findAll();
-
+        $user     = $this->userModel->where('Username', $username)->first();
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+        
         $data['country']    = $country;
         $data['province']   = $province;        
         $data['district']   = $district;
-        return view('shared/header', $data) . view('admin/addUser', $data);    
+        $data['profilePic']   = $profilePic;
+        $data['uploads_profile']   = base_url('uploads_profile/');
+        return view('shared/header', $data) . view('shared/navegation_admin', $data). view('admin/addUser', $data);    
     }
 
 

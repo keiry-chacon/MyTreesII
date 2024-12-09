@@ -21,11 +21,12 @@
             <!-- Submenu for the profile, initially hidden -->
             <div id="profile-submenu" class="hidden flex-col p-4 space-y-2">
                 <!-- Profile option -->
-                <li>
-                    <a href="/profile" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
-                        <i class="fas fa-user"></i> Profile
-                    </a>
-                </li>
+                <form action="/user/profile" method="post">
+                    <button type="submit" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2 w-full">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </button>
+                </form>
                 <!-- Log out button -->
                 <form action="/user/logout" method="post">
                     <button type="submit" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2 w-full">
@@ -34,7 +35,6 @@
                     </button>
                 </form>
             </div>
-
             <!-- Main navigation menu -->
             <ul class="space-y-4">
                 <!-- Home link -->
@@ -45,7 +45,7 @@
                 </li>
                 <!-- My Trees link -->
                 <li>
-                    <a href="/mytrees" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
+                    <a href="/friend/mytrees" class="flex items-center px-4 py-2 text-gray-800 bg-gray-300 rounded-lg hover:bg-green-500 hover:text-white transition duration-300">
                         <i class="fas fa-tree mr-3"></i> My Trees
                     </a>
                 </li>

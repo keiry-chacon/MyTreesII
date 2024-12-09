@@ -81,13 +81,13 @@ class User extends BaseController
         // Redirect user to the appropriate page based on their role
         switch ($user['Role_Id']) {
         case '1':
-            return redirect()->to('/adminhome'); // Admin dashboard
+            return redirect()->to('/admin/dashboard'); // Admin dashboard
         case '2':
             return redirect()->to('/friend/dashboard'); // Friend dashboard
         case '3':
-            return redirect()->to('/operatorhome'); // Operator home
+            return redirect()->to('/operator/dashboard'); // Operator dashboard
         default:
-            return redirect()->to('/'); // Default redirect
+            return redirect()->to('/login'); // Default redirect
         }
     } else {
         // If authentication fails, redirect back to the login page with an error message
@@ -603,6 +603,72 @@ class User extends BaseController
             'uploads_folder'    => base_url('uploads_tree/')
         ]);
     }
+    public function redirectToDashboard()
+    {
+        // Asume que tienes una sesión activa y puedes obtener el rol del usuario
+        $session = session(); // Obtener la sesión
+        $role = $session->get('role_id'); // Obtén el rol del usuario de la sesión
+
+        // Redirigir según el rol
+        switch ($role) {
+            case 1: // Admin
+                return redirect()->to('/admin/dashboard');
+            case 2: // Friend
+                return redirect()->to('/friend/dashboard');
+            case 3: // Operator
+                return redirect()->to('/operator/dashboard');
+            default:
+                return redirect()->to('/unauthorized'); // Redirige a una página de acceso no autorizado
+        }
+    }
+    public function indexManageFriends()
+{
+    // Obtener la lista de usuarios disponibles
+    $users = $this->userModel->getAvailableUsers();
+    $userData = $this->userModel->where('Username', $_SESSION['username'])->first();
+    if (!$userData) {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException('User not found.');
+    }
+    // Check if the profile has a picture, if not assign a default one
+    $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
+    $cartCount = $this->cartModel->where('User_Id', $userData['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
+
+    // Query to get the active cart items
+    $carts = $this->cartModel->getCartDetails($userData['Id_User']);
+    // Determine the navigation view based on the role
+    $navigationView = 'shared/navegation_friend';  // Default value
+    if (isset($userData['Role_Id'])) {
+        switch ($userData['Role_Id']) {
+            case '1':
+                $navigationView = 'shared/navegation_admin';  // If role is 'admin', use 'navegation_admin'
+                break;
+            case '3':
+                $navigationView = 'shared/navegation_operator';  // If role is 'operator', use 'navegation_operator'
+                break;
+            case '2':
+            default:
+                $navigationView = 'shared/navegation_friend';  // If role is 'friend' or any other value, use 'navegation_friend'
+                break;
+        }
+    }
+
+    // Preparar los datos para pasar a las vistas
+    $data['users'] = $users;
+    $data['uploads_folder'] = base_url('uploads_profile/'); // Correcta llamada a base_url()
+
+    // Renderizar ambas vistas correctamente
+    return view('shared/header', $data) . 
+           view($navigationView, [
+                'profilePic' => $profileImage,
+                'uploads_profile' => base_url('uploads_profile/'),
+                'cartCount' => $cartCount,
+                'carts' => $carts,
+                'uploads_folder' => base_url('uploads_tree/')
+            ]) . 
+           view('admin/manageFriends', $data);
+}
+
+
 }
 
 

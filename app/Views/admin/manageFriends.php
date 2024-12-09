@@ -18,9 +18,9 @@ $roleId = session()->get('role_id');
             <!-- Button linking to the trees list page -->
             <div class="text-center">
                 <?php if ($roleId == 1): ?>
-                    <a href="/adminhome" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
+                    <a href="/admin/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
                 <?php else: ?>
-                    <a href="/operatorhome" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
+                    <a href="/operator/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
                 <?php endif; ?>
             </div>
         </div>

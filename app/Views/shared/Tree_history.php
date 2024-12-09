@@ -17,10 +17,10 @@ $uploads_folder = base_url('public/uploads_tree/');
             <div class="text-center mt-3">
                 <?php if ($roleId == 1): ?>
                     <!-- Button for Admin Role -->
-                    <a href="/adminhome" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Go to Home</a>
+                    <a href="/admin/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Go to Home</a>
                 <?php elseif ($roleId == 3): ?>
                     <!-- Button for Operator Role -->
-                    <a href="/operatorhome" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Go to Home</a>
+                    <a href="/operator/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Go to Home</a>
                 <?php else: ?>
                     <!-- Button for Friend -->
                     <a href="/friend/dashboard" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Go to Home</a>

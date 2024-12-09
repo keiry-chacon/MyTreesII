@@ -136,7 +136,7 @@
     }
 
     function goToDashboard() {
-        window.location.href = "/friend/dashboard"; // Reemplaza con la URL de tu dashboard
+        window.location.href = "/friend/dashboard"; 
     }
     function showPurchaseForm(treeId) {
         document.getElementById('tree_id').value = treeId;

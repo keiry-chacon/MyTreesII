@@ -35,9 +35,13 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
-        'auth'          => \App\Filters\Auth::class, 
+        'auth' => \App\Filters\Auth::class, 
+        'admin' => \App\Filters\AdminFilter::class,
+        'friend' => \App\Filters\FriendFilter::class,
+        'operator' => \App\Filters\OperatorFilter::class,
+
+
     ];
-    
     
     /**
      * List of special required filters.
@@ -71,16 +75,10 @@ class Filters extends BaseFilters
      * @var array<string, array<string, array<string, string>>>|array<string, list<string>>
      */
     public array $globals = [
-        'before' => [
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
-        ],
-        'after' => [
-            // 'honeypot',
-            // 'secureheaders',
-        ],
+        'before' => [],
+        'after' => [],
     ];
+
 
     /**
      * List of filter aliases that works on a
@@ -106,5 +104,18 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        'admin' => [
+            'before' => ['admin/*'], // Rutas accesibles solo para administradores
+            'filters' => ['admin'],  // Filtro de acceso para administradores
+        ],
+        'operator' => [
+            'before' => ['operator/*'], // Rutas accesibles solo para operadores
+            'filters' => ['operator'], // Filtro de acceso para operadores
+        ],
+        'friend' => [
+            'before' => ['friend/*'], // Rutas accesibles solo para amigos
+            'filters' => ['friend'], // Filtro de acceso para amigos
+        ],
+    ];
 }

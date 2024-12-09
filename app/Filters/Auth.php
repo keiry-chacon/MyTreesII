@@ -22,6 +22,11 @@ class Auth implements FilterInterface
             }
         }
     }
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+    {
+        // Normalmente, aquí puedes agregar lógica para después de procesar la solicitud
+        // Si no necesitas lógica adicional, simplemente deja este método vacío.
+    }
 
     
 }

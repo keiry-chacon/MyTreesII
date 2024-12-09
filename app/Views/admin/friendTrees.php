@@ -16,10 +16,10 @@ $roleId = session()->get('role_id');
             <!-- Link to go back -->
             <?php if ($roleId == 1): ?>
                 <!-- Enlace para Admin -->
-                <a href="/adminhome" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
+                <a href="/admin/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
             <?php else: ?>
                 <!-- Enlace para otros roles (Operator) -->
-                <a href="/operatorhome" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
+                <a href="/operator/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
             <?php endif; ?>
         </div>
     </div>
