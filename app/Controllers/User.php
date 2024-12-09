@@ -10,6 +10,7 @@ use App\Models\TreeUpdateModel;
 use App\Models\CartModel;
 use App\Models\TreeModel;
 
+
 use CodeIgniter\Router\Router;
 
 class User extends BaseController
@@ -160,7 +161,7 @@ class User extends BaseController
             $newName = $file->getRandomName();
     
             // Move the file to the uploads folder
-            $file->move(WRITEPATH . 'uploads_profile', $newName);
+            $file->move(FCPATH . '/uploads_profile', $newName);  // FCPATH is the root folder of your project
     
             // Save the file name in the record
             $data['Profile_Pic'] = $newName;
@@ -221,74 +222,58 @@ class User extends BaseController
 
 
     /**
-     * Update a tree with a register
+     * Update a tree with a register Esta función está en ADmin con UpdateTree
      */
-    public function registerUpdate()  //Esta función está en ADmin con UpdateTree
+    public function registerUpdate()
     {
-        // Get the form data
-        $idTree       = $this->request->getPost('id_tree'); // Tree ID from the POST data
-        $size         = $this->request->getPost('size');
+        $idTree = $this->request->getPost('id_tree'); // ID del árbol desde el formulario
+        $size = $this->request->getPost('size');
 
-        // Validate that the tree ID is valid
+        // Validar que el ID del árbol es válido
         if (!$idTree || !is_numeric($idTree)) {
             log_message('error', 'Invalid or missing tree ID.');
             return redirect()->to('/managefriends')->with('error', 'Invalid tree ID');
         }
 
-        // Load the tree model
-        $treeModel          = new TreeModel();
+        $treeModel = new TreeModel();
 
-
-        // Prepare the data for the update
+        // Preparar los datos para actualizar
         $data = [];
         if (!empty($size)) {
             $data['Size'] = $size;
         }
 
-        // Check if there are any fields to update
-        if (empty($data)) {
-            return redirect()->back()->with('error', 'No fields to update.');
-        }
-
-        // Handling the tree picture
-        $file = $this->request->getFile('treePic'); // Get the file if it exists
+        // Manejar archivo de imagen (opcional)
+        $file = $this->request->getFile('treePic');
         if ($file && $file->isValid() && !$file->hasMoved()) {
-            // Generate a unique name for the image to avoid collision
             $newName = $file->getRandomName();
-            
-            // Move the file to the uploads folder
-            $file->move(WRITEPATH . 'uploads_tree', $newName);
-            
-            // Save the new file name in the record
+            $file->move(FCPATH . 'uploads_tree', $newName);
             $data['Photo_Path'] = $newName;
         }
 
-        // Check if tree exists in the database
+        // Validar existencia del árbol en la base de datos
         $tree = $treeModel->find($idTree);
         if (!$tree) {
             return redirect()->to('/managefriends')->with('error', 'Tree not found');
         }
 
-        // Try to update the tree
+        // Actualizar árbol en la tabla principal
         if (!$treeModel->update($idTree, $data)) {
-            // Get errors from the model
             $errors = $treeModel->errors();
             log_message('error', 'Errors trying to update tree: ' . implode(', ', $errors));
-            
-            // Redirect with errors if the update fails
             return redirect()->back()->withInput()->with('error', implode(', ', $errors));
         }
 
+        // Llamar a la segunda función para registrar el cambio
         $result = $this->registerUpdateTree($idTree, $size, $newName ?? null);
-
         if ($result !== true) {
-            // Si hubo un error en la función de inserción, redirigir con error
             return redirect()->back()->withInput()->with('error', $result);
         }
-        
-        // If everything is correct, redirect to the trees management page with a success message
-        return redirect()->to('/managefriends')->with('success', 'Tree updated successfully');
+
+        // Redirigir con éxito
+        return redirect()->to('/managefriends')->with('success', 'Tree updated and registered successfully');
     }
+
 
 
     /**
@@ -300,30 +285,53 @@ class User extends BaseController
 
         // Crear los datos para insertar
         $data = [
-            'Id_Tree' => $idTree, // Asegúrate de que este campo exista en tu tabla
+            'Tree_Id' => $idTree, // Asegúrate de que este campo coincide con la estructura de la tabla
             'Size' => $size
         ];
 
-        // Si hay una foto, agregarla a los datos
+        // Agregar ruta de la foto si existe
         if (!empty($photoPath)) {
             $data['Photo_Path'] = $photoPath;
         }
 
         // Intentar insertar el nuevo registro
         if (!$treeupdateModel->insert($data)) {
-            // Si falla, obtener los errores del modelo
             $errors = $treeupdateModel->errors();
             log_message('error', 'Errors trying to insert tree in TreeUpdateModel: ' . implode(', ', $errors));
             return implode(', ', $errors);
         }
 
-        // Si todo es correcto, devolver true
         return true;
     }
 
+
+
+
+
+    /**
+     * Displays the Operator page
+     */
+    public function indextreeHistory()
+    {
+        $idTree = $this->request->getGet('id_tree');
+
+        // Crear una instancia del modelo TreeUpdateModel
+        $treeupdateModel = new TreeUpdateModel();
+
+        // Obtener los datos de las actualizaciones de árboles con sus especies
+        $treeUpdates = $treeupdateModel->getTreeUpdatesWithSpecies($idTree);
+
+        // Preparar los datos para pasar a las vistas
+        $data = [
+            'treeUpdates' => $treeUpdates, // Pasar las actualizaciones de árboles a la vista
+            'uploads_folder' => base_url('uploads_tree/') // Agregar la base de la URL para las imágenes de perfil
+        ];
+
+        // Renderizar las vistas
+        return view('shared/header', $data) . view('operator/treehistory', $data);
+    }
+
     
-
-
 
 
 
@@ -337,6 +345,13 @@ class User extends BaseController
         $user       = $this->userModel->where('Username', $username)->first();
         $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
 
+        // Obtener el número de árboles disponibles
+        $treeModel = new TreeModel();
+        $availableTreesCount = $treeModel->where('StatusT', 1)->countAllResults(); // Árboles disponibles
+
+        $userModel = new UserModel();
+        $genders = $userModel->getFriends(); // Datos de géneros
+
         return view('shared/header', [
             'uploads_profile'   => base_url('uploads_profile/')
         ]) . 
@@ -345,6 +360,8 @@ class User extends BaseController
             'uploads_profile'   => base_url('uploads_profile/')
         ]) . 
         view('operator/operatorHome', [
+            'availableTreesCount' => $availableTreesCount,
+            'genders' => $genders, // Datos de género
         ]);
     }
 
@@ -478,7 +495,7 @@ class User extends BaseController
         $userId = $session->get('user_id');
         $cartCount = $this->cartModel->where('User_Id', $userId)->where('Status', 'active')->countAllResults();
 
-// Consulta para obtener los elementos activos en el carrito
+        // Consulta para obtener los elementos activos en el carrito
          $carts = $this->cartModel->getCartDetails($userId);
 
 

@@ -23,14 +23,15 @@ $routes->get('/unauthorized', 'Error::unauthorized');
 $routes->post('/redirectDashboard', 'Error::redirectDashboard');
 
 
-    // Ruta para mostrar el perfil del usuario
-    $routes->get('/profile', 'User::profile');
+// Ruta para mostrar el perfil del usuario
+$routes->get('/profile', 'User::profile');
 
-    // Ruta para editar el perfil del usuario
-    $routes->post('update', 'User::updateProfile', ['as' => 'user.updateProfile']); 
+// Ruta para editar el perfil del usuario
+$routes->post('update', 'User::updateProfile', ['as' => 'user.updateProfile']); 
 
 
-
+$routes->post('/province/getProvinces', 'Province::getProvinces');
+$routes->post('/district/getDistricts', 'District::getDistricts');
 
 
 
@@ -130,6 +131,10 @@ $routes->get('/registerupdate', 'User::indexRegisterUpdate');
 $routes->post('/operator/registerupdate', 'User::registerUpdate');
 
 $routes->get('/adminhome', 'Admin::indexHome');
+
+$routes->get('/treehistory', 'User::indexTreeHistory');
+$routes->post('/operator/treehistory', 'User::treeHistory');
+
 
 
 

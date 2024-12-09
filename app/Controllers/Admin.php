@@ -40,23 +40,35 @@ class Admin extends BaseController
 
     /**
      * Displays the Admin page
-    */    
+     */    
     public function indexHome()
     {
-        $username   = session()->get('username');
-        $user       = $this->userModel->where('Username', $username)->first();
+        $username = session()->get('username');
+        $user     = $this->userModel->where('Username', $username)->first();
         $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
 
+        // Obtener el número de árboles disponibles
+        $treeModel = new TreeModel();
+        $availableTreesCount = $treeModel->where('StatusT', 1)->countAllResults(); // Árboles disponibles
+        $soldTreesCount = $treeModel->where('StatusT', 0)->countAllResults(); // Árboles vendidos
+
+        $userModel = new UserModel();
+        $genders = $userModel->getFriends(); // Datos de géneros
+
         return view('shared/header', [
-            'uploads_profile'   => base_url('uploads_profile/')
+            'uploads_profile' => base_url('uploads_profile/')
         ]) . 
         view('shared/navegation_admin', [
-            'profilePic'        => $profilePic,
-            'uploads_profile'   => base_url('uploads_profile/')
+            'profilePic'      => $profilePic,
+            'uploads_profile' => base_url('uploads_profile/')
         ]) . 
         view('admin/adminHome', [
+            'availableTreesCount' => $availableTreesCount,
+            'soldTreesCount' => $soldTreesCount,
+            'genders' => $genders, // Datos de género
         ]);
     }
+
 
 
     /**
@@ -322,7 +334,7 @@ class Admin extends BaseController
             $newName = $file->getRandomName();
     
             // Move the file to the uploads folder
-            $file->move(WRITEPATH . 'uploads_tree', $newName);
+            $file->move(FCPATH . '/uploads_tree', $newName);  // FCPATH is the root folder of your project
     
             // Save the file name in the record
             $data['Photo_Path'] = $newName;
@@ -446,7 +458,7 @@ class Admin extends BaseController
             $newName = $file->getRandomName();
             
             // Move the file to the uploads folder
-            $file->move(WRITEPATH . 'uploads_tree', $newName);
+            $file->move(FCPATH . '/uploads_tree', $newName);  // FCPATH is the root folder of your project
             
             // Save the new file name in the record
             $data['Photo_Path'] = $newName;
@@ -508,16 +520,19 @@ class Admin extends BaseController
 
     /**
      * Displays the list of registered friends
-    */
+     */
     public function indexManageFriends()
     {
-        $user = $this->userModel->getAvailableUsers();
+        // Obtener la lista de usuarios disponibles
+        $users = $this->userModel->getAvailableUsers();
 
-        $data['users'] = $user;
+        // Preparar los datos para pasar a las vistas
+        $data['users'] = $users;
+        $data['uploads_folder'] = base_url('uploads_profile/'); // Correcta llamada a base_url()
+
+        // Renderizar ambas vistas correctamente
         return view('shared/header', $data) . view('admin/manageFriends', $data);
     }
-
-
 
 
 
@@ -534,6 +549,7 @@ class Admin extends BaseController
         $trees = $this->treeModel->getFriendsTrees($idUser);
 
         $data['trees'] = $trees;
+        $data['uploads_folder'] = base_url('uploads_tree/'); // Correcta llamada a base_url()
         return view('shared/header', $data) . view('admin/friendtrees', $data);
     }
 

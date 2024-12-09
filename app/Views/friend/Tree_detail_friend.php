@@ -36,6 +36,14 @@
                         <button class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full shadow hover:bg-gray-300 focus:outline-none transform transition-transform duration-300 hover:scale-105"><?= esc($tree['Size']); ?> cm</button>
                     </div>
                 </div>
+
+                <!-- Tree History Button -->
+                <div class="mt-6">
+                        <a href="/treehistory?id_tree=<?= $tree['Id_Tree']; ?>" 
+                           class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:outline-none transform transition-transform duration-300 hover:scale-105">
+                            Tree History
+                        </a>
+                    </div>
                 
             </div>
         </div>

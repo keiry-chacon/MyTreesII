@@ -97,6 +97,41 @@ class UserModel extends Model
     }
 
 
+    public function getFriends(): array
+    {
+        // Inicializa los contadores de géneros
+        $genderCounts = [
+            'F' => 0,
+            'M' => 0,
+            'O' => 0
+        ];
+
+        // Instancia del modelo
+        $userModel = new \App\Models\UserModel();
+
+        // Realiza la consulta utilizando Query Builder de CodeIgniter
+        $query = $userModel->select('Gender, COUNT(*) as count')
+            ->where('StatusU', 1) // Filtra usuarios activos
+            ->where('Role_Id', 2) // Filtra usuarios con rol "amigos"
+            ->groupBy('Gender')   // Agrupa por género
+            ->get();
+
+        // Procesa los resultados
+        $results = $query->getResultArray();
+        foreach ($results as $row) {
+            $gender = $row['Gender'];
+            $count = $row['count'];
+
+            if (isset($genderCounts[$gender])) {
+                $genderCounts[$gender] = $count;
+            }
+        }
+
+        return $genderCounts;
+    }
+
+
+
 }
 
 

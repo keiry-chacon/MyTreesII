@@ -85,33 +85,27 @@
                 <div>
                     <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
                     <select id="country" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" name="country" required>
+                        <option value="">Select Country</option>
                         <?php foreach ($country as $countries): ?>
-                            <option value="<?= $countries['Id_Country'] ?>" <?= old('country') == $countries['Id_Country'] ? 'selected' : '' ?>><?= $countries['Country_Name'] ?></option>
+                            <option value="<?= $countries['Id_Country'] ?>"><?= $countries['Country_Name'] ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <div class="text-red-500 text-sm"><?= session('error')['country'] ?? '' ?></div>
                 </div>
 
                 <!-- Province -->
                 <div>
                     <label for="province" class="block text-sm font-medium text-gray-700">Province</label>
                     <select id="province" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" name="province" required>
-                        <?php foreach ($province as $provinces): ?>
-                            <option value="<?= $provinces['Id_Province'] ?>" <?= old('province') == $provinces['Id_Province'] ? 'selected' : '' ?>><?= $provinces['Province_Name'] ?></option>
-                        <?php endforeach; ?>
+                        <option value="">Select Province</option>
                     </select>
-                    <div class="text-red-500 text-sm"><?= session('error')['province'] ?? '' ?></div>
                 </div>
 
                 <!-- District -->
                 <div>
                     <label for="district" class="block text-sm font-medium text-gray-700">District</label>
                     <select id="district" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" name="district" required>
-                        <?php foreach ($district as $districts): ?>
-                            <option value="<?= $districts['Id_District'] ?>" <?= old('district') == $districts['Id_District'] ? 'selected' : '' ?>><?= $districts['District_Name'] ?></option>
-                        <?php endforeach; ?>
+                        <option value="">Select District</option>
                     </select>
-                    <div class="text-red-500 text-sm"><?= session('error')['district'] ?? '' ?></div>
                 </div>
 
                 <!-- Username -->
@@ -142,3 +136,45 @@
         </div>
     </div>
 </body>
+
+<!-- jQuery (required for AJAX) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Cargar provincias según el país seleccionado
+    $('#country').on('change', function() {
+        var countryId = $(this).val();
+
+        if (countryId) {
+            $.ajax({
+                url: '/province/getProvinces',
+                type: 'POST',
+                data: { country_id: countryId },
+                success: function(data) {
+                    $('#province').html(data); // Actualiza las provincias
+                    $('#district').html('<option value="">Select District</option>'); // Reinicia los distritos
+                }
+            });
+        } else {
+            $('#province').html('<option value="">Select Province</option>');
+            $('#district').html('<option value="">Select District</option>');
+        }
+    });
+
+    // Cargar distritos según la provincia seleccionada
+    $('#province').on('change', function() {
+        var provinceId = $(this).val();
+
+        if (provinceId) {
+            $.ajax({
+                url: '/district/getDistricts',
+                type: 'POST',
+                data: { province_id: provinceId },
+                success: function(data) {
+                    $('#district').html(data); // Actualiza los distritos
+                }
+            });
+        } else {
+            $('#district').html('<option value="">Select District</option>');
+        }
+    });
+</script>

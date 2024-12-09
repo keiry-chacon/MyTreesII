@@ -45,6 +45,27 @@ class TreeModel extends Model
     protected $afterDelete    = [];
     
 
+
+    public function getAvailableTreesCount(): int
+    {
+        return $this->where('StatusT', 1)
+                    ->countAllResults();
+    }
+
+
+    public function getSoldTreesCount()
+    {
+        // Instancia del modelo
+        $treeModel = new \App\Models\TreeModel();
+
+        // Consulta utilizando el modelo para contar los árboles vendidos (StatusT = 0)
+        $soldTreesCount = $treeModel
+            ->where('StatusT', 0) // Condición para árboles vendidos
+            ->countAllResults(); // Cuenta los resultados
+
+        return $soldTreesCount;
+    }
+
     
     public function getAvailableTrees()
     {

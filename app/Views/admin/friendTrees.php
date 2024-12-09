@@ -13,8 +13,14 @@ $roleId = session()->get('role_id');
         <div class="text-center">
             <h1 class="text-6xl font-bold">Tree Management</h1>
             <p class="text-gray-600 mt-2">List of all trees associated with this friend</p>
-            <!-- Link to go back to the homepage -->
-            <a href="/adminhome" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
+            <!-- Link to go back -->
+            <?php if ($roleId == 1): ?>
+                <!-- Enlace para Admin -->
+                <a href="/adminhome" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
+            <?php else: ?>
+                <!-- Enlace para otros roles (Operator) -->
+                <a href="/operatorhome" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -38,10 +44,12 @@ $roleId = session()->get('role_id');
             <!-- Loop through each tree to display details -->
             <?php foreach ($trees as $tree):
                 // Set the image path with cache-busting using time()
-                $photoTree          = $uploads_tree . $tree['Photo_Path']. '?' . time();
+                $photoTree              = $uploads_tree . $tree['Photo_Path']. '?' . time();
                 // URLs for updating the tree or registering an update
-                $treeDetailUrl      = "/updatefriendtree?id_tree=" . $tree['Id_Tree']; 
-                $treeRegisterUrl    = "/registerupdate?id_tree=" . $tree['Id_Tree']; 
+                $updateFriendTree       = "/updatefriendtree?id_tree=" . $tree['Id_Tree']; 
+                $registerUpdate         = "/registerupdate?id_tree=" . $tree['Id_Tree']; 
+                $treeHistory            = "/treehistory?id_tree=" . $tree['Id_Tree']; 
+
             ?>
                 <!-- Card for each tree -->
                 <div class="bg-white shadow-md rounded-lg overflow-hidden">
@@ -56,16 +64,18 @@ $roleId = session()->get('role_id');
                         <p class="text-gray-600">Purchase date: <?php echo htmlspecialchars(date('Y-m-d', strtotime($tree['Purchase_Date']))); ?></p>
                         <!-- Buttons for updating the tree or registering an update -->
                         <div class="mt-4 flex justify-between">
-                        <?php 
-                            // Verificamos el rol y mostramos los botones correspondientes
-                            if ($roleId == 1): ?> 
-                                <!-- Mostrar ambos botones para el rol 1 (Admin) -->
-                                <a href="<?php echo $treeDetailUrl; ?>" class="bg-yellow-500 text-white px-1 py-2 rounded hover:bg-yellow-600">Update Tree</a>
-                                <a href="<?php echo $treeRegisterUrl; ?>" class="bg-green-500 text-white px-1 py-2 rounded hover:bg-green-600">Register Update</a>
-                            <?php else: ?>
-                                <div class="w-full text-center">
-                                    <a href="<?php echo $treeRegisterUrl; ?>" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Register Update</a>
-                                </div>
+                            <?php 
+                                // Verificamos el rol y mostramos los botones correspondientes
+                                if ($roleId == 1): ?> 
+                                    <!-- Mostrar ambos botones para el rol 1 (Admin) -->
+                                    <a href="<?php echo $updateFriendTree; ?>" class="bg-yellow-500 text-white px-1 py-2 rounded hover:bg-yellow-600">Update Tree</a>
+                                    <a href="<?php echo $registerUpdate; ?>" class="bg-green-500 text-white px-1 py-2 rounded hover:bg-green-600">Register Update</a>
+                                    <a href="<?php echo $treeHistory; ?>" class="bg-green-500 text-white px-1 py-2 rounded hover:bg-green-600">Tree History</a>
+                                <?php else: ?>
+                                    <div class="w-full text-center">
+                                        <a href="<?php echo $registerUpdate; ?>" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Register Update</a>
+                                        <a href="<?php echo $treeHistory; ?>" class="bg-green-500 text-white px-1 py-2 rounded hover:bg-green-600">Tree History</a>
+                                    </div>
                             <?php endif; ?>
                         </div>
                     </div>
