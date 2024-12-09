@@ -1,6 +1,6 @@
 <?php
 $roleId = session()->get('role_id'); 
-$uploads_folder = base_url('public/uploads_tree/'); // Cambié 'uploads_profile' por 'uploads_tree' para que sea más representativo.
+$uploads_folder = base_url('public/uploads_tree/'); 
 ?>
 
 <!-- Include Alpine.js for dynamic functionality -->

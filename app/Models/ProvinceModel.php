@@ -43,4 +43,8 @@ class ProvinceModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+    public function getProvincesByCountry($countryId)
+    {
+        return $this->where('Country_Id', $countryId)->findAll();  
+    }
 }

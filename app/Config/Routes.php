@@ -17,7 +17,8 @@ $routes->post('/user/logout', 'User::logout');
 //SignUp
 $routes->get('/signup', 'User::indexSignUp');
 $routes->post('/user/signup', 'User::signup');
-
+$routes->post('user/getProvinces', 'User::getProvinces');
+$routes->post('user/getDistricts', 'User::getDistricts');
 
 $routes->get('/unauthorized', 'Error::unauthorized');
 $routes->post('/redirectDashboard', 'Error::redirectDashboard');
@@ -30,8 +31,6 @@ $routes->get('/profile', 'User::profile');
 $routes->post('update', 'User::updateProfile', ['as' => 'user.updateProfile']); 
 
 
-$routes->post('/province/getProvinces', 'Province::getProvinces');
-$routes->post('/district/getDistricts', 'District::getDistricts');
 
 
 

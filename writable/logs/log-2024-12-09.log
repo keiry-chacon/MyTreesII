@@ -1,54 +1,123 @@
-CRITICAL - 2024-12-09 04:08:11 --> BadMethodCallException: Call to undefined method App\Models\TreeUpdateModel::getTreeUpdatesWithSpecies
+CRITICAL - 2024-12-09 13:02:15 --> ErrorException: Undefined property: App\Controllers\User::$session
 [Method: GET, Route: treehistory]
-in SYSTEMPATH\Model.php on line 932.
- 1 APPPATH\Controllers\User.php(320): CodeIgniter\Model->__call('getTreeUpdatesWithSpecies', [])
+in APPPATH\Controllers\User.php on line 317.
+ 1 APPPATH\Controllers\User.php(317): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\User::$session', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 317)
  2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indextreeHistory()
  3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
  4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
  6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-CRITICAL - 2024-12-09 04:11:40 --> BadMethodCallException: Call to undefined method App\Models\TreeUpdateModel::getTreeUpdatesWithSpecies
+CRITICAL - 2024-12-09 13:03:53 --> ErrorException: Undefined property: App\Controllers\User::$session
 [Method: GET, Route: treehistory]
-in SYSTEMPATH\Model.php on line 932.
- 1 APPPATH\Controllers\User.php(320): CodeIgniter\Model->__call('getTreeUpdatesWithSpecies', [])
+in APPPATH\Controllers\User.php on line 319.
+ 1 APPPATH\Controllers\User.php(319): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\User::$session', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 319)
  2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indextreeHistory()
  3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
  4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
  6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-CRITICAL - 2024-12-09 05:07:38 --> ErrorException: Undefined variable $base_url
-[Method: GET, Route: managefriends]
-in APPPATH\Controllers\Admin.php on line 529.
- 1 APPPATH\Controllers\Admin.php(529): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $base_url', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\Admin.php', 529)
- 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->indexManageFriends()
- 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+CRITICAL - 2024-12-09 13:06:44 --> ErrorException: Undefined property: App\Controllers\User::$session
+[Method: GET, Route: treehistory]
+in APPPATH\Controllers\User.php on line 329.
+ 1 APPPATH\Controllers\User.php(329): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\User::$session', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 329)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indextreeHistory()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
  4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
  6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-CRITICAL - 2024-12-09 07:09:20 --> ErrorException: Undefined variable $countries
+CRITICAL - 2024-12-09 13:06:47 --> ErrorException: Undefined property: App\Controllers\User::$session
+[Method: GET, Route: treehistory]
+in APPPATH\Controllers\User.php on line 329.
+ 1 APPPATH\Controllers\User.php(329): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\User::$session', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 329)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indextreeHistory()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-09 13:09:19 --> ErrorException: Undefined variable $session
+[Method: GET, Route: treehistory]
+in APPPATH\Controllers\User.php on line 318.
+ 1 APPPATH\Controllers\User.php(318): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $session', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 318)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indextreeHistory()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-12-09 13:17:47 --> Sesión no válida: user_id o role_id ausente.
+ERROR - 2024-12-09 13:23:21 --> Rol desconocido: 
+ERROR - 2024-12-09 13:24:29 --> Rol desconocido: 
+CRITICAL - 2024-12-09 13:46:28 --> ErrorException: Undefined property: App\Controllers\User::$session
+[Method: GET, Route: treehistory]
+in APPPATH\Controllers\User.php on line 330.
+ 1 APPPATH\Controllers\User.php(330): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\User::$session', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 330)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indextreeHistory()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-09 14:02:13 --> ParseError: Unclosed '{' on line 315 does not match ')'
+[Method: GET, Route: treehistory]
+in APPPATH\Controllers\User.php on line 361.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\User')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\User')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\User', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-09 14:02:29 --> ParseError: syntax error, unexpected token ";"
+[Method: GET, Route: treehistory]
+in APPPATH\Controllers\User.php on line 361.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\User')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\User')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\User', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-09 15:52:04 --> ParseError: syntax error, unexpected token "public", expecting end of file
 [Method: GET, Route: signup]
-in APPPATH\Views\user\Signup.php on line 89.
- 1 APPPATH\Views\user\Signup.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $countries', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\user\\Signup.php', 89)
- 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\user\\Signup.php')
- 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/signup', [], true)
- 5 APPPATH\Controllers\User.php(130): view('user/signup', [...])
- 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexSignUp()
- 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
- 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
-10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
-11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-CRITICAL - 2024-12-09 07:21:11 --> ErrorException: Undefined array key "Provinc_Name"
-[Method: POST, Route: province/getProvinces]
-in APPPATH\Controllers\Province.php on line 24.
- 1 APPPATH\Controllers\Province.php(24): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Provinc_Name"', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\Province.php', 24)
- 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Province->getProvinces()
- 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Province))
- 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
- 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
- 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+in APPPATH\Controllers\User.php on line 173.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\User')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\User')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\User', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-09 15:52:05 --> ParseError: syntax error, unexpected token "public", expecting end of file
+[Method: GET, Route: login]
+in APPPATH\Controllers\User.php on line 173.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\User')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\User')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\User', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-09 15:52:07 --> ParseError: syntax error, unexpected token "public", expecting end of file
+[Method: GET, Route: operatorhome]
+in APPPATH\Controllers\User.php on line 173.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\User')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\User')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\User', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
