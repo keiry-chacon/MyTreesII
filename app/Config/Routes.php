@@ -50,8 +50,12 @@ $routes->post('update', 'User::updateProfile', ['as' => 'user.updateProfile']); 
 $routes->group('admin', ['filter' => 'auth:1'], function ($routes) {
     $routes->get('dashboard',           'User::indexHome'); // Admin dashboard
 
+    $routes->get('manageusers',         'User::indexManageUsers');
     $routes->get('showadduser',         'User::indexAddUser');
     $routes->post('adduser',            'User::addUser');
+    $routes->get('showupdateuser',      'User::indexUpdateUser');
+    $routes->post('updateuser',         'User::updateUser');
+    $routes->post('deleteuser',         'User::deleteUser');
 
     $routes->get('managespecies',       'Species::indexManageSpecies');
     $routes->get('showaddspecies',      'Species::indexAddSpecies');

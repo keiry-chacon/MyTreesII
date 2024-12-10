@@ -313,6 +313,27 @@ class User extends BaseController
 
 
 
+    /**
+    * Displays the list of registered users
+    */
+    public function indexManageUsers()
+    {
+        $username = session()->get('username');
+
+        // Obtener la lista de usuarios disponibles
+        $users = $this->userModel->getAvailableUsers();
+
+        $user       = $this->userModel->where('Username', $username)->first();
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+        $data['users']              = $users;
+        $data['profilePic']         = $profilePic;
+        $data['uploads_profile']    = base_url('uploads_profile/');
+        return view('shared/header', $data) . view('shared/navegation_admin', $data) . view('admin/manageusers', $data);
+    }
+
+
+
 
     /**
      * Displays the interface of the add User section
@@ -390,6 +411,135 @@ class User extends BaseController
 
 
     /**
+     * Displays the interface of the update user section
+     */
+    public function indexUpdateUser()
+    {
+        $username = session()->get('username');
+        $user     = $this->userModel->where('Username', $username)->first();
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+        // Get the tree ID from the URL (GET parameter)
+        $idUser = $this->request->getGet('id_user');
+        
+        // Validate that the ID is valid
+        if (!$idUser || !is_numeric($idUser)) {
+            return redirect()->to('/manageusers')->with('error', 'Invalid User ID');
+        }
+
+        // Create the user model
+        $userModel = new UserModel();
+
+        // Search for the user by ID
+        $user = $userModel->find($idUser);
+
+        // Check if the tree exists
+        if (!$user) {
+            return redirect()->to('/admin/manageusers')->with('error', 'User not found');
+        }
+
+        // Prepare the data to be passed to the view
+        $data = [
+            'user' => $user,
+            'profilePic' => $profilePic,
+            'uploads_profile' => base_url('uploads_profile/'),
+            'error_msg' => session()->get('error')  // Get any error message, if exists
+        ];
+
+        // Return the full view with header and the update tree form
+        return view('shared/header', $data) . view('shared/navegation_admin', $data) . view('admin/updateUser', $data);
+    }
+
+
+    /**
+     * Update an existing user in the database
+     */
+    public function updateUser() 
+    {
+        // Get form data
+        $userId      = $this->request->getPost('id_user'); // User ID from POST data
+        $firstName   = $this->request->getPost('first_name');
+        $lastName1   = $this->request->getPost('last_name1');
+        $lastName2   = $this->request->getPost('last_name2');
+        $email       = $this->request->getPost('email');
+        $phone       = $this->request->getPost('phone');
+        $gender      = $this->request->getPost('gender');
+        $username    = $this->request->getPost('username');
+
+        // Validate user ID
+        if (!$userId || !is_numeric($userId)) {
+            log_message('error', 'Invalid or missing user ID.');
+            return redirect()->to('/admin/manageusers')->with('error', 'Invalid user ID');
+        }
+
+        // Load the user model
+        $userModel = new UserModel();
+
+        // Dynamically adjust validation rules for updating the current user
+        $userModel->setValidationRules($userModel->getValidationRulesForUpdate($userId));
+
+        // Prepare data for update
+        $data = [
+            'First_Name' => $firstName,
+            'Last_Name1' => $lastName1,
+            'Last_Name2' => $lastName2,
+            'Email'      => $email,
+            'Phone'      => $phone,
+            'Gender'     => $gender,
+            'Username'   => $username,
+        ];
+
+        // Handle profile picture upload
+        $file = $this->request->getFile('profilePic');
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $file->move(FCPATH . '/uploads_profile', $newName);
+            $data['Profile_Pic'] = $newName;
+        }
+
+        // Validate and update the user
+        if (!$userModel->update($userId, $data)) {
+            $errors = $userModel->errors();
+            log_message('error', 'Update failed: ' . implode(', ', $errors));
+            return redirect()->back()->withInput()->with('error', implode(', ', $errors));
+        }
+
+        // Redirect on success
+        return redirect()->to('/admin/manageusers')->with('success', 'User updated successfully');
+    }
+
+
+
+
+
+
+    /**
+     * Delete a user
+    */
+    public function deleteuser()
+    {
+        // Id_User received from the form
+        $idUser    = $this->request->getPost('id_user');
+    
+        $userModel = new UserModel();
+    
+        // Validation and saving
+        if (!$userModel->update($idUser, ['StatusU' => 0])) {
+            // Get validation errors from the model
+            $errors = $userModel->errors();
+    
+            // Redirect back to the form with errors
+            return redirect()->back()->withInput()->with('error', $errors);
+        }
+    
+        // If everything is correct, redirect to the login page with a success message
+        return redirect()->to('/admin/manageusers')->with('success', 'User Deleted Succesfully');
+    }
+
+
+
+
+    /**
      * Displays the list of friend trees
     */
     public function indexFriendTrees()
@@ -434,29 +584,6 @@ class User extends BaseController
         $data['uploads_profile']    = base_url('uploads_profile/');
         return view('shared/header', $data) . view($navigationView, $data) . view('admin/friendtrees', $data);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

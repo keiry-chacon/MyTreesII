@@ -136,3 +136,120 @@ in APPPATH\Views\shared\Tree_history.php on line 10.
  9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 11:01:54 --> ErrorException: Undefined variable $uploads_folder
+[Method: GET, Route: admin/manageusers]
+in APPPATH\Views\admin\manageUsers.php on line 61.
+ 1 APPPATH\Views\admin\manageUsers.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $uploads_folder', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\manageUsers.php', 61)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\manageUsers.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/manageusers', [], true)
+ 5 APPPATH\Controllers\User.php(332): view('admin/manageusers', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexManageUsers()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 11:04:09 --> ErrorException: Undefined variable $uploads_folder
+[Method: GET, Route: admin/manageusers]
+in APPPATH\Views\admin\manageUsers.php on line 61.
+ 1 APPPATH\Views\admin\manageUsers.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $uploads_folder', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\manageUsers.php', 61)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\manageUsers.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/manageusers', [], true)
+ 5 APPPATH\Controllers\User.php(332): view('admin/manageusers', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexManageUsers()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 11:20:28 --> ErrorException: Undefined variable $user
+[Method: GET, Route: admin/showupdateuser]
+in APPPATH\Views\admin\updateUser.php on line 21.
+ 1 APPPATH\Views\admin\updateUser.php(21): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $user', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\updateUser.php', 21)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\updateUser.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/updateUser', [], true)
+ 5 APPPATH\Controllers\User.php(453): view('admin/updateUser', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexUpdateUser()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 11:22:22 --> ErrorException: Undefined array key "Id_User"
+[Method: GET, Route: admin/showupdateuser]
+in APPPATH\Views\admin\updateUser.php on line 21.
+ 1 APPPATH\Views\admin\updateUser.php(21): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Id_User"', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\updateUser.php', 21)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\updateUser.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/updateUser', [], true)
+ 5 APPPATH\Controllers\User.php(453): view('admin/updateUser', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexUpdateUser()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 11:26:50 --> ErrorException: Undefined variable $country
+[Method: GET, Route: admin/showupdateuser]
+in APPPATH\Views\admin\updateUser.php on line 85.
+ 1 APPPATH\Views\admin\updateUser.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $country', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\updateUser.php', 85)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\updateUser.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/updateUser', [], true)
+ 5 APPPATH\Controllers\User.php(450): view('admin/updateUser', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexUpdateUser()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 11:28:36 --> ErrorException: Undefined array key "Country_Id"
+[Method: GET, Route: admin/showupdateuser]
+in APPPATH\Views\admin\updateUser.php on line 86.
+ 1 APPPATH\Views\admin\updateUser.php(86): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Country_Id"', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\updateUser.php', 86)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\admin\\updateUser.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/updateUser', [], true)
+ 5 APPPATH\Controllers\User.php(460): view('admin/updateUser', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexUpdateUser()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-12-10 11:47:35 --> Errors while trying to update user: Email is already registered.
+ERROR - 2024-12-10 11:48:24 --> Errors while trying to update user: Email is already registered.
+ERROR - 2024-12-10 11:49:28 --> Errors while trying to update user: Email is already registered.
+ERROR - 2024-12-10 11:49:46 --> Errors while trying to update user: Email is already registered.
+ERROR - 2024-12-10 11:50:54 --> Errors while trying to update user: Email is already registered.
+ERROR - 2024-12-10 11:53:38 --> Errors while trying to update user: Email is already registered.
+ERROR - 2024-12-10 12:02:11 --> Update failed: The username is already registered., Email is already registered.
+ERROR - 2024-12-10 12:02:37 --> Update failed: The username is already registered., Email is already registered.
+ERROR - 2024-12-10 12:04:34 --> Update failed: The username is already registered., Email is already registered.
+CRITICAL - 2024-12-10 12:07:49 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/deleteuser]
+in SYSTEMPATH\BaseModel.php on line 1011.
+ 1 SYSTEMPATH\BaseModel.php(1011): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\User.php(527): CodeIgniter\Model->update('2', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->deleteuser()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 12:09:09 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: POST, Route: admin/deleteuser]
+in SYSTEMPATH\BaseModel.php on line 1011.
+ 1 SYSTEMPATH\BaseModel.php(1011): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\User.php(527): CodeIgniter\Model->update('2', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->deleteuser()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

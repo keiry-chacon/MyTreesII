@@ -66,6 +66,21 @@ class UserModel extends Model
         ]
     ];
 
+
+    public function getValidationRulesForUpdate($userId)
+    {
+        return [
+            'First_Name'  => 'required|min_length[1]',
+            'Last_Name1'  => 'required|min_length[1]',
+            'Last_Name2'  => 'required|min_length[1]',
+            'Username'    => "required|alpha_numeric|min_length[1]|is_unique[users.Username,Id_User!={$userId}]",
+            'Email'       => "required|valid_email|is_unique[users.Email,Id_User!={$userId}]",
+            'Phone'       => 'required|numeric|min_length[1]',
+            'Gender'      => 'required',
+        ];
+    }
+
+
     // Specifies whether to skip validation (set to false, meaning validation is applied)
     protected $skipValidation = false;
     
@@ -122,6 +137,12 @@ class UserModel extends Model
                     ->findAll();
     }
 
+
+
+    public function getUsersByStatus($status = 1)
+    {
+        return $this->where('StatusU', $status)->findAll();  // Filtra usuarios cuyo estado sea igual a 1 (o el valor que se pase como argumento)
+    }
 
 
 

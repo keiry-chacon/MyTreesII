@@ -10,7 +10,7 @@
 
             <!-- General Error Message -->
             <?php if (session()->get('error')): ?>
-                <div class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+                <div class="bg-red-500 text-white py-2 mt-4 rounded max-w-4xl ml-80">
                     <ul>
                         <?php foreach (session('error') as $field => $error): ?>
                             <li><?= esc($error) ?></li>
@@ -143,6 +143,12 @@
                 <button type="submit" class="w-40 bg-blue-500 ml-60 text-white py-1 px-4 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
                     Add
                 </button>
+
+                <!-- Back to Manage Species -->
+                <a href="manageusers" 
+                    class="w-40 bg-blue-500 ml-60 text-white py-1 px-4 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                    Manage Species
+                </a>
             </form>
         </div>
     </div>
