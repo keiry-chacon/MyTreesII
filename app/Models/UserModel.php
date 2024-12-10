@@ -33,7 +33,8 @@ class UserModel extends Model
         'Gender',
         'Profile_Pic',
         'District_Id',
-        'Role_Id'
+        'Role_Id',
+        'StatusU'
     ];
 
     // Prevents inserting empty fields and ensures only changed fields are updated

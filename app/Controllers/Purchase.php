@@ -61,55 +61,58 @@ class Purchase extends BaseController
         // Redirigir al usuario con un mensaje de éxito
         return redirect()->to('/friend/success');
     }
+        
     public function success()
-{
-    $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+    {
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
 
-    return view('friend/success');
-}
-public function buyAllItems()
-{
-    $session = session();
-    $userId = $session->get('user_id');
-
-    // Obtener todos los árboles del carrito del usuario
-    $cartItems = $this->cartModel->getCartByUserId($userId);
-
-    if (empty($cartItems)) {
-        // Si el carrito está vacío, redirigir con un mensaje de error
-        return redirect()->to('/friend/dashboard')->with('error', 'No items in the cart.');
+        return view('friend/success');
     }
 
-    // Obtener la ubicación de envío y el método de pago desde el formulario
-    $shippingLocation = $this->request->getPost('shipping_location');
-    $paymentMethod = $this->request->getPost('payment_method');
 
-    // Verificar si la ubicación de envío y el método de pago están definidos
-    if (!$shippingLocation || !$paymentMethod) {
-        return redirect()->back()->with('error', 'Shipping location and payment method are required.');
+    public function buyAllItems()
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+
+        // Obtener todos los árboles del carrito del usuario
+        $cartItems = $this->cartModel->getCartByUserId($userId);
+
+        if (empty($cartItems)) {
+            // Si el carrito está vacío, redirigir con un mensaje de error
+            return redirect()->to('/friend/dashboard')->with('error', 'No items in the cart.');
+        }
+
+        // Obtener la ubicación de envío y el método de pago desde el formulario
+        $shippingLocation = $this->request->getPost('shipping_location');
+        $paymentMethod = $this->request->getPost('payment_method');
+
+        // Verificar si la ubicación de envío y el método de pago están definidos
+        if (!$shippingLocation || !$paymentMethod) {
+            return redirect()->back()->with('error', 'Shipping location and payment method are required.');
+        }
+
+        // Procesar la compra para cada artículo en el carrito
+        foreach ($cartItems as $item) {
+            $data = [
+                'Tree_Id' => $item['Tree_Id'],  
+                'User_Id' => $userId, 
+                'Shipping_Location' => $shippingLocation,  
+                'Payment_Method' => $paymentMethod,  
+            ];
+            
+            // Inserta la compra en la tabla de compras
+            $this->purchaseModel->insertPurchase($data);
+
+            $this->treeModel->update($item['Tree_Id'], ['StatusT' => 0]);
+
+            // Eliminar los elementos del carrito después de la compra
+            $this->cartModel->abandonItem($userId, $item['Tree_Id']);
+        }
+
+        // Redirigir al usuario a la página de dashboard después de la compra
+        return redirect()->to('/friend/success')->with('success', 'Purchase successful!');
     }
-
-    // Procesar la compra para cada artículo en el carrito
-    foreach ($cartItems as $item) {
-        $data = [
-            'Tree_Id' => $item['Tree_Id'],  
-            'User_Id' => $userId, 
-            'Shipping_Location' => $shippingLocation,  
-            'Payment_Method' => $paymentMethod,  
-        ];
-        
-        // Inserta la compra en la tabla de compras
-        $this->purchaseModel->insertPurchase($data);
-        
-        $this->treeModel->update($item['Tree_Id'], ['StatusT' => 0]);
-
-        // Eliminar los elementos del carrito después de la compra
-        $this->cartModel->abandonItem($userId, $item['Tree_Id']);
-    }
-
-    // Redirigir al usuario a la página de dashboard después de la compra
-    return redirect()->to('/friend/success')->with('success', 'Purchase successful!');
-}
 
 
 }

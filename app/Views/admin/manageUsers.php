@@ -17,7 +17,7 @@ $roleId = session()->get('role_id');
 
             <!-- Button linking to the Add User page -->
             <div class="flex justify-center space-x-4 mt-4">
-                <a href="/admin/showadduser" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add Tree</a>
+                <a href="/admin/showadduser" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add User</a>
             </div>
 
             <!-- Button linking to the Home page -->
@@ -35,18 +35,19 @@ $roleId = session()->get('role_id');
     <?php endif; ?>
 
     <!-- Table section to display the list of friends -->
-    <div class="mt-5 max-w-4xl ml-80 overflow-hidden">
+    <div class="mt-5 max-w-4xl ml-80 overflow-hidden px-4 overflow-x-auto">
         <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden w-full">
             <!-- Table header -->
             <thead>
                 <tr class="bg-blue-200 text-gray-700 text-center">
                     <th scope="col" class="px-6 py-3 text-center">Profile Picture</th>
-                    <th scope="col" class="px-6 py-3 text-center">First Name</th>
-                    <th scope="col" class="px-6 py-3 text-center">Last Name</th>
-                    <th scope="col" class="px-6 py-3 text-center">Username</th>
-                    <th scope="col" class="px-6 py-3 text-center">Email</th>
-                    <th scope="col" class="px-6 py-3 text-center">Edit</th>
-                    <th scope="col" class="px-6 py-3 text-center">Delete</th>
+                    <th scope="col" class="px-2 py-3 text-center">First Name</th>
+                    <th scope="col" class="px-2 py-3 text-center">Last Name</th>
+                    <th scope="col" class="px-2 py-3 text-center">Username</th>
+                    <th scope="col" class="px-2 py-3 text-center">Email</th>
+                    <th scope="col" class="px-2 py-3 text-center">Status</th>
+                    <th scope="col" class="px-2 py-3 text-center">Edit</th>
+                    <th scope="col" class="px-2 py-3 text-center">Delete</th>
 
                 </tr>
             </thead>
@@ -73,6 +74,7 @@ $roleId = session()->get('role_id');
                             <td class="px-6 py-4"><?= htmlspecialchars($user['Last_Name1']) ?></td>
                             <td class="px-6 py-4"><?= htmlspecialchars($user['Username']) ?></td>
                             <td class="px-6 py-4"><?= htmlspecialchars($user['Email']) ?></td>
+                            <td class="px-6 py-4"><?= htmlspecialchars($user['StatusU']) ?></td>
 
                             <!-- Edit link to the user update page -->
                             <td class="px-6 py-4 text-center">
@@ -87,8 +89,8 @@ $roleId = session()->get('role_id');
                             <!-- Delete user -->
                             <td class="px-6 py-4 text-center">
                                 <form action="/admin/deleteuser" method="POST" style="display:inline;" title="Delete">
-                                    <input type="hidden" name="id_user" value="<?= $user['Id_User'] ?>">
-                                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 flex flex-col items-center" onclick="return confirm('Are you sure you want to delete this specie?');">
+                                    <input type="hidden" name="Id_User" value="<?= $user['Id_User'] ?>">
+                                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 flex flex-col items-center" onclick="return confirm('Are you sure you want to delete this user?');">
                                         <i class="fa-solid fa-trash"></i> Delete
                                     </button>
                                 </form>

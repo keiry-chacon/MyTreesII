@@ -451,7 +451,7 @@ class User extends BaseController
     }
 
 
-    /**
+     /**
      * Update an existing user in the database
      */
     public function updateUser() 
@@ -475,19 +475,43 @@ class User extends BaseController
         // Load the user model
         $userModel = new UserModel();
 
-        // Dynamically adjust validation rules for updating the current user
-        $userModel->setValidationRules($userModel->getValidationRulesForUpdate($userId));
+        // Get the current user data from the database
+        $currentUser = $userModel->find($userId);
+        if (!$currentUser) {
+            log_message('error', 'User not found.');
+            return redirect()->to('/admin/manageusers')->with('error', 'User not found');
+        }
 
         // Prepare data for update
         $data = [
             'First_Name' => $firstName,
             'Last_Name1' => $lastName1,
             'Last_Name2' => $lastName2,
-            'Email'      => $email,
             'Phone'      => $phone,
             'Gender'     => $gender,
-            'Username'   => $username,
         ];
+
+        // Validation rules for email and username
+        $validationRules = $userModel->getValidationRulesForUpdate($userId);
+
+        // Check if the email has changed
+        if ($email !== $currentUser['Email']) {
+            $data['Email'] = $email; // Add email to the data array
+        } else {
+            // Remove email validation rule if not changed
+            unset($validationRules['Email']);
+        }
+
+        // Check if the username has changed
+        if ($username !== $currentUser['Username']) {
+            $data['Username'] = $username; // Add username to the data array
+        } else {
+            // Remove username validation rule if not changed
+            unset($validationRules['Username']);
+        }
+
+        // Dynamically set validation rules
+        $userModel->setValidationRules($validationRules);
 
         // Handle profile picture upload
         $file = $this->request->getFile('profilePic');
@@ -513,28 +537,33 @@ class User extends BaseController
 
 
 
+
     /**
      * Delete a user
     */
     public function deleteuser()
     {
-        // Id_User received from the form
-        $idUser    = $this->request->getPost('id_user');
-    
-        $userModel = new UserModel();
-    
-        // Validation and saving
-        if (!$userModel->update($idUser, ['StatusU' => 0])) {
-            // Get validation errors from the model
-            $errors = $userModel->errors();
-    
-            // Redirect back to the form with errors
-            return redirect()->back()->withInput()->with('error', $errors);
+        $userId = $this->request->getPost('Id_User');
+        log_message('debug', 'UserId received: ' . $userId);
+        var_dump($userId);  
+
+        if (empty($userId)) {
+            return redirect()->to('/admin/manageusers')->with('error', 'Invalid or missing user ID');
         }
-    
-        // If everything is correct, redirect to the login page with a success message
-        return redirect()->to('/admin/manageusers')->with('success', 'User Deleted Succesfully');
+
+        $userModel = new UserModel();
+        
+        $data = ['StatusU' => 0];
+
+        if (!$userModel->update($userId, $data)) {
+            $errors = $userModel->errors();
+            return redirect()->back()->withInput()->with('error', implode(', ', $errors));
+        }
+        
+        return redirect()->to('/admin/manageusers')->with('success', 'User marked as deleted successfully');
     }
+
+    
 
 
 

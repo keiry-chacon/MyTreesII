@@ -22,41 +22,44 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($treeUpdates)) : ?>
-                    <?php foreach ($treeUpdates as $update) : ?>
-                        <tr class="border-b">
-                            <!-- Tree Picture -->
-                            <td class="text-center px-6 py-4">
-                                <?php if (!empty($update['Photo_Path'])) : ?>
-                                    <?php $image_url = base_url('uploads_tree/' . $update['Photo_Path']); ?>
-                                    <img 
-                                        src="<?= $image_url . '?' . time(); ?>" 
-                                        alt="Tree Picture" 
-                                        class="rounded w-12 h-12 mx-auto cursor-pointer"
-                                        @click="modalImage = '<?= $image_url . '?' . time(); ?>'; showModal = true">
-                                <?php else : ?>
-                                    <span class="text-gray-400">No Image</span>
-                                <?php endif; ?>
-                            </td>
+            <?php if (!empty($treeUpdates)) : ?>
+                <?php foreach ($treeUpdates as $update) : ?>
+                    <tr class="border-b">
+                        <!-- Tree Picture -->
+                        <td class="text-center px-6 py-4">
+                            <?php if (!empty($update['Photo_Path'])) : ?>
+                                <?php 
+                                    // Generar la URL de la imagen para cada actualización
+                                    $image_url = base_url('uploads_tree/' . $update['Photo_Path']); 
+                                ?>
+                                <img 
+                                    x-bind:src="'<?= $image_url . '?' . time(); ?>'"
+                                    alt="Tree Picture" 
+                                    class="rounded w-12 h-12 mx-auto cursor-pointer"
+                                    @click="modalImage = '<?= $image_url . '?' . time(); ?>'; showModal = true">
+                            <?php else : ?>
+                                <span class="text-gray-400">No Image</span>
+                            <?php endif; ?>
+                        </td>
 
-                            <!-- Tree Specie -->
-                            <td class="px-6 py-4">
-                                <?= htmlspecialchars($update['Commercial_Name']) ?> 
-                                (<?= htmlspecialchars($update['Scientific_Name']) ?>)
-                            </td>
+                        <!-- Tree Specie -->
+                        <td class="px-6 py-4">
+                            <?= htmlspecialchars($update['Commercial_Name']) ?> 
+                            (<?= htmlspecialchars($update['Scientific_Name']) ?>)
+                        </td>
 
-                            <!-- Tree Size -->
-                            <td class="px-6 py-4"><?= htmlspecialchars($update['Size']) ?></td>
+                        <!-- Tree Size -->
+                        <td class="px-6 py-4"><?= htmlspecialchars($update['Size']) ?></td>
 
-                            <!-- Update Date -->
-                            <td class="px-6 py-4"><?= htmlspecialchars($update['UpdateDate']) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <tr>
-                        <td colspan="4" class="text-center text-gray-500 py-4">No Updates found</td>
+                        <!-- Update Date -->
+                        <td class="px-6 py-4"><?= htmlspecialchars($update['UpdateDate']) ?></td>
                     </tr>
-                <?php endif; ?>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <tr>
+                    <td colspan="4" class="text-center text-gray-500 py-4">No Updates found</td>
+                </tr>
+            <?php endif; ?>
             </tbody>
         </table>
     </div>
@@ -79,3 +82,4 @@
         </div>
     </div>
 </div>
+
