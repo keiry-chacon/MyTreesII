@@ -1,9 +1,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<main class="container mx-auto mt-10 p-4">
+<main class="ml-64 mt-16 p-4"> <!-- Push content to the right, starting after the navigation -->
     <!-- Welcome section of the admin dashboard -->
     <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
-        <h1 class="text-4xl font-bold text-center mb-4">¡Welcome!</h1>
+        <h1 class="text-4xl font-bold text-center mb-4">Welcome!</h1>
         <p class="text-lg text-gray-700 text-center">
             Welcome to the administration panel. Here you can view detailed statistics on registered friends and available and sold trees. 
             Use this information to make informed decisions and manage resources efficiently.
@@ -11,7 +10,7 @@
     </div>
 
     <!-- Section with flexible layout (responsive) for graphs -->
-    <div class="flex flex-col lg:flex-row gap-8">
+    <div class="flex gap-8">
         
         <!-- Graph for displaying the distribution of friends by gender -->
         <div class="bg-white shadow-lg rounded-lg p-6 w-full lg:w-1/2">
@@ -46,7 +45,7 @@
 
     <!-- Additional information section about the statistics -->
     <div class="bg-blue-50 shadow rounded-lg p-6 mt-8">
-        <h2 class="text-xl font-semibold text-center text-blue-600">Aditional Information</h2>
+        <h2 class="text-xl font-semibold text-center text-blue-600">Additional Information</h2>
         <p class="text-gray-700 mt-4">
             This statistics section allows managers to better understand the distribution of the community and the status of tree resources. The information gathered
             can assist in future management and planning decisions. It also fosters an inclusive and well-informed environment about the diversity of registered friends.

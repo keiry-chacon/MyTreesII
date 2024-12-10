@@ -3,6 +3,7 @@ $uploads_tree = base_url('/uploads_tree/');
 $data['uploads_tree'] = $uploads_tree;
 
 $roleId = session()->get('role_id'); 
+
 ?>
 
 <!-- Main container for the Tree Management page -->
@@ -14,10 +15,10 @@ $roleId = session()->get('role_id');
             <p class="text-gray-600 mt-2">List of all trees associated with this friend</p>
             <!-- Link to go back -->
             <?php if ($roleId == 1): ?>
-                <!-- Link to Admin -->
+                <!-- Enlace para Admin -->
                 <a href="/admin/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
             <?php else: ?>
-                <!-- Link to others roles (Operator) -->
+                <!-- Enlace para otros roles (Operator) -->
                 <a href="/operator/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
             <?php endif; ?>
         </div>
@@ -42,12 +43,12 @@ $roleId = session()->get('role_id');
         <div class="mt-6 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Loop through each tree to display details -->
             <?php foreach ($trees as $tree):
-                // Set the image path with cache-busting using time()
-                $photoTree              = $uploads_tree . $tree['Photo_Path']. '?' . time();
-                // URLs for updating the tree or registering an update
-                $updateFriendTree       = "/admin/showupdatefriendtree?id_tree=" . $tree['Id_Tree']; 
-                $registerUpdate         = "showregisterupdate?id_tree=" . $tree['Id_Tree']; 
-                $treeHistory            = "showtreehistory?id_tree=" . $tree['Id_Tree']; 
+                 // Set the image path with cache-busting using time()
+                 $photoTree              = $uploads_tree . $tree['Photo_Path']. '?' . time();
+                 // URLs for updating the tree or registering an update
+                 $updateFriendTree       = "/admin/showupdatefriendtree?id_tree=" . $tree['Id_Tree']; 
+                 $registerUpdate         = "showregisterupdate?id_tree=" . $tree['Id_Tree']; 
+                 $treeHistory            = "showtreehistory?id_tree=" . $tree['Id_Tree'];
 
             ?>
                 <!-- Card for each tree -->
@@ -64,9 +65,9 @@ $roleId = session()->get('role_id');
                         <!-- Buttons for updating the tree or registering an update -->
                         <div class="mt-4 flex justify-between">
                             <?php 
-                                // We check the role and show the corresponding buttons
+                                // Verificamos el rol y mostramos los botones correspondientes
                                 if ($roleId == 1): ?> 
-                                    <!-- Show both buttons for role 1 (Admin) -->
+                                    <!-- Mostrar ambos botones para el rol 1 (Admin) -->
                                     <a href="<?php echo $updateFriendTree; ?>" class="bg-yellow-500 text-white px-1 py-2 rounded hover:bg-yellow-600">Update Tree</a>
                                     <a href="<?php echo $registerUpdate; ?>" class="bg-green-500 text-white px-1 py-2 rounded hover:bg-green-600">Register Update</a>
                                     <a href="<?php echo $treeHistory; ?>" class="bg-green-500 text-white px-1 py-2 rounded hover:bg-green-600">Tree History</a>

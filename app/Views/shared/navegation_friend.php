@@ -20,13 +20,7 @@
 
             <!-- Submenu for the profile, initially hidden -->
             <div id="profile-submenu" class="hidden flex-col p-4 space-y-2">
-                <!-- Profile option -->
-                <form action="/user/profile" method="post">
-                    <button type="submit" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2 w-full">
-                        <i class="fas fa-user"></i>
-                        <span>Profile</span>
-                    </button>
-                </form>
+
                 <!-- Log out button -->
                 <form action="/user/logout" method="post">
                     <button type="submit" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2 w-full">
@@ -88,7 +82,7 @@
                     </div>
 
                     <!-- Remove button for each tree -->
-                    <form method="POST" class="ml-4" action="<?= site_url('/cartRemove'); ?>">
+                    <form method="POST" class="ml-4" action="<?= site_url('/friend/cartRemove'); ?>">
                         <input type="hidden" name="tree_id" value="<?= $cart['Tree_Id'] ?>" />
                         <button type="submit" name="action" value="delete" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600">
                             <i class="fas fa-trash"></i>
@@ -107,7 +101,7 @@
             </div>
 
             <!-- Form to proceed with the purchase -->
-            <form method="POST" action="<?= site_url('/cart/buyAll') ?>">
+            <form method="POST" action="<?= site_url('/friend/cartBuyAll') ?>">
                 <div class="form-group">
                     <label for="shipping_location">Shipping Location:</label>
                     <input type="text" name="shipping_location" id="shipping_location" class="form-control" required>
@@ -159,4 +153,3 @@
         }
     };
 </script>
-

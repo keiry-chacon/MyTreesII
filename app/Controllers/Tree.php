@@ -147,7 +147,7 @@ class Tree extends BaseController
 
         // Check if the tree exists
         if (!$tree) {
-            return redirect()->to('/managetrees')->with('error', 'Tree not found');
+            return redirect()->to('/admin/managetrees')->with('error', 'Tree not found');
         }
 
         // Fetch species data to display in the dropdown
@@ -228,7 +228,7 @@ class Tree extends BaseController
         // Check if tree exists in the database
         $tree = $treeModel->find($idTree);
         if (!$tree) {
-            return redirect()->to('/managetrees')->with('error', 'Tree not found');
+            return redirect()->to('/admin/managetrees')->with('error', 'Tree not found');
         }
 
         // Try to update the tree
@@ -242,7 +242,7 @@ class Tree extends BaseController
         }
 
         // If everything is correct, redirect to the trees management page with a success message
-        return redirect()->to('/managetrees')->with('success', 'Tree updated successfully');
+        return redirect()->to('/admin/managetrees')->with('success', 'Tree updated successfully');
     }
 
 
@@ -500,5 +500,4 @@ class Tree extends BaseController
     
 
 }
-
 

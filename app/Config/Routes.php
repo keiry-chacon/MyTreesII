@@ -53,12 +53,12 @@ $routes->group('admin', ['filter' => 'auth:1'], function ($routes) {
     $routes->get('showadduser',         'User::indexAddUser');
     $routes->post('adduser',            'User::addUser');
 
-    $routes->get('managespecies',       'User::indexManageSpecies');
-    $routes->get('showaddspecies',      'User::indexAddSpecies');
-    $routes->post('addspecies',         'User::addSpecies');
-    $routes->get('showupdatespecies',   'User::indexUpdateSpecies');
-    $routes->post('updatespecies',      'User::updateSpecies');
-    $routes->post('deletespecies',      'User::deleteSpecies');
+    $routes->get('managespecies',       'Species::indexManageSpecies');
+    $routes->get('showaddspecies',      'Species::indexAddSpecies');
+    $routes->post('addspecies',         'Species::addSpecies');
+    $routes->get('showupdatespecies',   'Species::indexUpdateSpecies');
+    $routes->post('updatespecies',      'Species::updateSpecies');
+    $routes->post('deletespecies',      'Species::deleteSpecies');
 
     $routes->get('managetrees',         'Tree::indexManageTrees');
     $routes->get('showaddtree',         'Tree::indexAddTree');
@@ -68,10 +68,9 @@ $routes->group('admin', ['filter' => 'auth:1'], function ($routes) {
     $routes->post('deletetree',         'Tree::deleteTree');
 
     $routes->post('friendtrees', 'Admin::friendtrees');
-    $routes->get('showupdatefriendtree', 'Admin::indexUpdateFriendTree');
-    $routes->post('updatefriendtree', 'Admin::updateFriendTree');
+    $routes->get('showupdatefriendtree', 'Tree::indexUpdateFriendTree');
+    $routes->post('updatefriendtree', 'Tree::updateFriendTree');
 });
-
 
 
 // ================================================================
@@ -83,12 +82,12 @@ $routes->group('friend', ['filter' => 'auth:2'], function ($routes) {
     $routes->get('tree_detail/(:segment)', 'Tree::treeDetail/$1'); // View tree details
     $routes->get('tree_detail_friend/(:segment)', 'Tree::treeDetailFriend/$1'); // View friend's tree details
 
-    $routes->post('purchase/processPurchase', 'Purchase::processPurchase'); // Process purchase
-    $routes->get('purchase/success', 'Purchase::success'); // Purchase success
+    $routes->post('processPurchase', 'Purchase::processPurchase'); // Process purchase
+    $routes->get('success', 'Purchase::success'); // Purchase success
     $routes->post('addToCart', 'Cart::addToCart'); // Add item to cart
     $routes->post('showCart', 'Cart::showCart'); // Show cart
     $routes->post('cartRemove', 'Cart::removeItem'); // Remove item from cart
-    $routes->post('cart/buyAll', 'Purchase::buyAllItems'); // Buy all items in cart
+    $routes->post('cartBuyAll', 'Purchase::buyAllItems'); // Buy all items in cart
 });
 
 
@@ -108,9 +107,9 @@ $routes->group('operator', ['filter' => 'auth:3'], function ($routes) {
 // Admin and Operator Shared Routes
 $routes->group('', ['filter' => 'auth:1,3'], function ($routes) {
     $routes->get('showregisterupdate', 'User::indexRegisterUpdate'); // Register update page
-    $routes->post('/operator/registerupdate', 'User::registerUpdate'); // Process register update
+    $routes->post('registerupdate', 'User::registerUpdate'); // Process register update
     $routes->get('managefriends', 'User::indexManageFriends');
-    $routes->get('showfriendtrees', 'Admin::indexFriendTrees');
+    $routes->get('showfriendtrees', 'User::indexFriendTrees');
 
 });
 

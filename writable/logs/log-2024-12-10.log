@@ -40,3 +40,71 @@ in APPPATH\Views\shared\navegation_admin.php on line 5.
  9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 05:59:59 --> ErrorException: Undefined variable $userData
+[Method: GET, Route: showfriendtrees]
+in APPPATH\Controllers\User.php on line 405.
+ 1 APPPATH\Controllers\User.php(405): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $userData', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 405)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexFriendTrees()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 06:00:38 --> ErrorException: Undefined variable $userData
+[Method: GET, Route: showfriendtrees]
+in APPPATH\Controllers\User.php on line 408.
+ 1 APPPATH\Controllers\User.php(408): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $userData', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 408)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexFriendTrees()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 06:00:55 --> ErrorException: Undefined variable $userData
+[Method: GET, Route: showfriendtrees]
+in APPPATH\Controllers\User.php on line 408.
+ 1 APPPATH\Controllers\User.php(408): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $userData', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 408)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexFriendTrees()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 06:01:22 --> ErrorException: Undefined variable $users
+[Method: GET, Route: showfriendtrees]
+in APPPATH\Controllers\User.php on line 427.
+ 1 APPPATH\Controllers\User.php(427): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $users', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 427)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexFriendTrees()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 06:02:13 --> ErrorException: Undefined variable $cartCount
+[Method: GET, Route: showfriendtrees]
+in APPPATH\Views\shared\Navegation_friend.php on line 58.
+ 1 APPPATH\Views\shared\Navegation_friend.php(58): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $cartCount', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php', 58)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('shared/navegation_friend', [], true)
+ 5 APPPATH\Controllers\User.php(432): view('shared/navegation_friend', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexFriendTrees()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-10 06:03:02 --> ErrorException: Undefined variable $carts
+[Method: GET, Route: showfriendtrees]
+in APPPATH\Views\shared\Navegation_friend.php on line 74.
+ 1 APPPATH\Views\shared\Navegation_friend.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $carts', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php', 74)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('shared/navegation_friend', [], true)
+ 5 APPPATH\Controllers\User.php(433): view('shared/navegation_friend', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexFriendTrees()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

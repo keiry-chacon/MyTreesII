@@ -59,7 +59,7 @@ class Purchase extends BaseController
         $treeModel = new TreeModel();
         $treeModel->update($treeId, ['StatusT' => '0']);
         // Redirigir al usuario con un mensaje de éxito
-        return redirect()->to('purchase/success');
+        return redirect()->to('/friend/success');
     }
     public function success()
 {
@@ -100,13 +100,15 @@ public function buyAllItems()
         
         // Inserta la compra en la tabla de compras
         $this->purchaseModel->insertPurchase($data);
+        
+        $this->treeModel->update($item['Tree_Id'], ['StatusT' => 0]);
 
         // Eliminar los elementos del carrito después de la compra
         $this->cartModel->abandonItem($userId, $item['Tree_Id']);
     }
 
     // Redirigir al usuario a la página de dashboard después de la compra
-    return redirect()->to('/purchase/success')->with('success', 'Purchase successful!');
+    return redirect()->to('/friend/success')->with('success', 'Purchase successful!');
 }
 
 

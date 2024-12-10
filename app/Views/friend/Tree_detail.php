@@ -54,7 +54,7 @@
 
                     <!-- Action Buttons (Add to Cart / Buy Now) -->
                     <div class="flex space-x-6 mt-6">
-                        <form method="POST" action="<?= site_url('/addToCart'); ?>">
+                        <form method="POST" action="<?= site_url('/friend/addToCart'); ?>">
                             <input type="hidden" name="tree_id" value="<?= esc($tree['Id_Tree']); ?>">
                             <input type="hidden" name="price" value="<?= esc($tree['Price']); ?>">
                             <button type="submit" class="flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 focus:outline-none transition-colors duration-300" name="add_to_cart">
@@ -91,7 +91,7 @@
         </div>
 </div>
             <!-- Purchase form -->
-            <form action="<?= site_url('purchase/processPurchase'); ?>" method="POST">
+            <form action="<?= site_url('/friend/processPurchase'); ?>" method="POST">
                 <input type="hidden" name="tree_id" id="tree_id" value="<?= $tree['Id_Tree']; ?>">
 
                 <div class="mb-4">

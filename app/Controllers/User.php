@@ -401,12 +401,38 @@ class User extends BaseController
         $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
 
         $trees = $this->treeModel->getFriendsTrees($idUser);
+        $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
+        $cartCount = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
+
+        // Query to get the active cart items
+        $carts = $this->cartModel->getCartDetails($user['Id_User']);
+        // Determine the navigation view based on the role
+        $navigationView = 'shared/navegation_friend';  // Default value
+        if (isset($user['Role_Id'])) {
+            switch ($user['Role_Id']) {
+                case '1':
+                    $navigationView = 'shared/navegation_admin';  // If role is 'admin', use 'navegation_admin'
+                    break;
+                case '3':
+                    $navigationView = 'shared/navegation_operator';  // If role is 'operator', use 'navegation_operator'
+                    break;
+                case '2':
+                default:
+                    $navigationView = 'shared/navegation_friend';  // If role is 'friend' or any other value, use 'navegation_friend'
+                    break;
+            }
+        }
+
+        // Preparar los datos para pasar a las vistas
+        $data['users'] = $user;
+        $data['cartCount'] = $cartCount;
+        $data['carts'] = $carts;
 
         $data['trees']              = $trees;
         $data['uploads_folder']     = base_url('uploads_tree/');
         $data['profilePic']         = $profilePic;
         $data['uploads_profile']    = base_url('uploads_profile/');
-        return view('shared/header', $data) . view('shared/navegation_admin', $data) . view('admin/friendtrees', $data);
+        return view('shared/header', $data) . view($navigationView, $data) . view('admin/friendtrees', $data);
     }
 
 
@@ -443,7 +469,9 @@ class User extends BaseController
         $username = session()->get('username');
         $user     = $this->userModel->where('Username', $username)->first();
         $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
-
+        $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
+        $cartCount = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
+        $carts = $this->cartModel->getCartDetails($user['Id_User']);
         // Get the tree ID from the URL (GET parameter)
         $idTree = $this->request->getGet('id_tree');
 
@@ -465,16 +493,32 @@ class User extends BaseController
             return redirect()->to('/admin/managetrees')->with('error', 'Tree not found');
         }
 
-        // Prepare the data to be passed to the view
-        $data = [
-            'tree' => $tree,
-            'profilePic' => $profilePic,
-            'uploads_profile' => base_url('uploads_profile/'),
-            'error_msg' => session()->get('error')
-        ];
+        $navigationView = 'shared/navegation_friend';  // Default value
+        if (isset($user['Role_Id'])) {
+            switch ($user['Role_Id']) {
+                case '1':
+                    $navigationView = 'shared/navegation_admin';  // If role is 'admin', use 'navegation_admin'
+                    break;
+                case '3':
+                    $navigationView = 'shared/navegation_operator';  // If role is 'operator', use 'navegation_operator'
+                    break;
+                case '2':
+                default:
+                    $navigationView = 'shared/navegation_friend';  // If role is 'friend' or any other value, use 'navegation_friend'
+                    break;
+            }
+        }
 
-        // Return the full view with header and the update tree form
-        return view('shared/header', $data) . view('shared/navegation_admin', $data) . view('operator/registerUpdate', $data);
+        // Preparar los datos para pasar a las vistas
+        $data['users'] = $user;
+        $data['cartCount'] = $cartCount;
+        $data['carts'] = $carts;
+
+        $data['tree']              = $tree;
+        $data['uploads_folder']     = base_url('uploads_tree/');
+        $data['profilePic']         = $profilePic;
+        $data['uploads_profile']    = base_url('uploads_profile/');
+        return view('shared/header', $data) . view($navigationView, $data) . view('operator/registerUpdate', $data);
     }
 
 
@@ -518,7 +562,7 @@ class User extends BaseController
         $tree = $treeModel->find($idTree);
         if (!$tree) {
             // If the tree is not found, redirect with an error
-            return redirect()->to('/admin/managefriends')->with('error', 'Tree not found');
+            return redirect()->to('managefriends')->with('error', 'Tree not found');
         }
 
         // Update the tree in the database
@@ -537,7 +581,7 @@ class User extends BaseController
         }
 
         // If everything is successful, redirect with a success message
-        return redirect()->to('/admin/managefriends')->with('success', 'Tree updated and registered successfully');
+        return redirect()->to('managefriends')->with('success', 'Tree updated and registered successfully');
     }
 
 
@@ -595,7 +639,6 @@ class User extends BaseController
         $treeUpdates = $treeupdateModel->getTreeUpdatesWithSpecies($idTree);
         $cartCount = $this->cartModel->where('User_Id', $userId)->where('Status', 'active')->countAllResults();
         $carts = $this->cartModel->getCartDetails($userId);
-
         // Prepare data for the view
         $data = [
             'treeUpdates' => $treeUpdates,

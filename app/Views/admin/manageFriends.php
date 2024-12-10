@@ -10,8 +10,8 @@ $roleId = session()->get('role_id');
     <!-- Header section for the page -->
     <div class="bg-white shadow-lg rounded-lg p-4 max-w-4xl mx-auto">
         <div class="text-center">
-            <!-- Page title -->
-            <h1 class="text-6xl font-bold">Manage Friend´s Tree</h1>
+            <!-- Page title with green color and centered text -->
+            <h1 class="text-6xl font-bold text-green-600 tracking-tight">Manage Trees</h1>
             <!-- Description of the page -->
             <p class="text-gray-600 mt-2">Here is a list of all registered trees.</p>
 

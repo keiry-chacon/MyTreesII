@@ -39,11 +39,11 @@
 
                 <!-- Tree History Button -->
                 <div class="mt-6">
-                        <a href="/treehistory?id_tree=<?= $tree['Id_Tree']; ?>" 
+                        <a href="/showtreehistory?id_tree=<?= $tree['Id_Tree']; ?>" 
                            class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full shadow-md hover:bg-blue-600 hover:shadow-lg focus:outline-none transform transition-transform duration-300 hover:scale-105">
                             Tree History
                         </a>
-                    </div>
+                    </div> 
                 
             </div>
         </div>

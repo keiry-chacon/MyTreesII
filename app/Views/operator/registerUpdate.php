@@ -15,7 +15,7 @@
         <?php endif; ?>
 
         <!-- Form -->
-        <form method="POST" action="/operator/registerupdate" enctype="multipart/form-data" class="space-y-4">
+        <form method="POST" action="registerupdate" enctype="multipart/form-data" class="space-y-4">
             <?= csrf_field() ?>
             <input type="hidden" name="id_tree" value="<?= htmlspecialchars($tree['Id_Tree']) ?>">
 

@@ -6,12 +6,7 @@
                 <div class="text-center font-semibold text-gray-700"><?php echo htmlspecialchars($_SESSION['username']); ?></div>
             </a>
             <div id="profile-submenu" class="hidden flex-col p-4 space-y-2"> 
-                <form action="/user/profile" method="post">
-                    <button type="submit" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2 w-full">
-                        <i class="fas fa-user"></i>
-                        <span>Profile</span>
-                    </button>
-                </form>
+        
                 <form action="/user/logout" method="post">
                     <button type="submit" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2 w-full">
                         <i class="fas fa-sign-out-alt"></i>
@@ -47,4 +42,4 @@
             let scrolled = (winScroll / height) * 100;
             document.getElementById('progress-bar').style.width = scrolled + "%"; 
         };
-    </script>
+</script>
