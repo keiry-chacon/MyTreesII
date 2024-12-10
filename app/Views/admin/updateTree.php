@@ -91,9 +91,24 @@
         </form>
 
         <!-- Back to Manage Trees -->
-        <a href="/managetrees" 
+        <a href="/admin/managetrees" 
             class="block text-center mt-4 text-sm text-blue-500 hover:text-blue-700">
             Manage Trees
         </a>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Profile picture preview when the user selects a new image
+    $('#treePic').on('change', function(event) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#previewImage').attr('src', e.target.result);  // Establecer la imagen en el contenedor de vista previa
+        };
+        if (this.files && this.files[0]) {
+            reader.readAsDataURL(this.files[0]);  // Leer la imagen seleccionada
+        }
+    });
+
+</script>

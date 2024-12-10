@@ -7,18 +7,20 @@ class FriendFilter implements FilterInterface
 {
     public function before($request, $arguments = null)
     {
-        // Obtén el rol del usuario desde la sesión
+        // Get the user's role from the session
         $userRole = session()->get('role_id');
-
-        // Verifica si el rol es 2 (friend)
+    
+        // Check if the role is 2 (friend)
         if ($userRole != 2) {
-            // Si no es amigo, redirige a la página de "Acceso Denegado"
+            // If not a friend, redirect to the "Access Denied" page
             return redirect()->to('/unauthorized');
         }
     }
+    
 
+    
     public function after($request, $response, $arguments = null)
     {
-        // No es necesario realizar ninguna acción después de que se ejecute el controlador.
-    }
+        // No action is needed after the controller is executed.
+    }    
 }

@@ -48,37 +48,45 @@ class TreeModel extends Model
 
     public function getAvailableTreesCount(): int
     {
+        // Count the number of trees that are available (StatusT = 1)
         return $this->where('StatusT', 1)
                     ->countAllResults();
     }
-
-
-    public function getSoldTreesCount()
-    {
-        // Instancia del modelo
-        $treeModel = new \App\Models\TreeModel();
-
-        // Consulta utilizando el modelo para contar los árboles vendidos (StatusT = 0)
-        $soldTreesCount = $treeModel
-            ->where('StatusT', 0) // Condición para árboles vendidos
-            ->countAllResults(); // Cuenta los resultados
-
-        return $soldTreesCount;
-    }
+    
 
     
+    public function getSoldTreesCount()
+    {
+        // Get the count of trees that have been sold (StatusT = 0)
+        
+        // Instantiate the TreeModel
+        $treeModel = new \App\Models\TreeModel();
+    
+        // Query the model to count the sold trees
+        $soldTreesCount = $treeModel
+            ->where('StatusT', 0) // Condition for sold trees
+            ->countAllResults(); // Count the results
+    
+        return $soldTreesCount;
+    }
+    
+
+
     public function getAvailableTrees()
     {
-        return $this->select('trees.*, species.Commercial_Name, species.Scientific_Name') 
-                ->join('species', 'species.Id_Specie = trees.Specie_Id') 
-                ->where('trees.StatusT', 1) 
-                ->findAll();
+        // Retrieve all trees that are available (StatusT = 1) along with their species details
+        return $this->select('trees.*, species.Commercial_Name, species.Scientific_Name') // Select tree and species details
+                    ->join('species', 'species.Id_Specie = trees.Specie_Id') // Join the 'species' table using Specie_Id
+                    ->where('trees.StatusT', 1) // Filter for available trees
+                    ->findAll(); // Retrieve all matching records
     }
+    
 
 
     public function getFriendsTrees($friendId)
     {
-        return $this->db->table('trees as trees_main') // Asignar alias aquí
+        // Retrieve trees purchased by a specific friend
+        return $this->db->table('trees as trees_main') // Assign alias to 'trees' table
             ->select(
                 'purchase.Id_Purchase, 
                  purchase.Payment_Method, 
@@ -93,36 +101,38 @@ class TreeModel extends Model
                  trees_main.Price, 
                  trees_main.Photo_Path'
             )
-            ->join('purchase', 'trees_main.Id_Tree = purchase.Tree_Id') // Alias usado
-            ->join('species', 'species.Id_Specie = trees_main.Specie_Id') // Alias usado
-            ->where('purchase.User_Id', $friendId)
-            ->where('purchase.StatusP', 1)
+            ->join('purchase', 'trees_main.Id_Tree = purchase.Tree_Id') // Join 'purchase' table using Tree_Id
+            ->join('species', 'species.Id_Specie = trees_main.Specie_Id') // Join 'species' table using Specie_Id
+            ->where('purchase.User_Id', $friendId) // Filter by friend's ID
+            ->where('purchase.StatusP', 1) // Only include active purchases
             ->get()
-            ->getResultArray();
+            ->getResultArray(); // Return the results as an array
     }
-    
     
 
 
     public function getTreeById($id)
     {
-        return $this->select('trees.*, species.Commercial_Name, species.Scientific_Name')
-            ->join('species', 'species.Id_Specie = trees.Specie_Id')  // Ajusta el nombre de las columnas según tu esquema
-            ->where('trees.Id_Tree', $id)  // Filtra por el ID del árbol
-            ->first();  // Obtiene solo el primer resultado (ya que el ID es único)
+        // Retrieve the details of a specific tree by its ID
+        return $this->select('trees.*, species.Commercial_Name, species.Scientific_Name') // Select tree and species details
+            ->join('species', 'species.Id_Specie = trees.Specie_Id') // Join 'species' table using Specie_Id
+            ->where('trees.Id_Tree', $id) // Filter by tree ID
+            ->first(); // Retrieve only the first result (ID is unique)
     }
+    
 
 
-    public function getTreeDetails($treeId) {
-        // Realizar la consulta para obtener los detalles del árbol
-        $query = $this->db->get_where('trees', array('Tree_Id' => $treeId));
-
-        // Si la consulta tiene resultados, devolverlos
+    public function getTreeDetails($treeId)
+    {
+        // Query to get the details of a specific tree by its ID
+        $query = $this->db->get_where('trees', array('Tree_Id' => $treeId)); // Query with condition
+    
+        // If the query returns results, return them
         if ($query->num_rows() > 0) {
-            return $query->row_array(); // Retorna como array
+            return $query->row_array(); // Return the results as an array
         }
-
-        // Si no se encuentra el árbol, devolver null
+    
+        // If the tree is not found, return null
         return null;
     }
 }

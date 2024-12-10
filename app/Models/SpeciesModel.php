@@ -54,12 +54,8 @@ class SpeciesModel extends Model
 
 
 
-
-
     public function getSpeciesByStatus($status = 1)
     {
         return $this->where('StatusS', $status)->findAll();  // Filter species whose status is equal to 1
     }
-    
-
 }

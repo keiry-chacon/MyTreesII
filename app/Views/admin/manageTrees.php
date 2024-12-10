@@ -10,12 +10,12 @@
 
             <!-- Button linking to the trees registration page -->
             <div class="flex justify-center space-x-4 mt-4">
-                <a href="/addtree" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add Tree</a>
+                <a href="/admin/showaddtree" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add Tree</a>
             </div>
 
             <!-- Button linking to the trees list page -->
             <div class="flex justify-center space-x-4 mt-4">
-                <a href="/adminhome" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-600">Principal Page</a>
+                <a href="/admin/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-600">Principal Page</a>
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
 
                             <!-- Edit link to the tree update page -->
                             <td class="px-6 py-4 text-center">
-                                <a href="/updatetree?id_tree=<?= urlencode($tree['Id_Tree']) ?>" 
+                                <a href="/admin/showupdatetree?id_tree=<?= urlencode($tree['Id_Tree']) ?>" 
                                 class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 flex items-center justify-center space-x-2" 
                                 title="Edit">
                                     <i class="fa-solid fa-pen-to-square"></i>
@@ -73,7 +73,6 @@
                                 </a>
                             </td>
 
-                            
                             <!-- Delete form to delete the tree -->
                             <td class="px-6 py-4 text-center">
                                 <form action="/admin/deletetree" method="POST" style="display:inline;" title="Delete">

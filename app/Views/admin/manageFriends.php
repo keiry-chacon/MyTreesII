@@ -11,7 +11,7 @@ $roleId = session()->get('role_id');
     <div class="bg-white shadow-lg rounded-lg p-4 max-w-4xl mx-auto">
         <div class="text-center">
             <!-- Page title -->
-            <h1 class="text-6xl font-bold">Manage Trees</h1>
+            <h1 class="text-6xl font-bold">Manage Friend´s Tree</h1>
             <!-- Description of the page -->
             <p class="text-gray-600 mt-2">Here is a list of all registered trees.</p>
 
@@ -72,7 +72,7 @@ $roleId = session()->get('role_id');
                             <td class="px-6 py-4"><?= htmlspecialchars($user['Email']) ?></td>
 
                             <td class="px-6 py-4 text-center">
-                                <a href="/friendtrees?id_user=<?= urlencode($user['Id_User']) ?>" 
+                                <a href="showfriendtrees?id_user=<?= urlencode($user['Id_User']) ?>" 
                                 class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 flex items-center justify-center space-x-2" 
                                 title="View Trees">
                                     <i class="fas fa-tree"></i>

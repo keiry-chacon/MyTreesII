@@ -9,12 +9,12 @@ class Auth implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // Verifica si el usuario está autenticado
+        // Check if the user is authenticated
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/login'); 
         }
-
-        // Si se pasan roles en los argumentos, verifica si el rol del usuario es válido
+    
+        // If roles are passed in the arguments, check if the user's role is valid
         if ($arguments) {
             $role = session()->get('role_id');
             if (!in_array($role, $arguments)) {
@@ -22,13 +22,14 @@ class Auth implements FilterInterface
             }
         }
     }
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
-    {
-        // Normalmente, aquí puedes agregar lógica para después de procesar la solicitud
-        // Si no necesitas lógica adicional, simplemente deja este método vacío.
-    }
+    
 
     
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+    {
+        // Typically, you can add logic here to execute after processing the request
+        // If no additional logic is needed, simply leave this method empty.
+    }
 }
 
 

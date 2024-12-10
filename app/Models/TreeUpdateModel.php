@@ -44,18 +44,17 @@ class TreeUpdateModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    
 
     public function getTreeUpdatesWithSpecies($id_tree)
     {
-        return $this->db->table('tree_update') // Selecciona la tabla tree_update como base
+        // Retrieve updates for a specific tree along with its species information
+        return $this->db->table('tree_update') // Select the 'tree_update' table as the base
                     ->select('tree_update.*, trees.Specie_Id, species.Commercial_Name, species.Scientific_Name')
-                    ->join('trees', 'trees.Id_Tree = tree_update.Tree_Id') // Relación entre tree_update y trees
-                    ->join('species', 'species.Id_Specie = trees.Specie_Id') // Relación entre trees y species
-                    ->where('tree_update.Tree_Id', $id_tree) // Filtro basado en Tree_Id
+                    ->join('trees', 'trees.Id_Tree = tree_update.Tree_Id') // Relationship between 'tree_update' and 'trees'
+                    ->join('species', 'species.Id_Specie = trees.Specie_Id') // Relationship between 'trees' and 'species'
+                    ->where('tree_update.Tree_Id', $id_tree) // Filter based on Tree_Id
                     ->get()
-                    ->getResultArray(); // Devuelve los resultados como un arreglo asociativo
+                    ->getResultArray(); // Return the results as an associative array
     }
-
-
-
 }

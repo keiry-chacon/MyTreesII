@@ -25,7 +25,7 @@ class Friend extends BaseController
         $this->treeModel        = model(TreeModel::class); 
         $this->userModel        = model(UserModel::class);
         $this->purchaseModel    = model(PurchaseModel::class);
-        $this->cartModel = new CartModel();
+        $this->cartModel        = new CartModel();
 
     }
 
@@ -47,7 +47,7 @@ class Friend extends BaseController
         $userId = $session->get('user_id');
         $cartCount = $this->cartModel->where('User_Id', $userId)->where('Status', 'active')->countAllResults();
 
-// Consulta para obtener los elementos activos en el carrito
+        // Consulta para obtener los elementos activos en el carrito
          $carts = $this->cartModel->getCartDetails($userId);
 
 

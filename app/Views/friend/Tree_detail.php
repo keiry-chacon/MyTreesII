@@ -17,34 +17,34 @@
         <div class="bg-white max-w-6xl rounded-xl shadow-lg p-10 relative ml-60 transform transition-transform duration-500 hover:shadow-2xl">
             <div class="flex flex-col md:flex-row items-center gap-6">
                 <div class="md:w-1/2 p-4">
-                    <!-- Mostrar imagen del árbol -->
+                    <!-- Show tree image -->
                     <img class="w-full h-96 object-contain rounded-lg shadow-md transition-shadow duration-300 hover:shadow-xl" 
                          src="<?= $uploads_folder . $tree['Photo_Path']; ?>" alt="<?= esc($tree['Commercial_Name']); ?>">
                 </div>
 
                 <div class="md:w-1/2 p-4 space-y-6">
-                    <!-- Nombre comercial del árbol -->
+                    <!-- Commercial name of the tree -->
                     <div class="text-3xl font-bold text-gray-800 hover:text-blue-500 transition-colors duration-300">
                         <?= esc($tree['Commercial_Name']); ?>
                     </div>
 
-                    <!-- Nombre científico del árbol -->
+                    <!-- Scientific name of the tree -->
                     <div class="text-xl italic text-gray-500">
                         <?= esc($tree['Scientific_Name']); ?>
                     </div>
 
-                    <!-- Ubicación del árbol -->
+                    <!-- Location of the tree -->
                     <div class="text-md text-gray-600">
                         <i class="fas fa-map-marker-alt mr-1 text-red-400"></i> 
                         Location: <?= esc($tree['Location']); ?>
                     </div>
 
-                    <!-- Precio del árbol -->
+                    <!-- Price of the tree -->
                     <div class="text-4xl font-semibold text-gray-800 mt-4">
                         ₡<?= number_format($tree['Price'], 2, ',', '.'); ?>
                     </div>
 
-                    <!-- Tamaño del árbol -->
+                    <!-- Tree size -->
                     <div class="mt-4">
                         <label class="block text-gray-600 font-semibold">Size:</label>
                         <div class="flex space-x-2 mt-1">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <!-- Botones de acción (Añadir al carrito / Comprar ahora) -->
+                    <!-- Action Buttons (Add to Cart / Buy Now) -->
                     <div class="flex space-x-6 mt-6">
                         <form method="POST" action="<?= site_url('/addToCart'); ?>">
                             <input type="hidden" name="tree_id" value="<?= esc($tree['Id_Tree']); ?>">
@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <!-- Modal para el formulario de compra -->
+    <!-- Modal for the purchase form -->
     <div id="purchaseModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex justify-center items-center">
         <div class="bg-white p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto relative rounded-lg">
             <button onclick="closePurchaseForm()" class="absolute top-4 right-4 text-2xl text-red-500 bg-transparent border-none cursor-pointer">
@@ -80,7 +80,7 @@
             <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Purchase Form</h1>
 
             <div id="cartItems" class="space-y-6">
-    <!-- Los productos se agregarán aquí dinámicamente -->
+    <!-- Products will be added here dynamically -->
         <div class="flex items-center space-x-4">
             <img src="<?= $uploads_folder . $tree['Photo_Path']; ?>" alt="<?= esc($tree['Commercial_Name']); ?>" class="w-20 h-20 object-cover rounded-md">
             <div>
@@ -90,7 +90,7 @@
             </div>
         </div>
 </div>
-            <!-- Formulario de compra -->
+            <!-- Purchase form -->
             <form action="<?= site_url('purchase/processPurchase'); ?>" method="POST">
                 <input type="hidden" name="tree_id" id="tree_id" value="<?= $tree['Id_Tree']; ?>">
 
@@ -115,10 +115,10 @@
 
 
 <script>
-    // Obtener los productos desde PHP
+    // Get the products from PHP
 
     function loadCartItems() {
-        const cartItemsContainer = document.getElementById('cartItems'); // Asegúrate de tener este contenedor en el HTML
+        const cartItemsContainer = document.getElementById('cartItems'); // Make sure you have this container in the HTML
         cartItems.forEach(item => {
             const productHTML = `
                 <div class="flex items-center space-x-4">

@@ -93,3 +93,15 @@
         </div>
     </div>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Profile picture preview when the user selects a new image
+    $('#treePic').on('change', function(event) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#previewImage').attr('src', e.target.result);  // Set the image in the preview container
+        };
+        reader.readAsDataURL(this.files[0]);  // Read the selected image
+    });
+</script>

@@ -44,10 +44,6 @@
 <link rel="stylesheet" href="../css/friend_trees.css">
 
 <script>
-  
-
-
-
     function closeDetail() {
         const detailContainer = document.querySelector('.tree-detail-container');
         if (detailContainer) {

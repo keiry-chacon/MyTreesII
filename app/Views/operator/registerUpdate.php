@@ -3,7 +3,7 @@
     <div class="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
         <!-- Header -->
         <div class="text-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-800">Update Tree</h1>
+            <h1 class="text-2xl font-bold text-gray-800">Register Update</h1>
             <p class="text-gray-600 text-sm">Update the tree information below</p>
         </div>
 
@@ -46,7 +46,7 @@
         </form>
 
         <!-- Back to Manage Trees -->
-        <a href="/managefriends" 
+        <a href="managefriends" 
             class="block text-center mt-4 text-sm text-blue-500 hover:text-blue-700">
             Manage Friends
         </a>

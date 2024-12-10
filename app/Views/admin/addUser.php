@@ -1,10 +1,10 @@
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-300 font-sans">
     <div class="min-h-screen flex items-center justify-center">
         <!-- Card Container -->
-        <div class="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
+        <div class="bg-white w-full max-w-4xl p-16 rounded-lg shadow-lg"> <!-- Increased max-w-4xl and padding p-16 -->
             <!-- Header -->
             <div class="text-center mb-6">
-                <h1 class="text-2xl font-bold text-gray-800">Create a New User</h1>
+                <h1 class="text-4xl font-bold text-gray-800">Create a New User</h1> <!-- Increased heading size to 4xl -->
                 <p class="text-gray-600 text-sm">Join us to access all the features</p>
             </div>
 
@@ -147,3 +147,73 @@
         </div>
     </div>
 </body>
+
+<!-- jQuery (required for AJAX) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Profile picture preview when the user selects a new image
+    $('#profilePic').on('change', function(event) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#previewImage').attr('src', e.target.result);  // Set the image in the preview container
+        };
+        reader.readAsDataURL(this.files[0]);  // Read the selected image
+    });
+
+    $(document).ready(function() {
+        // Event when the country select changes, triggering AJAX to get provinces
+        $('#country').on('change', function() {
+            var countryId = $(this).val();  // Get the selected country ID
+
+            // If a country is selected, make the AJAX request
+            if (countryId) {
+                $.ajax({
+                    url: '/user/getProvinces',  // URL for getting provinces based on the country
+                    type: 'POST',
+                    data: { country_id: countryId },
+                    dataType: 'json',  // Expect a JSON response
+                    success: function(data) {
+                        if (data.options) {
+                            $('#province').html(data.options);  // Update the provinces dropdown
+                        } else {
+                            $('#province').html('<option value="">' + data.message + '</option>');  // Show message if no provinces found
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error loading provinces: ' + error);  // Show error if the request fails
+                    }
+                });
+            } else {
+                $('#province').html('<option value="">Select Province</option>');  // Reset the provinces dropdown
+            }
+        });
+
+        // Event when the province select changes, triggering AJAX to get districts
+        $('#province').on('change', function() {
+            var provinceId = $(this).val();  // Get the selected province ID
+
+            // If a province is selected, make the AJAX request
+            if (provinceId) {
+                $.ajax({
+                    url: '/user/getDistricts',  // URL for getting districts based on the province
+                    type: 'POST',
+                    data: { province_id: provinceId },
+                    dataType: 'json',  // Expect a JSON response
+                    success: function(data) {
+                        if (data.options) {
+                            $('#district').html(data.options);  // Update the districts dropdown
+                        } else {
+                            $('#district').html('<option value="">' + data.message + '</option>');  // Show message if no districts found
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error loading districts: ' + error);  // Show error if the request fails
+                    }
+                });
+            } else {
+                $('#district').html('<option value="">Select District</option>');  // Reset the districts dropdown
+            }
+        });
+    });
+</script>
+

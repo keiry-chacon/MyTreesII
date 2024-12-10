@@ -9,6 +9,8 @@ use App\Models\DistrictModel;
 use App\Models\TreeUpdateModel;
 use App\Models\CartModel;
 use App\Models\TreeModel;
+use App\Models\SpeciesModel;
+
 
 
 use CodeIgniter\Router\Router;
@@ -22,7 +24,9 @@ class User extends BaseController
     private $districtModel;
     private $treeupdateModel;
     private $treeModel;
-    private $cartModel; // Agregar CartModel
+    private $cartModel; 
+    private $speciesModel;
+
 
     public function __construct()
     {
@@ -37,8 +41,15 @@ class User extends BaseController
         $this->treeupdateModel  = model(TreeUpdateModel::class);
         $this->treeModel        = model(TreeModel::class);
         $this->cartModel        = model(CartModel::class); // Inicializar CartModel
+        $this->speciesModel     = model(SpeciesModel::class);
 
     }
+
+
+
+    // ==============================================================================================
+    // Principal Functions
+    
     /**
      * Displays the Friend page
     */
@@ -47,6 +58,7 @@ class User extends BaseController
     // Return the 'header' view followed by the 'login' view
     return view('shared/header') . view('user/login');
     }
+
 
     /**
      * Handle the user login process
@@ -95,6 +107,9 @@ class User extends BaseController
     }
     }
 
+
+
+
     /**
      * Handle the user LogOut process
     */
@@ -106,6 +121,9 @@ class User extends BaseController
     // Redirect the user to the login page after logging out
     return redirect()->to('/login');
     }
+
+
+
 
     /**
      * Displays the SignUp page
@@ -126,72 +144,6 @@ class User extends BaseController
     return view('shared/header', $data) . view('user/signup', $data);
     }
 
-    /**
-     * Fetches provinces based on the selected country
-     */
-    public function getProvinces()
-    {
-    // Get the selected country ID from the POST request
-    $countryId = $this->request->getPost('country_id');
-
-    // If no country is selected, return an error message
-    if (empty($countryId)) {
-        return $this->response->setJSON(['message' => 'Please select a country first']);
-    }
-
-    // Create a new instance of the ProvinceModel
-    $provinceModel = new ProvinceModel();
-
-    try {
-        // Use a custom method to fetch provinces by the selected country
-        $provinces = $provinceModel->getProvincesByCountry($countryId);
-
-        // If no provinces are found, return a message indicating this
-        if (empty($provinces)) {
-        return $this->response->setJSON(['message' => 'No provinces available']);
-        }
-
-        // Prepare HTML options for the provinces to be displayed in the dropdown
-        $options = '<option value="">Select Province</option>';
-        foreach ($provinces as $province) {
-        $options .= '<option value="' . $province['Id_Province'] . '">' . $province['Province_Name'] . '</option>';
-        }
-
-        // Return the generated options as a JSON response
-        return $this->response->setJSON(['options' => $options]);
-
-    } catch (\Exception $e) {
-        // If an error occurs while fetching provinces, return an error message
-        return $this->response->setJSON(['message' => 'Error fetching provinces: ' . $e->getMessage()]);
-    }
-    }
-    /**
-     * Get the districts based on the province ID
-     */
-    public function getDistricts()
-    {
-        $provinceId = $this->request->getPost('province_id');  // Get the province ID from the post request
-        
-        // Create an instance of the DistrictModel to interact with the database
-        $districtModel = new DistrictModel();
-        
-        // Fetch districts that match the provided province ID
-        $districts = $districtModel->where('Province_Id', $provinceId)->findAll();
-        
-        // If districts are found, prepare the options for the dropdown
-        if ($districts) {
-            $options = '';  // Initialize an empty string for the options
-            foreach ($districts as $district) {
-                // Append each district to the options list
-                $options .= "<option value='{$district['Id_District']}'>{$district['District_Name']}</option>";
-            }
-            // Return the options as a JSON response
-            return $this->response->setJSON(['options' => $options]);
-        } else {
-            // If no districts are found, return an error message
-            return $this->response->setJSON(['message' => 'No districts found']);
-        }
-    }
 
     /**
      * Add a new user to the database
@@ -246,11 +198,252 @@ class User extends BaseController
         return redirect()->to('/login')->with('success', 'Your account was successfully created!');
     }
 
+
+
+
+    /**
+     * Fetches provinces based on the selected country
+     */
+    public function getProvinces()
+    {
+    // Get the selected country ID from the POST request
+    $countryId = $this->request->getPost('country_id');
+
+    // If no country is selected, return an error message
+    if (empty($countryId)) {
+        return $this->response->setJSON(['message' => 'Please select a country first']);
+    }
+
+    // Create a new instance of the ProvinceModel
+    $provinceModel = new ProvinceModel();
+
+    try {
+        // Use a custom method to fetch provinces by the selected country
+        $provinces = $provinceModel->getProvincesByCountry($countryId);
+
+        // If no provinces are found, return a message indicating this
+        if (empty($provinces)) {
+        return $this->response->setJSON(['message' => 'No provinces available']);
+        }
+
+        // Prepare HTML options for the provinces to be displayed in the dropdown
+        $options = '<option value="">Select Province</option>';
+        foreach ($provinces as $province) {
+        $options .= '<option value="' . $province['Id_Province'] . '">' . $province['Province_Name'] . '</option>';
+        }
+
+        // Return the generated options as a JSON response
+        return $this->response->setJSON(['options' => $options]);
+
+    } catch (\Exception $e) {
+        // If an error occurs while fetching provinces, return an error message
+        return $this->response->setJSON(['message' => 'Error fetching provinces: ' . $e->getMessage()]);
+    }
+    }
+
+
+
+
+    /**
+     * Get the districts based on the province ID
+     */
+    public function getDistricts()
+    {
+        $provinceId = $this->request->getPost('province_id');  // Get the province ID from the post request
+        
+        // Create an instance of the DistrictModel to interact with the database
+        $districtModel = new DistrictModel();
+        
+        // Fetch districts that match the provided province ID
+        $districts = $districtModel->where('Province_Id', $provinceId)->findAll();
+        
+        // If districts are found, prepare the options for the dropdown
+        if ($districts) {
+            $options = '';  // Initialize an empty string for the options
+            foreach ($districts as $district) {
+                // Append each district to the options list
+                $options .= "<option value='{$district['Id_District']}'>{$district['District_Name']}</option>";
+            }
+            // Return the options as a JSON response
+            return $this->response->setJSON(['options' => $options]);
+        } else {
+            // If no districts are found, return an error message
+            return $this->response->setJSON(['message' => 'No districts found']);
+        }
+    }
+
+
+
+
+
+    // ==============================================================================================
+    // Administrator Functions
+
+    /**
+     * Displays the Admin page
+     */    
+    public function indexHome()
+    {
+        $username = session()->get('username');
+        $user     = $this->userModel->where('Username', $username)->first();
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+        // Get the number of available trees
+        $treeModel = new TreeModel();
+        $availableTreesCount = $treeModel->where('StatusT', 1)->countAllResults(); // Available trees
+        $soldTreesCount = $treeModel->where('StatusT', 0)->countAllResults(); // Sold trees
+
+        $userModel = new UserModel();
+        $genders = $userModel->getFriends(); // Gender data
+
+        return view('shared/header', [
+            'uploads_profile' => base_url('uploads_profile/')
+        ]) . 
+        view('shared/navegation_admin', [
+            'profilePic'      => $profilePic,
+            'uploads_profile' => base_url('uploads_profile/')
+        ]) . 
+        view('admin/adminHome', [
+            'availableTreesCount' => $availableTreesCount,
+            'soldTreesCount' => $soldTreesCount,
+            'genders' => $genders, // Gender data
+        ]);
+    }
+
+
+
+
+
+    /**
+     * Displays the interface of the add User section
+    */
+    public function indexAddUser()
+    {
+        $username = session()->get('username');
+
+        $country    = $this->countryModel->findAll();
+        $province   = $this->provinceModel->findAll();
+        $district   = $this->districtModel->findAll();
+        $user       = $this->userModel->where('Username', $username)->first();
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+        
+        $data['country']    = $country;
+        $data['province']   = $province;        
+        $data['district']   = $district;
+        $data['profilePic']   = $profilePic;
+        $data['uploads_profile']   = base_url('uploads_profile/');
+        return view('shared/header', $data) . view('shared/navegation_admin', $data). view('admin/addUser', $data);    
+    }
+
+
+    /**
+     * Add a new user to the database
+    */
+    public function adduser()
+    {
+        // Data received from the form
+        $data = [
+            'First_Name'  => $this->request->getPost('first_name'),
+            'Last_Name1'  => $this->request->getPost('last_name1'),
+            'Last_Name2'  => $this->request->getPost('last_name2'),
+            'Username'    => $this->request->getPost('username'),
+            'Password'    => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
+            'Email'       => $this->request->getPost('email'),
+            'Phone'       => $this->request->getPost('phone'),
+            'Gender'      => $this->request->getPost('gender'),
+            'District_Id' => $this->request->getPost('district'),
+            'Role_Id'     => $this->request->getPost('role'),
+        ];
+    
+        // Handling the profile picture
+        $file = $this->request->getFile('profilePic'); // Get the file
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            // Generate a unique name to avoid collisions
+            $newName = $file->getRandomName();
+    
+            // Move the file to the uploads folder
+            $file->move(FCPATH . '/uploads_profile', $newName);  // FCPATH is the root folder of the project
+    
+            // Save the file name in the record
+            $data['Profile_Pic'] = $newName;
+        } else {
+            // If no file is uploaded, use the default image
+            $data['Profile_Pic'] = 'default_profile.png';
+        }
+    
+        $userModel = new UserModel();
+    
+        // Validation and saving
+        if (!$userModel->save($data)) {
+            // Get validation errors from the model
+            $errors = $userModel->errors();
+    
+            // Redirect back to the form with errors
+            return redirect()->back()->withInput()->with('error', $errors);
+        }
+    
+        // If everything is correct, redirect to the login page with a success message
+        return redirect()->to('/admin/dashboard')->with('success', 'The account was successfully created!');
+    }
+
+
+
+
+    /**
+     * Displays the list of friend trees
+    */
+    public function indexFriendTrees()
+    {
+        $idUser = $this->request->getGet('id_user');
+
+        $username   = session()->get('username');
+        $user       = $this->userModel->where('Username', $username)->first();
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+        $trees = $this->treeModel->getFriendsTrees($idUser);
+
+        $data['trees']              = $trees;
+        $data['uploads_folder']     = base_url('uploads_tree/');
+        $data['profilePic']         = $profilePic;
+        $data['uploads_profile']    = base_url('uploads_profile/');
+        return view('shared/header', $data) . view('shared/navegation_admin', $data) . view('admin/friendtrees', $data);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Displays the RegisterUpdate page
      */
     public function indexRegisterUpdate()
     {
+        $username = session()->get('username');
+        $user     = $this->userModel->where('Username', $username)->first();
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
         // Get the tree ID from the URL (GET parameter)
         $idTree = $this->request->getGet('id_tree');
 
@@ -269,18 +462,23 @@ class User extends BaseController
         // Check if the tree exists
         if (!$tree) {
             // If the tree does not exist, redirect with an error message
-            return redirect()->to('/managetrees')->with('error', 'Tree not found');
+            return redirect()->to('/admin/managetrees')->with('error', 'Tree not found');
         }
 
         // Prepare the data to be passed to the view
         $data = [
             'tree' => $tree,
+            'profilePic' => $profilePic,
+            'uploads_profile' => base_url('uploads_profile/'),
             'error_msg' => session()->get('error')
         ];
 
         // Return the full view with header and the update tree form
-        return view('shared/header', $data) . view('operator/registerUpdate', $data);
+        return view('shared/header', $data) . view('shared/navegation_admin', $data) . view('operator/registerUpdate', $data);
     }
+
+
+
 
     /**
      * Update a tree with a register (This function is called in Admin with UpdateTree)
@@ -320,7 +518,7 @@ class User extends BaseController
         $tree = $treeModel->find($idTree);
         if (!$tree) {
             // If the tree is not found, redirect with an error
-            return redirect()->to('/managefriends')->with('error', 'Tree not found');
+            return redirect()->to('/admin/managefriends')->with('error', 'Tree not found');
         }
 
         // Update the tree in the database
@@ -339,8 +537,12 @@ class User extends BaseController
         }
 
         // If everything is successful, redirect with a success message
-        return redirect()->to('/managefriends')->with('success', 'Tree updated and registered successfully');
+        return redirect()->to('/admin/managefriends')->with('success', 'Tree updated and registered successfully');
     }
+
+
+
+
     /**
      * Register a tree with a register
      */
@@ -368,6 +570,9 @@ class User extends BaseController
 
         return true;
     }
+
+
+
 
     /**
      * Displays the Operator page
@@ -423,6 +628,9 @@ class User extends BaseController
             . view('shared/tree_history', $data);
     }
 
+
+
+
     /**
      * Displays the Operator home page
      */
@@ -453,6 +661,9 @@ class User extends BaseController
             'genders' => $genders, // Gender data
         ]);
     }
+
+
+
 
     /**
      * Displays the profile page
@@ -506,6 +717,10 @@ class User extends BaseController
             'profileImage' => $profileImage, // Correct variable name
         ]);
     }
+
+
+
+
     /**
      * Updates the user's profile
      */
@@ -516,7 +731,7 @@ class User extends BaseController
             return redirect()->route('login')->with('error', 'You must log in.');
         }
 
-        $uploads_folder = WRITEPATH . 'uploads_user/';  // Folder path where profile images are uploaded
+        $uploads_folder = FCPATH . 'uploads_profile/';  // Folder path where profile images are uploaded
 
         // Check if the form was submitted via POST
         if ($this->request->getMethod() === 'post') {
@@ -565,6 +780,9 @@ class User extends BaseController
         }
     }
 
+
+
+
     /**
      * Displays the friend page
      */    
@@ -603,6 +821,10 @@ class User extends BaseController
             'uploads_folder'    => base_url('uploads_tree/')
         ]);
     }
+
+
+
+
     public function redirectToDashboard()
     {
         // Asume que tienes una sesión activa y puedes obtener el rol del usuario
@@ -621,52 +843,56 @@ class User extends BaseController
                 return redirect()->to('/unauthorized'); // Redirige a una página de acceso no autorizado
         }
     }
+
+
+
+
     public function indexManageFriends()
-{
-    // Obtener la lista de usuarios disponibles
-    $users = $this->userModel->getAvailableUsers();
-    $userData = $this->userModel->where('Username', $_SESSION['username'])->first();
-    if (!$userData) {
-        throw new \CodeIgniter\Exceptions\PageNotFoundException('User not found.');
-    }
-    // Check if the profile has a picture, if not assign a default one
-    $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
-    $cartCount = $this->cartModel->where('User_Id', $userData['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
-
-    // Query to get the active cart items
-    $carts = $this->cartModel->getCartDetails($userData['Id_User']);
-    // Determine the navigation view based on the role
-    $navigationView = 'shared/navegation_friend';  // Default value
-    if (isset($userData['Role_Id'])) {
-        switch ($userData['Role_Id']) {
-            case '1':
-                $navigationView = 'shared/navegation_admin';  // If role is 'admin', use 'navegation_admin'
-                break;
-            case '3':
-                $navigationView = 'shared/navegation_operator';  // If role is 'operator', use 'navegation_operator'
-                break;
-            case '2':
-            default:
-                $navigationView = 'shared/navegation_friend';  // If role is 'friend' or any other value, use 'navegation_friend'
-                break;
+    {
+        // Obtener la lista de usuarios disponibles
+        $users = $this->userModel->getAvailableUsers();
+        $userData = $this->userModel->where('Username', $_SESSION['username'])->first();
+        if (!$userData) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('User not found.');
         }
+        // Check if the profile has a picture, if not assign a default one
+        $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
+        $cartCount = $this->cartModel->where('User_Id', $userData['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
+
+        // Query to get the active cart items
+        $carts = $this->cartModel->getCartDetails($userData['Id_User']);
+        // Determine the navigation view based on the role
+        $navigationView = 'shared/navegation_friend';  // Default value
+        if (isset($userData['Role_Id'])) {
+            switch ($userData['Role_Id']) {
+                case '1':
+                    $navigationView = 'shared/navegation_admin';  // If role is 'admin', use 'navegation_admin'
+                    break;
+                case '3':
+                    $navigationView = 'shared/navegation_operator';  // If role is 'operator', use 'navegation_operator'
+                    break;
+                case '2':
+                default:
+                    $navigationView = 'shared/navegation_friend';  // If role is 'friend' or any other value, use 'navegation_friend'
+                    break;
+            }
+        }
+
+        // Preparar los datos para pasar a las vistas
+        $data['users'] = $users;
+        $data['uploads_folder'] = base_url('uploads_profile/'); // Correcta llamada a base_url()
+
+        // Renderizar ambas vistas correctamente
+        return view('shared/header', $data) . 
+            view($navigationView, [
+                    'profilePic' => $profileImage,
+                    'uploads_profile' => base_url('uploads_profile/'),
+                    'cartCount' => $cartCount,
+                    'carts' => $carts,
+                    'uploads_folder' => base_url('uploads_tree/')
+                ]) . 
+            view('admin/manageFriends', $data);
     }
-
-    // Preparar los datos para pasar a las vistas
-    $data['users'] = $users;
-    $data['uploads_folder'] = base_url('uploads_profile/'); // Correcta llamada a base_url()
-
-    // Renderizar ambas vistas correctamente
-    return view('shared/header', $data) . 
-           view($navigationView, [
-                'profilePic' => $profileImage,
-                'uploads_profile' => base_url('uploads_profile/'),
-                'cartCount' => $cartCount,
-                'carts' => $carts,
-                'uploads_folder' => base_url('uploads_tree/')
-            ]) . 
-           view('admin/manageFriends', $data);
-}
 
 
 }

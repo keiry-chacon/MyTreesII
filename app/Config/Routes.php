@@ -12,12 +12,18 @@ use CodeIgniter\Router\RouteCollection;
 // Home and General Routes
 $routes->get('/', 'Home::index'); // Home page
 
+
+
 // Login Routes
 $routes->get('/login', 'User::indexLogin'); // Login page
 $routes->post('/user/login', 'User::login'); // Process login
 
+
+
 // Logout Route
 $routes->post('/user/logout', 'User::logout'); // Logout
+
+
 
 // SignUp Routes
 $routes->get('/signup', 'User::indexSignUp'); // Sign-up page
@@ -25,39 +31,48 @@ $routes->post('/user/signup', 'User::signup'); // Process sign-up
 $routes->post('user/getProvinces', 'User::getProvinces'); // Get provinces
 $routes->post('user/getDistricts', 'User::getDistricts'); // Get districts
 
+
+
 // Unauthorized page
 $routes->get('/unauthorized', 'Error::unauthorized');
 $routes->post('/redirectDashboard', 'User::redirectToDashboard');
+
+
 
 // Profile Routes
 $routes->get('/profile', 'User::profile'); // View user profile
 $routes->post('update', 'User::updateProfile', ['as' => 'user.updateProfile']); // Update user profile
 
+
+
 // ================================================================
 // Admin Routes (For Admin Users)
 $routes->group('admin', ['filter' => 'auth:1'], function ($routes) {
-    $routes->get('dashboard', 'Admin::indexHome'); // Admin dashboard
-    $routes->get('/managespecies', 'Admin::indexManageSpecies');
-    $routes->get('/addspecies', 'Admin::indexAddSpecies');
-    $routes->post('/admin/addspecies', 'Admin::addSpecies');
-    $routes->get('/updatespecies', 'Admin::indexUpdateSpecies');
-    $routes->post('/admin/updatespecies', 'Admin::updateSpecies');
-    $routes->post('/admin/deletespecies', 'Admin::deleteSpecies');
+    $routes->get('dashboard',           'User::indexHome'); // Admin dashboard
 
-    $routes->get('/managetrees', 'Admin::indexManageTrees');
-    $routes->get('/addtree', 'Admin::indexAddTree');
-    $routes->post('/admin/addtree', 'Admin::addTree');
-    $routes->get('/updatetree', 'Admin::indexUpdateTree');
-    $routes->post('/admin/updatetree', 'Admin::updateTree');
-    $routes->post('/admin/deletetree', 'Admin::deleteTree');
+    $routes->get('showadduser',         'User::indexAddUser');
+    $routes->post('adduser',            'User::addUser');
 
-    $routes->post('/admin/friendtrees', 'Admin::friendtrees');
-    $routes->get('/updatefriendtree', 'Admin::indexUpdateFriendTree');
-    $routes->post('/admin/updatefriendtree', 'Admin::updateFriendTree');
+    $routes->get('managespecies',       'User::indexManageSpecies');
+    $routes->get('showaddspecies',      'User::indexAddSpecies');
+    $routes->post('addspecies',         'User::addSpecies');
+    $routes->get('showupdatespecies',   'User::indexUpdateSpecies');
+    $routes->post('updatespecies',      'User::updateSpecies');
+    $routes->post('deletespecies',      'User::deleteSpecies');
 
-    $routes->get('adduser', 'Admin::indexAddUser');
-    $routes->post('/admin/adduser', 'Admin::addUser');
+    $routes->get('managetrees',         'Tree::indexManageTrees');
+    $routes->get('showaddtree',         'Tree::indexAddTree');
+    $routes->post('addtree',            'Tree::addTree');
+    $routes->get('showupdatetree',      'Tree::indexUpdateTree');
+    $routes->post('updatetree',         'Tree::updateTree');
+    $routes->post('deletetree',         'Tree::deleteTree');
+
+    $routes->post('friendtrees', 'Admin::friendtrees');
+    $routes->get('showupdatefriendtree', 'Admin::indexUpdateFriendTree');
+    $routes->post('updatefriendtree', 'Admin::updateFriendTree');
 });
+
+
 
 // ================================================================
 // Friend Routes (For Friend Users)
@@ -76,6 +91,8 @@ $routes->group('friend', ['filter' => 'auth:2'], function ($routes) {
     $routes->post('cart/buyAll', 'Purchase::buyAllItems'); // Buy all items in cart
 });
 
+
+
 // ================================================================
 // Operator Routes (For Operator Users)
 $routes->group('operator', ['filter' => 'auth:3'], function ($routes) {
@@ -85,18 +102,20 @@ $routes->group('operator', ['filter' => 'auth:3'], function ($routes) {
 
 });
 
+
+
 // ================================================================
 // Admin and Operator Shared Routes
 $routes->group('', ['filter' => 'auth:1,3'], function ($routes) {
-    $routes->get('/registerupdate', 'User::indexRegisterUpdate'); // Register update page
+    $routes->get('showregisterupdate', 'User::indexRegisterUpdate'); // Register update page
     $routes->post('/operator/registerupdate', 'User::registerUpdate'); // Process register update
-    $routes->get('/managefriends', 'User::indexManageFriends');
-    $routes->get('/friendtrees', 'Admin::indexFriendTrees');
+    $routes->get('managefriends', 'User::indexManageFriends');
+    $routes->get('showfriendtrees', 'Admin::indexFriendTrees');
 
 });
 
 $routes->group('', ['filter' => 'auth:1,2,3'], function ($routes) {
-    $routes->get('/treehistory', 'User::indexTreeHistory'); // View tree history
+    $routes->get('showtreehistory', 'User::indexTreeHistory'); // View tree history
     $routes->post('/operator/treehistory', 'User::treeHistory'); // Process tree history, no se que hace esto
 
 });

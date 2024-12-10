@@ -39,10 +39,8 @@
             </button>
         </form>
 
-
-
         <!-- Back to Manage Species -->
-        <a href="/managespecies" 
+        <a href="managespecies" 
             class="block text-center mt-4 text-sm text-blue-500 hover:text-blue-700">
             Manage Species
         </a>

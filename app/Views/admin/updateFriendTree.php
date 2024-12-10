@@ -15,7 +15,7 @@
         <?php endif; ?>
 
         <!-- Form -->
-        <form method="POST" action="/admin/updatetree" enctype="multipart/form-data" class="space-y-4">
+        <form method="POST" action="/admin/updatefriendtree" enctype="multipart/form-data" class="space-y-4">
             <?= csrf_field() ?>
             <input type="hidden" name="id_tree" value="<?= htmlspecialchars($tree['Id_Tree']) ?>">
 
@@ -71,7 +71,7 @@
         </form>
 
         <!-- Back to Manage Trees -->
-        <a href="/managetrees" 
+        <a href="managetrees" 
             class="block text-center mt-4 text-sm text-blue-500 hover:text-blue-700">
             Manage Trees
         </a>

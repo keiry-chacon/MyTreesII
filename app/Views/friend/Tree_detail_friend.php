@@ -89,7 +89,7 @@
 <script>
  
     function goToDashboard() {
-        window.location.href = "/friend/mytrees"; // Reemplaza con la URL de tu dashboard
+        window.location.href = "/friend/mytrees";
     }
     function showPurchaseForm(treeId) {
         document.getElementById('tree_id').value = treeId;

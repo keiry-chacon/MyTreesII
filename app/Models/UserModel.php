@@ -83,6 +83,8 @@ class UserModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+
+    
     /**
      * Method to authenticate a user with a username and password.
      *
@@ -107,6 +109,8 @@ class UserModel extends Model
         return null;
     }
 
+
+
     /**
      * Method to get all users with the role of "friends".
      *
@@ -117,6 +121,9 @@ class UserModel extends Model
         return $this->where('Role_Id', 2)
                     ->findAll();
     }
+
+
+
 
     /**
      * Method to get the count of users by gender for active friends.
