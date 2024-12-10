@@ -1,10 +1,10 @@
-<body class="bg-gray-100 font-sans">
+<body class="bg-white-300 font-sans">
     <div class="min-h-screen flex items-center justify-center">
         <!-- Card Container -->
-        <div class="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
+        <div class="bg-white w-full max-w-7xl p-16 rounded-lg shadow-lg flex flex-col justify-between min-h-screen"> <!-- Fondo blanco ocupando toda la pantalla -->
             <!-- Header -->
-            <div class="text-center mb-6">
-                <h1 class="text-2xl font-bold text-gray-800">Add a new Tree</h1>
+            <div class="mb-6 ml-60">
+                <h1 class="text-4xl font-bold text-gray-800">Add a new Tree</h1>
                 <p class="text-gray-600 text-sm">Insert the data </p>
             </div>
 
@@ -24,10 +24,10 @@
                 <?= csrf_field() ?>
 
                 <!-- Specie dropdown select -->
-                <div>
-                    <label for="specie_id" class="block text-sm font-medium text-gray-700">Species</label>
+                <div class="ml-60">
+                    <label for="specie_id" class="block text-lg font-medium text-gray-700">Species</label>
                     <select id="specie_id" 
-                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
+                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg h-12 py-3" 
                             name="specie_id" 
                             required>
                         <?php foreach ($species as $specie): ?>
@@ -41,24 +41,24 @@
                 </div>
 
                 <!-- Location -->
-                <div>
-                    <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
-                    <input id="location" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" type="text" name="location" value="<?= old('location') ?>" required>
+                <div class="ml-60">
+                    <label for="location" class="block text-lg font-medium text-gray-700">Location</label>
+                    <input id="location" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg h-12 py-3" type="text" name="location" value="<?= old('location') ?>" required>
                     <div class="text-red-500 text-sm"><?= session('error')['location'] ?? '' ?></div>
                 </div>
 
                 <!-- Size -->
-                <div>
-                    <label for="size" class="block text-sm font-medium text-gray-700">Size</label>
-                    <input id="size" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" type="number" name="size" value="<?= old('size') ?>" required>
+                <div class="ml-60">
+                    <label for="size" class="block text-lg font-medium text-gray-700">Size</label>
+                    <input id="size" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg h-12 py-3" type="number" name="size" value="<?= old('size') ?>" required>
                     <div class="text-red-500 text-sm"><?= session('error')['size'] ?? '' ?></div>
                 </div>
 
                 <!-- Status -->
-                <div>
-                    <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                <div class="ml-60">
+                    <label for="status" class="block text-lg font-medium text-gray-700">Status</label>
                     <select id="status" 
-                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
+                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg h-12 py-3" 
                             name="status" 
                             required>
                         <option value="1" <?= old('status') == "1" ? 'selected' : '' ?>>Available</option>
@@ -68,9 +68,9 @@
                 </div>
 
                 <!-- Price -->
-                <div>
-                    <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                    <input id="price" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" type="number" name="price" value="<?= old('price') ?>" step="0.01" min="0" max="99999999.99" required>
+                <div class="ml-60">
+                    <label for="price" class="block text-lg font-medium text-gray-700">Price</label>
+                    <input id="price" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg h-12 py-3" type="number" name="price" value="<?= old('price') ?>" step="0.01" min="0" max="99999999.99" required>
                     <div class="text-red-500 text-sm"><?= session('error')['price'] ?? '' ?></div>
                 </div>
 
@@ -86,7 +86,7 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                <button type="submit" class="w-40 bg-blue-500 ml-60 text-white py-1 px-4 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
                     Add Tree
                 </button>
             </form>

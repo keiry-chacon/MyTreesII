@@ -1,12 +1,12 @@
 <!-- Main container for the species list page -->
-<div class="container mx-auto mt-10 text-center px-4">
+<div class="container mr-0 mt-10 px-4">
     <!-- Header section for the page -->
-    <div class="bg-white shadow-lg rounded-lg p-4 max-w-4xl mx-auto">
+    <div class="bg-white shadow-lg rounded-lg p-4 max-w-4xl ml-80">
         <div class="text-center">
             <!-- Page title -->
-            <h1 class="text-6xl font-bold">Manage Species</h1>
+            <h1 class="text-6xl font-bold text-center">Manage Species</h1>
             <!-- Description of the page -->
-            <p class="text-gray-600 mt-2">Here is a list of all registered species.</p>
+            <p class="text-gray-600 mt-2 text-center">Here is a list of all registered species.</p>
 
             <!-- Button linking to the species registration page -->
             <div class="flex justify-center space-x-4 mt-4">
@@ -28,14 +28,14 @@
     <?php endif; ?>
 
     <!-- Table section to display the list of species -->
-    <div class="mt-6 max-w-4xl mx-auto overflow-hidden">
+    <div class="mt-5 max-w-4xl ml-80 overflow-hidden">
         <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden w-full">
             <!-- Table header -->
             <thead>
-                <tr class="bg-blue-200 text-gray-700">
+                <tr class="bg-blue-200 text-gray-700 text-center">
                     <th class="px-6 py-3 text-center">ID Specie</th>
-                    <th class="px-6 py-3">Commercial Name</th>
-                    <th class="px-6 py-3">Scientific Name</th>
+                    <th class="px-6 py-3 text-center">Commercial Name</th>
+                    <th class="px-6 py-3 text-center">Scientific Name</th>
                     <th class="px-6 py-3 text-center">Edit</th>
                     <th class="px-6 py-3 text-center">Delete</th>
                 </tr>
@@ -45,7 +45,7 @@
                 <?php if (!empty($species)) : ?>
                     <!-- Loop through each species and display its details -->
                     <?php foreach ($species as $specie) : ?>
-                        <tr class="border-b">
+                        <tr class="border-b"
                             <!-- Display the specie ID -->
                             <td class="text-center px-6 py-4"><?= htmlspecialchars($specie['Id_Specie']) ?></td>
                             <!-- Display the commercial name of the specie -->

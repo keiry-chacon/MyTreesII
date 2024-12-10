@@ -627,10 +627,10 @@ class User extends BaseController
 
         // Get the tree ID from the GET request
         $idTree = $this->request->getGet('id_tree'); 
-        $user       = $this->userModel->where('Username', session()->get('username'))->first(); 
+        $user = $this->userModel->where('Username', session()->get('username'))->first(); 
         $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg'; // Profile picture or default
         $userId = $user['Id_User']; 
-        $role =   $user['Role_Id']; 
+        $role = $user['Role_Id']; 
         
         // Instantiate the model
         $treeupdateModel = new TreeUpdateModel();
@@ -639,6 +639,13 @@ class User extends BaseController
         $treeUpdates = $treeupdateModel->getTreeUpdatesWithSpecies($idTree);
         $cartCount = $this->cartModel->where('User_Id', $userId)->where('Status', 'active')->countAllResults();
         $carts = $this->cartModel->getCartDetails($userId);
+
+        // Process tree photo
+        $tree = $treeupdateModel->find($idTree); // Assuming this fetches tree details
+        $treePhoto = isset($tree['Photo_Path']) && file_exists(FCPATH . 'uploads_tree/' . $tree['Photo_Path'])
+            ? base_url('uploads_tree/' . $tree['Photo_Path'])
+            : base_url('img/default_tree.png');
+
         // Prepare data for the view
         $data = [
             'treeUpdates' => $treeUpdates,
@@ -647,6 +654,7 @@ class User extends BaseController
             'carts' => $carts,
             'profilePic' => $profilePic,
             'uploads_profile' => base_url('uploads_profile/'),
+            'treePhoto' => $treePhoto, // Pass processed tree photo
         ];
 
         // Prepare navigation data
@@ -670,6 +678,7 @@ class User extends BaseController
             . $navegationView
             . view('shared/tree_history', $data);
     }
+
 
 
 

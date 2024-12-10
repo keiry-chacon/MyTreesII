@@ -1,11 +1,11 @@
-<body class="bg-gray-300 font-sans">
+<body class="bg-white-300 font-sans">
     <div class="min-h-screen flex items-center justify-center">
         <!-- Card Container -->
-        <div class="bg-white w-full max-w-4xl p-16 rounded-lg shadow-lg"> <!-- Increased max-w-4xl and padding p-16 -->
+        <div class="bg-white w-full max-w-7xl p-16 rounded-lg shadow-lg flex flex-col justify-between min-h-screen"> <!-- Fondo blanco ocupando toda la pantalla -->
             <!-- Header -->
-            <div class="text-center mb-6">
-                <h1 class="text-4xl font-bold text-gray-800">Create a New User</h1> <!-- Increased heading size to 4xl -->
-                <p class="text-gray-600 text-sm">Join us to access all the features</p>
+            <div class="mb-6 ml-60">
+                <h1 class="text-4xl font-bold text-gray-800">Create a New User</h1>
+                <p class="text-gray-600 text-sm">Insert the person's information</p>
             </div>
 
             <!-- General Error Message -->
@@ -24,7 +24,7 @@
                 <?= csrf_field() ?>
 
                 <!-- Profile Picture -->
-                <div class="flex flex-col items-center space-y-4">
+                <div class="flex flex-col items-center space-y-4 -ml-80">
                     <div class="relative">
                         <img id="previewImage" src="img/default_profile.png" alt="Profile Picture" class="w-24 h-24 rounded-full shadow-md">
                         <label for="profilePic" class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full cursor-pointer hover:bg-blue-600">
@@ -35,42 +35,42 @@
                 </div>
 
                 <!-- First Name -->
-                <div>
+                <div class="ml-60">
                     <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
                     <input id="first_name" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" type="text" name="first_name" value="<?= old('first_name') ?>" required>
                     <div class="text-red-500 text-sm"><?= session('error')['first_name'] ?? '' ?></div>
                 </div>
 
                 <!-- Last Name 1 -->
-                <div>
+                <div class="ml-60"> 
                     <label for="last_name1" class="block text-sm font-medium text-gray-700">Last Name</label>
                     <input id="last_name1" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" type="text" name="last_name1" value="<?= old('last_name1') ?>" required>
                     <div class="text-red-500 text-sm"><?= session('error')['last_name1'] ?? '' ?></div>
                 </div>
 
                 <!-- Last Name 2 -->
-                <div>
+                <div class="ml-60"> 
                     <label for="last_name2" class="block text-sm font-medium text-gray-700">Last Name 2</label>
                     <input id="last_name2" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" type="text" name="last_name2" value="<?= old('last_name2') ?>" required>
                     <div class="text-red-500 text-sm"><?= session('error')['last_name2'] ?? '' ?></div>
                 </div>
 
                 <!-- Email -->
-                <div>
+                <div class="ml-60"> 
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                     <input id="email" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" type="email" name="email" value="<?= old('email') ?>" required>
                     <div class="text-red-500 text-sm"><?= session('error')['email'] ?? '' ?></div>
                 </div>
 
                 <!-- Phone -->
-                <div>
+                <div class="ml-60">
                     <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
                     <input id="phone" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" type="text" name="phone" value="<?= old('phone') ?>" required>
                     <div class="text-red-500 text-sm"><?= session('error')['phone'] ?? '' ?></div>
                 </div>
 
                 <!-- Gender -->
-                <div>
+                <div class="ml-60">
                     <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
                     <select id="gender" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" name="gender" required>
                         <option value=""    <?= old('gender') === '' ? 'selected' : '' ?>>Select Gender</option>
@@ -82,7 +82,7 @@
                 </div>
 
                 <!-- Country -->
-                <div>
+                <div class="ml-60"> 
                     <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
                     <select id="country" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" name="country" required>
                         <?php foreach ($country as $countries): ?>
@@ -93,7 +93,7 @@
                 </div>
 
                 <!-- Province -->
-                <div>
+                <div class="ml-60">
                     <label for="province" class="block text-sm font-medium text-gray-700">Province</label>
                     <select id="province" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" name="province" required>
                         <?php foreach ($province as $provinces): ?>
@@ -104,7 +104,7 @@
                 </div>
 
                 <!-- District -->
-                <div>
+                <div class="ml-60">
                     <label for="district" class="block text-sm font-medium text-gray-700">District</label>
                     <select id="district" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" name="district" required>
                         <?php foreach ($district as $districts): ?>
@@ -115,21 +115,21 @@
                 </div>
 
                 <!-- Username -->
-                <div>
+                <div class="ml-60">
                     <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                     <input id="username" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" type="text" name="username" value="<?= old('username') ?>" required>
                     <div class="text-red-500 text-sm"><?= session('error')['username'] ?? '' ?></div>
                 </div>
 
                 <!-- Password -->
-                <div>
+                <div class="ml-60">
                     <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <input id="password" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" type="password" name="password" required>
                     <div class="text-red-500 text-sm"><?= session('error')['password'] ?? '' ?></div>
                 </div>
 
                 <!-- Role -->
-                <div>
+                <div class="ml-60">
                     <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
                     <select id="role" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" name="role" required>
                         <option value=""    <?= old('role') === '' ? 'selected' : '' ?>>Select User Role</option>
@@ -140,7 +140,7 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                <button type="submit" class="w-40 bg-blue-500 ml-60 text-white py-1 px-4 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
                     Add
                 </button>
             </form>

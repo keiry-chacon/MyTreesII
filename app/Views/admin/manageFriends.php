@@ -6,12 +6,12 @@ $roleId = session()->get('role_id');
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.4.2/dist/cdn.min.js" defer></script>
 
 <!-- Main container for the species list page -->
-<div class="container mx-auto mt-10 text-center px-4">
+<div class="container mr-0 mt-10 px-4">
     <!-- Header section for the page -->
-    <div class="bg-white shadow-lg rounded-lg p-4 max-w-4xl mx-auto">
+    <div class="bg-white shadow-lg rounded-lg p-4 max-w-4xl ml-80">
         <div class="text-center">
             <!-- Page title with green color and centered text -->
-            <h1 class="text-6xl font-bold text-green-600 tracking-tight">Manage Trees</h1>
+            <h1 class="text-6xl font-bold text-600 tracking-tight">Manage Friend´s Trees</h1>
             <!-- Description of the page -->
             <p class="text-gray-600 mt-2">Here is a list of all registered trees.</p>
 
@@ -28,22 +28,22 @@ $roleId = session()->get('role_id');
 
     <!-- Display error message if there is one -->
     <?php if (isset($error_msg)) : ?>
-        <div class="bg-red-500 text-white text-center py-2 mt-4 rounded max-w-4xl mx-auto">
+        <div class="bg-red-500 text-white py-2 mt-4 rounded max-w-4xl ml-auto text-right">
             <?= htmlspecialchars($error_msg) ?>
         </div>
     <?php endif; ?>
 
     <!-- Table section to display the list of friends -->
-    <div class="mt-6 max-w-4xl mx-auto overflow-hidden">
+    <div class="mt-5 max-w-4xl ml-80 overflow-hidden">
         <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden w-full">
             <!-- Table header -->
             <thead>
-                <tr class="bg-blue-200 text-gray-700">
+                <tr class="bg-blue-200 text-gray-700 text-center">
                     <th scope="col" class="px-6 py-3 text-center">Profile Picture</th>
-                    <th scope="col" class="px-6 py-3">First Name</th>
-                    <th scope="col" class="px-6 py-3">Last Name</th>
-                    <th scope="col" class="px-6 py-3">Username</th>
-                    <th scope="col" class="px-6 py-3">Email</th>
+                    <th scope="col" class="px-6 py-3 text-center">First Name</th>
+                    <th scope="col" class="px-6 py-3 text-center">Last Name</th>
+                    <th scope="col" class="px-6 py-3 text-center">Username</th>
+                    <th scope="col" class="px-6 py-3 text-center">Email</th>
                     <th scope="col" class="px-6 py-3 text-center">View Trees</th>
                 </tr>
             </thead>
@@ -52,7 +52,7 @@ $roleId = session()->get('role_id');
                 <?php if (!empty($users)) : ?>
                     <!-- Loop through each user and display their data -->
                     <?php foreach ($users as $user) : ?>
-                        <tr class="border-b">
+                        <tr class="border-b text-center">
                             <!-- Display the user's profile picture if available -->
                             <td class="text-center px-6 py-4">
                                 <?php if (!empty($user['Profile_Pic'])) : ?>

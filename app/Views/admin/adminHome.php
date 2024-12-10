@@ -1,6 +1,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<main class="container mx-auto mt-10 p-4">
+<main class="ml-64 mt-16 p-4"> <!-- Push content to the right, starting after the navigation -->
     <!-- Welcome section of the admin dashboard -->
     <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
         <h1 class="text-4xl font-bold text-center mb-4">¡Welcome!</h1>

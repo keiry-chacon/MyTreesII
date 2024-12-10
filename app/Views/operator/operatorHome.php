@@ -10,7 +10,7 @@
     </div>
 
     <!-- Section with flexible layout (responsive) for graphs -->
-    <div class="flex gap-8">
+    <div class="flex flex-col lg:flex-row gap-8">
         
         <!-- Graph for displaying the distribution of friends by gender -->
         <div class="bg-white shadow-lg rounded-lg p-6 w-full lg:w-1/2">

@@ -1,7 +1,7 @@
 <!-- Main container for the species list page -->
-<div class="container mx-auto mt-10 text-center px-4">
+<div class="container mr-0 mt-10 px-4">
     <!-- Header section for the page -->
-    <div class="bg-white shadow-lg rounded-lg p-4 max-w-4xl mx-auto">
+    <div class="bg-white shadow-lg rounded-lg p-4 max-w-4xl ml-80">
         <div class="text-center">
             <!-- Page title -->
             <h1 class="text-6xl font-bold">Manage Trees</h1>
@@ -22,22 +22,22 @@
 
     <!-- Display error message if there is one -->
     <?php if (isset($error_msg)) : ?>
-        <div class="bg-red-500 text-white text-center py-2 mt-4 rounded max-w-4xl mx-auto">
+        <div class="bg-red-500 text-white py-2 mt-4 rounded max-w-4xl ml-auto text-right">
             <?= htmlspecialchars($error_msg) ?>
         </div>
     <?php endif; ?>
 
     <!-- Table section to display the list of trees -->
-    <div class="mt-6 max-w-4xl mx-auto overflow-hidden">
+    <div class="mt-5 max-w-4xl ml-80 overflow-hidden">
         <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden w-full">
             <!-- Table header -->
             <thead>
                 <tr class="bg-blue-200 text-gray-700">
                     <th class="px-6 py-3 text-center">Species</th>
-                    <th class="px-6 py-3">Location</th>
-                    <th class="px-6 py-3">Size</th>
-                    <th class="px-6 py-3">Status</th>
-                    <th class="px-6 py-3">Price</th>
+                    <th class="px-6 py-3 text-center">Location</th>
+                    <th class="px-6 py-3 text-center">Size</th>
+                    <th class="px-6 py-3 text-center">Status</th>
+                    <th class="px-6 py-3 text-center">Price</th>
                     <th class="px-6 py-3 text-center">Edit</th>
                     <th class="px-6 py-3 text-center">Delete</th>
                 </tr>
