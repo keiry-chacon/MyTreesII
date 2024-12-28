@@ -1,9 +1,11 @@
 <div class="content ml-64">
-    <div class="hero-section bg-cover bg-center text-white text-center py-24" style="background-image: url('../img/background_friend_trees.jpg');">
+    <div class="hero-section bg-cover bg-center text-white text-center py-24 relative overflow-hidden" style="background-image: url('../img/background_friend_trees.jpg');">
         <div class="hero-content">
-            <h1 class="text-4xl mb-2">Your Tree Collection</h1>
-            <p class="text-lg mb-4">Explore your purchased trees</p>
-            <a href="#available-trees" class="bg-green-200 text-green-800 py-2 px-4 rounded-lg transition duration-300 hover:bg-green-300">View Your Trees</a>
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg tracking-wide">Your Tree Collection</h1>
+            <p class="text-lg md:text-xl mb-6 drop-shadow-md">Explore your purchased trees</p>
+            <a href="#available-trees" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 animate-bounce-once">
+                View Your Trees
+            </a>
         </div>
     </div>
 

@@ -6,7 +6,11 @@
                 <div class="text-center font-semibold text-gray-700"><?php echo htmlspecialchars($_SESSION['username']); ?></div>
             </a>
             <div id="profile-submenu" class="hidden flex-col p-4 space-y-2"> 
-               
+               <!-- Profile button -->
+               <a href="/showupdateuser" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2 w-full">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Profile</span>
+                </a>
                 <form action="/user/logout" method="post">
                     <button type="submit" class="text-gray-800 hover:text-white hover:bg-green-500 px-4 py-2 rounded flex items-center space-x-2 w-full">
                         <i class="fas fa-sign-out-alt"></i>

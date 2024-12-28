@@ -53,8 +53,6 @@ $routes->group('admin', ['filter' => 'auth:1'], function ($routes) {
     $routes->get('manageusers',         'User::indexManageUsers');
     $routes->get('showadduser',         'User::indexAddUser');
     $routes->post('adduser',            'User::addUser');
-    $routes->get('showupdateuser',      'User::indexUpdateUser');
-    $routes->post('updateuser',         'User::updateUser');
     $routes->post('deleteuser',         'User::deleteUser');
 
     $routes->get('managespecies',       'Species::indexManageSpecies');
@@ -120,7 +118,8 @@ $routes->group('', ['filter' => 'auth:1,3'], function ($routes) {
 $routes->group('', ['filter' => 'auth:1,2,3'], function ($routes) {
     $routes->get('showtreehistory', 'User::indexTreeHistory'); // View tree history
     $routes->post('/operator/treehistory', 'User::treeHistory'); // Process tree history, no se que hace esto
-
+    $routes->get('showupdateuser',      'User::indexUpdateUser');
+    $routes->post('updateuser',         'User::updateUser');
 });
 
 

@@ -106,10 +106,10 @@
     $('#treePic').on('change', function(event) {
         var reader = new FileReader();
         reader.onload = function(e) {
-            $('#previewImage').attr('src', e.target.result);  // Establecer la imagen en el contenedor de vista previa
+            $('#previewImage').attr('src', e.target.result); 
         };
         if (this.files && this.files[0]) {
-            reader.readAsDataURL(this.files[0]);  // Leer la imagen seleccionada
+            reader.readAsDataURL(this.files[0]);  
         }
     });
 

@@ -320,8 +320,7 @@ class User extends BaseController
     {
         $username = session()->get('username');
 
-        // Obtener la lista de usuarios disponibles
-        $users = $this->userModel->getAvailableUsers();
+        $users = $this->userModel->getAllUsers();
 
         $user       = $this->userModel->where('Username', $username)->first();
         $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
@@ -414,41 +413,72 @@ class User extends BaseController
      * Displays the interface of the update user section
      */
     public function indexUpdateUser()
-    {
-        $username = session()->get('username');
-        $user     = $this->userModel->where('Username', $username)->first();
-        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+{
+    $username = session()->get('username');
+    $userModel = new UserModel();
 
-        // Get the tree ID from the URL (GET parameter)
-        $idUser = $this->request->getGet('id_user');
-        
-        // Validate that the ID is valid
-        if (!$idUser || !is_numeric($idUser)) {
-            return redirect()->to('/manageusers')->with('error', 'Invalid User ID');
-        }
-
-        // Create the user model
-        $userModel = new UserModel();
-
-        // Search for the user by ID
-        $user = $userModel->find($idUser);
-
-        // Check if the tree exists
-        if (!$user) {
-            return redirect()->to('/admin/manageusers')->with('error', 'User not found');
-        }
-
-        // Prepare the data to be passed to the view
-        $data = [
-            'user' => $user,
-            'profilePic' => $profilePic,
-            'uploads_profile' => base_url('uploads_profile/'),
-            'error_msg' => session()->get('error')  // Get any error message, if exists
-        ];
-
-        // Return the full view with header and the update tree form
-        return view('shared/header', $data) . view('shared/navegation_admin', $data) . view('admin/updateUser', $data);
+    // Obtener el usuario por el nombre de usuario
+    $user = $userModel->where('Username', $username)->first();
+    if (!$user) {
+        return redirect()->to('/login')->with('error', 'User not found.');
     }
+
+    $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+    // Obtener el ID del usuario desde el GET o la sesión
+    $idUser = $this->request->getGet('id_user') ?? session()->get('user_id');
+    $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+    $trees = $this->treeModel->getFriendsTrees($idUser);
+    $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
+    $cartCount = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
+
+    // Query to get the active cart items
+    $carts = $this->cartModel->getCartDetails($user['Id_User']);
+    // Validar que el ID sea numérico
+    if (!$idUser || !is_numeric($idUser)) {
+        return redirect()->to('/manageusers')->with('error', 'Invalid User ID');
+    }
+
+    // Buscar al usuario con el ID proporcionado
+    $user = $userModel->find($idUser);
+    if (!$user) {
+        return redirect()->to('/shared/manageusers')->with('error', 'User not found');
+    }
+
+    // Determinar la vista de navegación según el rol
+    $navigationView = $this->getNavigationViewByRole($user['Role_Id']);
+
+    // Preparar los datos para pasar a las vistas
+    $data = [
+        'user' => $user,
+        'profilePic' => $profilePic,
+        'uploads_profile' => base_url('uploads_profile/'),
+        'error_msg' => session()->get('error'),
+        'navigationView' => $navigationView,
+        'cartCount'=> $cartCount,
+        'carts'=> $carts
+
+    ];
+
+    return view('shared/header', $data)
+        . view($navigationView, $data)
+        . view('shared/updateUser', $data);
+}
+
+// Método para obtener la vista de navegación según el rol
+private function getNavigationViewByRole($roleId)
+{
+    switch ($roleId) {
+        case '1':
+            return 'shared/navegation_admin';  // admin
+        case '3':
+            return 'shared/navegation_operator';  // operator
+        case '2':
+        default:
+            return 'shared/navegation_friend';  // friend o cualquier otro valor
+    }
+}
 
 
      /**
@@ -528,15 +558,19 @@ class User extends BaseController
             return redirect()->back()->withInput()->with('error', implode(', ', $errors));
         }
 
-        // Redirect on success
-        return redirect()->to('/admin/manageusers')->with('success', 'User updated successfully');
+        // Get the user's role from the database (e.g., 'friend', 'operator', 'admin')
+        $role = session()->get('role_id');
+
+        // Redirect based on the user's role
+        if ($role === '2') {
+            return redirect()->to('/friend/dashboard')->with('success', 'User updated successfully');
+        } elseif ($role === '3') {
+            return redirect()->to('/operator/dashboard')->with('success', 'User updated successfully');
+        } else {
+            // If role is admin, stay on the manage users page
+            return redirect()->to('/admin/dashboard')->with('success', 'User updated successfully');
+        }
     }
-
-
-
-
-
-
 
     /**
      * Delete a user
@@ -622,14 +656,14 @@ class User extends BaseController
      */
     public function indexRegisterUpdate()
     {
-        $username = session()->get('username');
-        $user     = $this->userModel->where('Username', $username)->first();
-        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+        $username     = session()->get('username');
+        $user         = $this->userModel->where('Username', $username)->first();
+        $profilePic   = $user['Profile_Pic'] ?? 'default_profile.jpg';
         $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
-        $cartCount = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
-        $carts = $this->cartModel->getCartDetails($user['Id_User']);
+        $cartCount    = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
+        $carts        = $this->cartModel->getCartDetails($user['Id_User']);
         // Get the tree ID from the URL (GET parameter)
-        $idTree = $this->request->getGet('id_tree');
+        $idTree       = $this->request->getGet('id_tree');
 
         // Validate that the ID is valid
         if (!$idTree || !is_numeric($idTree)) {
@@ -782,19 +816,19 @@ class User extends BaseController
         $session = session();
 
         // Get the tree ID from the GET request
-        $idTree = $this->request->getGet('id_tree'); 
-        $user = $this->userModel->where('Username', session()->get('username'))->first(); 
+        $idTree     = $this->request->getGet('id_tree'); 
+        $user       = $this->userModel->where('Username', session()->get('username'))->first(); 
         $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg'; // Profile picture or default
-        $userId = $user['Id_User']; 
-        $role = $user['Role_Id']; 
+        $userId     = $user['Id_User']; 
+        $role       = $user['Role_Id']; 
         
         // Instantiate the model
         $treeupdateModel = new TreeUpdateModel();
 
         // Get the tree update data
         $treeUpdates = $treeupdateModel->getTreeUpdatesWithSpecies($idTree);
-        $cartCount = $this->cartModel->where('User_Id', $userId)->where('Status', 'active')->countAllResults();
-        $carts = $this->cartModel->getCartDetails($userId);
+        $cartCount   = $this->cartModel->where('User_Id', $userId)->where('Status', 'active')->countAllResults();
+        $carts       = $this->cartModel->getCartDetails($userId);
 
         // Process tree photo
         $tree = $treeupdateModel->find($idTree); // Assuming this fetches tree details
@@ -1065,7 +1099,7 @@ class User extends BaseController
         }
         // Check if the profile has a picture, if not assign a default one
         $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
-        $cartCount = $this->cartModel->where('User_Id', $userData['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
+        $cartCount    = $this->cartModel->where('User_Id', $userData['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
 
         // Query to get the active cart items
         $carts = $this->cartModel->getCartDetails($userData['Id_User']);

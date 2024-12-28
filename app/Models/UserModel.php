@@ -138,6 +138,10 @@ class UserModel extends Model
                     ->findAll();
     }
 
+    public function getAllUsers()
+    {
+        return $this->findAll(); 
+    }
 
 
     public function getUsersByStatus($status = 1)

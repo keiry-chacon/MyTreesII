@@ -1,0 +1,42 @@
+CRITICAL - 2024-12-28 02:39:14 --> ErrorException: Undefined variable $cartCount
+[Method: GET, Route: showupdateuser]
+in APPPATH\Views\shared\Navegation_friend.php on line 46.
+ 1 APPPATH\Views\shared\Navegation_friend.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $cartCount', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php', 46)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('shared/navegation_friend', [], true)
+ 5 APPPATH\Controllers\User.php(455): view('shared/navegation_friend', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexUpdateUser()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-28 02:40:38 --> ErrorException: Undefined variable $cartCount
+[Method: GET, Route: showupdateuser]
+in APPPATH\Views\shared\Navegation_friend.php on line 46.
+ 1 APPPATH\Views\shared\Navegation_friend.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $cartCount', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php', 46)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('shared/navegation_friend', [], true)
+ 5 APPPATH\Controllers\User.php(462): view('shared/navegation_friend', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexUpdateUser()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-28 02:41:50 --> ErrorException: Undefined variable $carts
+[Method: GET, Route: showupdateuser]
+in APPPATH\Views\shared\Navegation_friend.php on line 62.
+ 1 APPPATH\Views\shared\Navegation_friend.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $carts', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php', 62)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('shared/navegation_friend', [], true)
+ 5 APPPATH\Controllers\User.php(463): view('shared/navegation_friend', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexUpdateUser()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

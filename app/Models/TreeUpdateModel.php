@@ -50,7 +50,7 @@ class TreeUpdateModel extends Model
     {
         // Retrieve updates for a specific tree along with its species information
         return $this->db->table('tree_update') // Select the 'tree_update' table as the base
-                    ->select('tree_update.*, trees.Specie_Id, trees.Photo_Path, species.Commercial_Name, species.Scientific_Name')
+                    ->select('tree_update.*, trees.Specie_Id, tree_update.Photo_Path, species.Commercial_Name, species.Scientific_Name')
                     ->join('trees', 'trees.Id_Tree = tree_update.Tree_Id') // Relationship between 'tree_update' and 'trees'
                     ->join('species', 'species.Id_Specie = trees.Specie_Id') // Relationship between 'trees' and 'species'
                     ->where('tree_update.Tree_Id', $id_tree) // Filter based on Tree_Id

@@ -10,18 +10,16 @@ use App\Models\CartModel;
 
 class Purchase extends BaseController
 {
-    // Cargar el servicio de sesión
     protected $cartModel;
     protected $purchaseModel;
+    protected $treeModel;
 
-    // Constructor: cargar los modelos
     public function __construct()
     {
-        // Cargar el CartModel
         $this->cartModel = new CartModel();
-        
-        // Cargar el PurchaseModel
         $this->purchaseModel = new PurchaseModel();
+        $this->treeModel = new TreeModel(); 
+
     }
     public function processPurchase()
     {
