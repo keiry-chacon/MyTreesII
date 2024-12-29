@@ -135,8 +135,10 @@ class UserModel extends Model
     public function getAvailableUsers()
     {
         return $this->where('Role_Id', 2)
+                    ->where('StatusU', 1)
                     ->findAll();
     }
+
 
     public function getAllUsers()
     {

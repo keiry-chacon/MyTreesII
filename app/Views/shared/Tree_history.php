@@ -12,11 +12,11 @@
     <!-- Page Header -->
     <div class="bg-white shadow-lg rounded-lg p-6 max-w-4xl ml-80">
         <div class="text-center">
-            <h1 class="text-5xl font-extrabold text-gray-800">Tree Updates</h1>
+            <h1 class="text-5xl font-bold text-gray-800">Tree Updates</h1>
             <p class="text-gray-600 mt-2 text-xl">Here is a list of all updates for the selected tree.</p>
         </div>
     </div>
-
+    
     <!-- Table Section -->
     <div class="mt-6 max-w-4xl ml-80 overflow-hidden">
         <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden w-full">

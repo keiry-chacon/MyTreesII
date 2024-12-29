@@ -1,60 +1,49 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<main class="ml-64 mt-16 p-4"> <!-- Push content to the right, starting after the navigation -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<main class="ml-64 mt-16 p-4 bg-gray-100 min-h-screen">
     <!-- Welcome section of the admin dashboard -->
-    <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
-        <h1 class="text-4xl font-bold text-center mb-4">Welcome!</h1>
-        <p class="text-lg text-gray-700 text-center">
-            Welcome to the administration panel. Here you can view detailed statistics on registered friends and available and sold trees. 
-            Use this information to make informed decisions and manage resources efficiently.
+    <div class="bg-gradient-to-r from-blue-500 to-indigo-500 shadow-lg rounded-lg p-6 mb-8 text-white">
+        <h1 class="text-4xl font-bold text-center mb-4 flex items-center justify-center">
+            <span>🎉</span> Welcome, <?= htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?>!
+        </h1>
+        <p class="text-lg text-center">
+            Access detailed insights and manage resources efficiently. Your role is vital in driving success!
         </p>
     </div>
 
     <!-- Section with flexible layout (responsive) for graphs -->
     <div class="flex flex-col lg:flex-row gap-8">
-        
         <!-- Graph for displaying the distribution of friends by gender -->
-        <div class="bg-white shadow-lg rounded-lg p-6 w-full lg:w-1/2">
-            <h2 class="text-xl font-semibold mb-4 text-center">Distribution of Friends by Gender</h2>
-            <p class="text-gray-600 mb-6 text-sm text-center">
-                This graph shows the distribution of registered friends according to gender. Use this information to understand the diversity in our community of friends.
+        <div class="bg-white shadow-xl rounded-lg p-6 w-full lg:w-1/2 hover:shadow-2xl transition-shadow duration-300">
+            <h2 class="text-2xl font-bold mb-4 text-center text-indigo-600">👥 Gender Distribution</h2>
+            <p class="text-gray-600 mb-6 text-center">
+                A breakdown of registered friends by gender for better community insights.
             </p>
             <div class="flex flex-col items-center">
-                <!-- Pie chart showing the gender distribution -->
                 <canvas id="genderChart" class="w-full h-60"></canvas>
-                <div class="mt-6 text-left bg-gray-50 p-4 rounded-md w-full">
-                    <h3 class="text-lg font-semibold text-center">Gender Details:</h3>
-                    <div class="mt-4 flex justify-around text-gray-700">
-                        <p><strong>Female:</strong> <?= $genders['F']; ?></p>
-                        <p><strong>Male:</strong> <?= $genders['M']; ?></p>
-                        <p><strong>Other:</strong> <?= $genders['O']; ?></p>
-                    </div>
+                <div class="mt-6 bg-gray-100 p-4 rounded-md w-full text-gray-700">
+                    <h3 class="text-lg font-bold text-center">Details</h3>
+                    <ul class="mt-4 flex justify-around">
+                        <li><strong>Female:</strong> <?= $genders['F']; ?></li>
+                        <li><strong>Male:</strong> <?= $genders['M']; ?></li>
+                        <li><strong>Other:</strong> <?= $genders['O']; ?></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        
+
         <!-- Graph for comparing available trees -->
-        <div class="bg-white shadow-lg rounded-lg p-6 w-full lg:w-1/2">
-            <h2 class="text-xl font-semibold mb-4 text-center">Comparison of Available Trees</h2>
-            <p class="text-gray-600 mb-6 text-sm text-center">
-                This graph compares the number of trees currently available. Useful for monitoring inventories and evaluating the popularity of our offerings.
+        <div class="bg-white shadow-xl rounded-lg p-6 w-full lg:w-1/2 hover:shadow-2xl transition-shadow duration-300">
+            <h2 class="text-2xl font-bold mb-4 text-center text-green-600">🌳 Trees Available</h2>
+            <p class="text-gray-600 mb-6 text-center">
+                Monitor inventory and evaluate the popularity of tree offerings.
             </p>
-            <!-- Bar chart comparing available and sold trees -->
             <canvas id="treesComparisonChart" class="w-full h-60"></canvas>
         </div>
     </div>
-
-    <!-- Additional information section about the statistics -->
-    <div class="bg-blue-50 shadow rounded-lg p-6 mt-8">
-        <h2 class="text-xl font-semibold text-center text-blue-600">Additional Information</h2>
-        <p class="text-gray-700 mt-4">
-            This statistics section allows managers to better understand the distribution of the community and the status of tree resources. The information gathered
-            can assist in future management and planning decisions. It also fosters an inclusive and well-informed environment about the diversity of registered friends.
-        </p>
-        <p class="text-gray-700 mt-4">
-            If you wish to make adjustments to the statistics displayed or update the data, you can go to the configuration section or contact technical support.
-        </p>
-    </div>
 </main>
+
 
 <!-- Script to create the bar chart for comparing available and sold trees -->
 <script>

@@ -105,6 +105,7 @@ class TreeModel extends Model
             ->join('species', 'species.Id_Specie = trees_main.Specie_Id') // Join 'species' table using Specie_Id
             ->where('purchase.User_Id', $friendId) // Filter by friend's ID
             ->where('purchase.StatusP', 1) // Only include active purchases
+            ->distinct() // Remove duplicates
             ->get()
             ->getResultArray(); // Return the results as an array
     }

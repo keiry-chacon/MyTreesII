@@ -1,92 +1,70 @@
 <?php
-$roleId = session()->get('role_id'); 
+$roleId = session()->get('role_id');
 ?>
 
-<!-- Include Alpine.js for possible JavaScript functionality (e.g., modal windows or dynamic content) -->
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.4.2/dist/cdn.min.js" defer></script>
-
 <!-- Main container for the species list page -->
-<div class="container mr-0 mt-10 px-4">
+<div class="container mx-auto mt-8 px-4">
     <!-- Header section for the page -->
-    <div class="bg-white shadow-lg rounded-lg p-4 max-w-4xl ml-80">
+    <div class="bg-green-600 shadow-lg rounded-lg p-6 max-w-5xl ml-auto mr-0">
         <div class="text-center">
-            <!-- Page title with green color and centered text -->
-            <h1 class="text-6xl font-bold text-600 tracking-tight">Manage Friend´s Trees</h1>
-            <!-- Description of the page -->
-            <p class="text-gray-600 mt-2">Here is a list of all registered trees.</p>
-
-            <!-- Button linking to the trees list page -->
-            <div class="text-center">
-                <?php if ($roleId == 1): ?>
-                    <a href="/admin/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
-                <?php else: ?>
-                    <a href="/operator/dashboard" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3 inline-block">Go to Home</a>
-                <?php endif; ?>
-            </div>
+            <!-- Title without animation -->
+            <h1 class="text-4xl font-semibold text-white tracking-tight mb-3">
+                Manage Your Friend’s Trees
+            </h1>
+            
+            <!-- Description without animation -->
+            <p class="text-white mt-2 text-base opacity-90 mb-5">
+                Here is a comprehensive list of all registered trees managed by your friends. You can easily view their trees and take actions.
+            </p>
         </div>
     </div>
 
     <!-- Display error message if there is one -->
     <?php if (isset($error_msg)) : ?>
-        <div class="bg-red-500 text-white py-2 mt-4 rounded max-w-4xl ml-auto text-right">
+        <div class="bg-red-500 text-white py-3 mt-6 rounded-lg max-w-5xl ml-auto text-right">
             <?= htmlspecialchars($error_msg) ?>
         </div>
     <?php endif; ?>
 
     <!-- Table section to display the list of friends -->
-    <div class="mt-5 max-w-4xl ml-80 overflow-hidden">
-        <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden w-full">
-            <!-- Table header -->
-            <thead>
-                <tr class="bg-blue-200 text-gray-700 text-center">
-                    <th scope="col" class="px-6 py-3 text-center">Profile Picture</th>
-                    <th scope="col" class="px-6 py-3 text-center">First Name</th>
-                    <th scope="col" class="px-6 py-3 text-center">Last Name</th>
-                    <th scope="col" class="px-6 py-3 text-center">Username</th>
-                    <th scope="col" class="px-6 py-3 text-center">Email</th>
-                    <th scope="col" class="px-6 py-3 text-center">View Trees</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Check if users are available to display -->
-                <?php if (!empty($users)) : ?>
-                    <!-- Loop through each user and display their data -->
-                    <?php foreach ($users as $user) : ?>
-                        <tr class="border-b text-center">
-                            <!-- Display the user's profile picture if available -->
-                            <td class="text-center px-6 py-4">
-                                <?php if (!empty($user['Profile_Pic'])) : ?>
-                                    <?php
-                                        // Generate the URL for the profile image with a cache-busting query string
-                                        $image_url = htmlspecialchars($uploads_folder . $user['Profile_Pic']) . '?' . time();
-                                    ?>
-                                    <!-- Display the profile image as a circular thumbnail -->
-                                    <img src="<?= $image_url; ?>" alt="Profile Picture" class="rounded-full w-12 h-12 mx-auto">
-                                <?php else : ?>
-                                    <span class="text-gray-400">No Image</span>
-                                <?php endif; ?>
-                            </td>
-                            <td class="px-6 py-4"><?= htmlspecialchars($user['First_Name']) ?></td>
-                            <td class="px-6 py-4"><?= htmlspecialchars($user['Last_Name1']) ?></td>
-                            <td class="px-6 py-4"><?= htmlspecialchars($user['Username']) ?></td>
-                            <td class="px-6 py-4"><?= htmlspecialchars($user['Email']) ?></td>
+    <div class="mt-8 max-w-5xl ml-auto overflow-hidden">
+        <div class="space-y-5">
+            <!-- Check if users are available to display -->
+            <?php if (!empty($users)) : ?>
+                <!-- Loop through each user and display their data -->
+                <?php foreach ($users as $user) : ?>
+                    <div class="flex items-center justify-between space-x-4 border-b pb-4">
+                        <!-- Display the user's profile picture if available -->
+                        <div class="flex-shrink-0">
+                            <?php if (!empty($user['Profile_Pic'])) : ?>
+                                <?php
+                                    // Generate the URL for the profile image with a cache-busting query string
+                                    $image_url = htmlspecialchars($uploads_folder . $user['Profile_Pic']) . '?' . time();
+                                ?>
+                                <img src="<?= $image_url; ?>" alt="Profile Picture" class="rounded-full w-20 h-20 object-cover">
+                            <?php else : ?>
+                                <span class="text-gray-400">No Image</span>
+                            <?php endif; ?>
+                        </div>
 
-                            <td class="px-6 py-4 text-center">
-                                <a href="showfriendtrees?id_user=<?= urlencode($user['Id_User']) ?>" 
-                                class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 flex items-center justify-center space-x-2" 
-                                title="View Trees">
-                                    <i class="fas fa-tree"></i>
-                                    <span>View Trees</span>
-                                </a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <tr>
-                        <td colspan="5" class="text-center text-gray-500 py-4">No Friends found</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+                        <!-- User name and full name, aligned to the left with the profile image -->
+                        <div class="flex flex-col ml-6">
+                            <span class="font-semibold text-gray-900 text-xl"><?= htmlspecialchars($user['Username']) ?></span>
+                            <span class="text-gray-600 text-sm"><?= htmlspecialchars($user['First_Name']) . ' ' . htmlspecialchars($user['Last_Name1']). ' ' . htmlspecialchars($user['Last_Name2']) ?></span>
+                        </div>
+
+                        <!-- Button to view trees, aligned to the right -->
+                        <div class="flex-shrink-0 ml-auto">
+                            <a href="showfriendtrees?id_user=<?= urlencode($user['Id_User']) ?>" 
+                               class="bg-green-500 text-white px-5 py-2 rounded-lg hover:bg-green-600 transition-all" 
+                               title="View Trees">View Trees</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <div class="text-center text-gray-500 py-4">No Friends found</div>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
+

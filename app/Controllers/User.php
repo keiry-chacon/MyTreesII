@@ -307,6 +307,8 @@ class User extends BaseController
             'availableTreesCount' => $availableTreesCount,
             'soldTreesCount' => $soldTreesCount,
             'genders' => $genders, // Gender data
+            'username' => $username,
+
         ]);
     }
 
@@ -413,72 +415,68 @@ class User extends BaseController
      * Displays the interface of the update user section
      */
     public function indexUpdateUser()
-{
-    $username = session()->get('username');
-    $userModel = new UserModel();
+    {
+        $username = session()->get('username');
+        $userModel = new UserModel();
 
-    // Obtener el usuario por el nombre de usuario
-    $user = $userModel->where('Username', $username)->first();
-    if (!$user) {
-        return redirect()->to('/login')->with('error', 'User not found.');
+        // Obtener el usuario por el nombre de usuario
+        $user = $userModel->where('Username', $username)->first();
+        if (!$user) {
+            return redirect()->to('/login')->with('error', 'User not found.');
+        }
+
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+        // Obtener el ID del usuario desde el GET o la sesión
+        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
+
+        $trees = $this->treeModel->getFriendsTrees($user['Id_User']);
+        $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
+        $cartCount = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
+
+        // Query to get the active cart items
+        $carts = $this->cartModel->getCartDetails($user['Id_User']);
+        // Validar que el ID sea numérico
+        if (!$user['Id_User'] || !is_numeric($user['Id_User'])) {
+            return redirect()->to('/manageusers')->with('error', 'Invalid User ID');
+        }
+
+        // Buscar al usuario con el ID proporcionado
+        if (!$user) {
+            return redirect()->to('/shared/manageusers')->with('error', 'User not found');
+        }
+        $navigationView = $this->getNavigationViewByRole($user['Role_Id']);
+
+        // Preparar los datos para pasar a las vistas
+        $data = [
+            'user' => $user,
+            'profilePic' => $profilePic,
+            'uploads_profile' => base_url('uploads_profile/'),
+            'error_msg' => session()->get('error'),
+            'navigationView' => $navigationView,
+            'cartCount'=> $cartCount,
+            'carts'=> $carts,
+            'uploads_folder'=> base_url('uploads_tree/'),
+            'uploads_profile'=> base_url('uploads_profile/'),
+        ];
+
+        return view('shared/header', $data)
+            . view($navigationView, $data)
+            . view('shared/updateUser', $data);
     }
 
-    $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
-
-    // Obtener el ID del usuario desde el GET o la sesión
-    $idUser = $this->request->getGet('id_user') ?? session()->get('user_id');
-    $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
-
-    $trees = $this->treeModel->getFriendsTrees($idUser);
-    $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
-    $cartCount = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
-
-    // Query to get the active cart items
-    $carts = $this->cartModel->getCartDetails($user['Id_User']);
-    // Validar que el ID sea numérico
-    if (!$idUser || !is_numeric($idUser)) {
-        return redirect()->to('/manageusers')->with('error', 'Invalid User ID');
+    public function getNavigationViewByRole($roleId)
+    {
+        switch ($roleId) {
+            case '1':
+                return 'shared/navegation_admin';  // admin
+            case '3':
+                return 'shared/navegation_operator';  // operator
+            case '2':
+            default:
+                return 'shared/navegation_friend';  // friend
+        }
     }
-
-    // Buscar al usuario con el ID proporcionado
-    $user = $userModel->find($idUser);
-    if (!$user) {
-        return redirect()->to('/shared/manageusers')->with('error', 'User not found');
-    }
-
-    // Determinar la vista de navegación según el rol
-    $navigationView = $this->getNavigationViewByRole($user['Role_Id']);
-
-    // Preparar los datos para pasar a las vistas
-    $data = [
-        'user' => $user,
-        'profilePic' => $profilePic,
-        'uploads_profile' => base_url('uploads_profile/'),
-        'error_msg' => session()->get('error'),
-        'navigationView' => $navigationView,
-        'cartCount'=> $cartCount,
-        'carts'=> $carts
-
-    ];
-
-    return view('shared/header', $data)
-        . view($navigationView, $data)
-        . view('shared/updateUser', $data);
-}
-
-// Método para obtener la vista de navegación según el rol
-private function getNavigationViewByRole($roleId)
-{
-    switch ($roleId) {
-        case '1':
-            return 'shared/navegation_admin';  // admin
-        case '3':
-            return 'shared/navegation_operator';  // operator
-        case '2':
-        default:
-            return 'shared/navegation_friend';  // friend o cualquier otro valor
-    }
-}
 
 
      /**
@@ -607,18 +605,15 @@ private function getNavigationViewByRole($roleId)
     */
     public function indexFriendTrees()
     {
-        $idUser = $this->request->getGet('id_user');
-
-        $username   = session()->get('username');
-        $user       = $this->userModel->where('Username', $username)->first();
-        $profilePic = $user['Profile_Pic'] ?? 'default_profile.jpg';
-
-        $trees = $this->treeModel->getFriendsTrees($idUser);
-        $profileImage = $userData['Profile_Pic'] ?? 'default_profile.jpg';
-        $cartCount = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
-
+        $idUser         = $this->request->getGet('id_user');
+        $username       = session()->get('username');
+        $user           = $this->userModel->where('Username', $username)->first();
+        $profilePic     = $user['Profile_Pic'] ?? 'default_profile.jpg';
+        $trees          = $this->treeModel->getFriendsTrees($idUser);
+        $profileImage   = $userData['Profile_Pic'] ?? 'default_profile.jpg';
+        $cartCount      = $this->cartModel->where('User_Id', $user['Id_User'])->where('Status', 'active')->countAllResults();  // Count the active carts for the user
         // Query to get the active cart items
-        $carts = $this->cartModel->getCartDetails($user['Id_User']);
+        $carts          = $this->cartModel->getCartDetails($user['Id_User']);
         // Determine the navigation view based on the role
         $navigationView = 'shared/navegation_friend';  // Default value
         if (isset($user['Role_Id'])) {
@@ -637,9 +632,9 @@ private function getNavigationViewByRole($roleId)
         }
 
         // Preparar los datos para pasar a las vistas
-        $data['users'] = $user;
+        $data['users']     = $user;
         $data['cartCount'] = $cartCount;
-        $data['carts'] = $carts;
+        $data['carts']     = $carts;
 
         $data['trees']              = $trees;
         $data['uploads_folder']     = base_url('uploads_tree/');
@@ -901,6 +896,8 @@ private function getNavigationViewByRole($roleId)
         view('operator/operatorHome', [
             'availableTreesCount' => $availableTreesCount,
             'genders' => $genders, // Gender data
+            'username' => $username, // Gender data
+
         ]);
     }
 

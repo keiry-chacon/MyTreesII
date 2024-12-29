@@ -40,3 +40,27 @@ in APPPATH\Views\shared\Navegation_friend.php on line 62.
  9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-28 02:48:36 --> ErrorException: Undefined variable $uploads_folder
+[Method: GET, Route: showupdateuser]
+in APPPATH\Views\shared\Navegation_friend.php on line 65.
+ 1 APPPATH\Views\shared\Navegation_friend.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $uploads_folder', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php', 65)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\ISW-613-MyTrees2\\app\\Views\\shared\\Navegation_friend.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('shared/navegation_friend', [], true)
+ 5 APPPATH\Controllers\User.php(465): view('shared/navegation_friend', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexUpdateUser()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-28 02:50:30 --> ErrorException: Undefined variable $navigationView
+[Method: GET, Route: showupdateuser]
+in APPPATH\Controllers\User.php on line 455.
+ 1 APPPATH\Controllers\User.php(455): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $navigationView', 'C:\\xampp\\ISW-613-MyTrees2\\app\\Controllers\\User.php', 455)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->indexUpdateUser()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
